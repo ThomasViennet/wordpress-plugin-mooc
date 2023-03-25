@@ -2,7 +2,7 @@
 
 namespace Mooc\Models\Lesson;
 
-class Lesson
+class Model_Lesson
 {
     public int $id;
     public int $user_id;

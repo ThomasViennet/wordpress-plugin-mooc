@@ -4,9 +4,9 @@
  * Create a table in the database to record student progress
  */
 
-namespace Mooc\Models\Initialisation;
+namespace Mooc\Models\Init;
 
-class InitialisationModels
+class Models_Init
 {
     public function createTales()
     {
