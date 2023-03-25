@@ -29,9 +29,9 @@ use Mooc\Controllers\Dashboard\Dashboard;
 use Mooc\Controllers\ButtonLesson\ButtonLesson;
 
 
-add_action( 'init', array( 'Controllers_Init', 'init' ) );
-add_action('wp_body_open', array( 'NavMooc', 'display'));//should be in Controllers_Init ?
-add_action('wp_body_open', array( 'ButtonLesson', 'display'));//should be in Controllers_Init ?
+add_action('init', array('Controllers_Init', 'init'));
+// add_action('wp_body_open', array( 'NavMooc', 'display'));//should be in Controllers_Init ?
+// add_action('wp_body_open', array( 'ButtonLesson', 'display'));//should be in Controllers_Init ?
 
 add_shortcode('quiz', 'quiz');
 function quiz($atts)
@@ -76,7 +76,7 @@ function quiz($atts)
     }
 }
 
-add_shortcode('lesson_button', 'lesson_button');
+add_shortcode('lesson_button', 'lesson_button', 20);
 function lesson_button($atts)
 {
     if (!is_admin()) {
@@ -93,6 +93,7 @@ function lesson_button($atts)
                     }
                 }
             }
+            
             ob_start();
             $button_lesson->display($user->ID, $atts['lesson_id']);
             return ob_get_clean();
@@ -101,3 +102,8 @@ function lesson_button($atts)
         }
     }
 }
+
+/**
+ * This add_action 'wp_body_open' doesn't display fresh data about lesson_status
+ */
+add_action('wp_body_open', array('NavMooc', 'display'), 10);//should be in Controllers_Init ?

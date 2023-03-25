@@ -19,7 +19,20 @@ class NavMooc
             $user = wp_get_current_user();
             global $post;
             if (has_shortcode($post->post_content, 'nav_mooc')) {
-                $lesson = (new Model_Lesson())->get_all($user->ID);
+                $lessons = (new Model_Lesson())->get_all($user->ID);
+                
+                $lessons_id = array();
+                foreach ($lessons as $lesson) {
+                    array_push($lessons_id, $lesson->lesson_id);
+                }
+
+                if (!empty($lesson))
+                {
+                    $class = 'completed';
+                } else {
+                    $class = 'uncompleted';
+                }
+                
                 require_once(dirname(__FILE__) . '/../views/nav-mooc.php');
             }
         }

@@ -12,7 +12,7 @@ use Mooc\Models\Lesson\Model_Lesson;
 
 class ButtonLesson
 {
-    public function display(int $user_id, int $lesson_id)
+    public function display(int $user_id, string $lesson_id)
     {
 
         if (!empty((new Model_Lesson())->get($user_id, $lesson_id))) {

@@ -1,32 +1,44 @@
-.sidenav {
+#bodyNavMooc {
+    padding: 100px;
+}
+
+.navMooc {
+    /* color: #0a2463; */
     height: 100%;
     width: 0px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: white;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
     text-align: left;
     z-index: 999;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
+.navMooc h2 {
+    font-weight: bold !important;
+    transition: 0.3s;
+}
+
+.navMooc h2:hover {
+    /* text-decoration: underline; */
+    font-weight: bolder !important;
+}
+
+.navMooc a {
     text-decoration: none;
-    /* font-size: 25px; */
-    color: #818181;
+    color: #0a2463;
     display: block;
     transition: 0.3s;
 }
 
-.sidenav a:hover {
-    color: #f1f1f1;
+.navMooc a:hover {
+    font-weight: bold;
 }
 
-.sidenav .closebtn {
+.navMooc .closebtn {
     position: absolute;
     padding-top: 60px;
     top: 0;
@@ -35,7 +47,7 @@
     margin-left: 50px;
 }
 
-.buttonSideNav {
+.buttonNavMooc {
     font-size: 1.2em;
     cursor: pointer;
     bottom: 0px;
@@ -47,11 +59,11 @@
     width: 100%;
     vertical-align: middle;
     height: 50px;
-    padding:10px;
+    padding: 10px;
     text-align: center;
 }
 
-.buttonSideNav::before {
+.buttonNavMooc::before {
     font: normal 20px/1 dashicons;
     content: '\f118';
     font-size: 1.2em;
@@ -59,13 +71,34 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-image: none !important;
-    margin-right: 6px;
+    margin-right: 7px;
     vertical-align: middle;
     /* position: relative; */
     /* float: left; */
     padding: 10px 0;
 }
- 
+
+.lessonCompleted {
+    color: #0a2463 !important;
+}
+
+.lessonCompleted::before {
+    font: normal 20px/1 dashicons;
+    content: '\f118';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 7px;
+    vertical-align: middle;
+    text-decoration: none !important;
+    color: #cd2653;
+}
+
+.lessonUncompleted {
+    /* text-decoration: underline; */
+}
+
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;

@@ -31,19 +31,11 @@ class Model_Lesson
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'lessons';
-        $data = $wpdb->get_row("SELECT * FROM $table_name WHERE user_id = $user_id");
 
-        //Shloud return array of all lessons completed by user
-        if ($wpdb->num_rows > 0) {
-            $this->id = $data->id;
-            $this->user_id = $data->user_id;
-            $this->lesson_id = $data->lesson_id;
-            $this->creation_date = $data->creation_date;
+        $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %s", $user_id);
+        $data = $wpdb->get_results($sql);        
 
-            return $this;
-        } else {
-            return $wpdb->last_error;
-        }
+        return $data;
     }
 
     public function save(int $user_id, int $lesson_id)
