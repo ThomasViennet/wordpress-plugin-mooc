@@ -1,0 +1,28 @@
+body {
+    width: 80%;
+}
+
+#wpcontent li::before {
+    content: "✅";
+    padding: 5px;
+}
+
+#wpcontent li {
+    border-left: solid 2px;
+    border-color: white;
+    background-color: rgba(0, 141, 5, 0.5);
+    /* color: white; */
+}
+
+#wp-admin-bar-formation-seo .ab-item:before {
+    font: normal 20px/1 dashicons;
+    content: '\f118';
+    position: relative;
+    float: left;
+    speak: never;
+    padding: 7px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: none !important;
+    margin-right: 6px;
+}
