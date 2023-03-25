@@ -26,12 +26,7 @@ class NavMooc
                     array_push($lessons_id, $lesson->lesson_id);
                 }
 
-                if (!empty($lesson))
-                {
-                    $class = 'completed';
-                } else {
-                    $class = 'uncompleted';
-                }
+                var_dump($lessons_id);
                 
                 require_once(dirname(__FILE__) . '/../views/nav-mooc.php');
             }

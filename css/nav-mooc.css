@@ -4,7 +4,7 @@
 
 .navMooc {
     height: 100%;
-    width: 0px;
+    width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -31,7 +31,7 @@
     text-decoration: none;
     color: #0a2463;
     display: block;
-    transition: 0.3s;
+    transition: 0.3s !important;
 }
 
 .navMooc a:hover {
@@ -63,6 +63,7 @@
     padding: 10px;
     text-align: center;
     color: #0a2463;
+    margin-bottom: 0px !important;
 }
 
 .buttonNavMooc::before {
@@ -80,9 +81,8 @@
 }
 
 .buttonNavMooc:hover {
-    font-weight: bold;
     background-color: #cd2653;
-    color: white!important;
+    color: white !important;
 }
 
 .buttonNavMooc:hover::before {

@@ -1,4 +1,4 @@
-<div id="navMooc" class="navMooc">
+<div id="navMooc" class="is-style-wide navMooc">
 
     <div id="bodyNavMooc">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -329,25 +329,7 @@
             ?>">Ressources utiles</h2>
         </a>
 
-        <ol>
-            <li class="
-            <?php
-            if (in_array("11", $lessons_id, true))
-                echo 'lessonCompleted';
-
-            ?>">Liste de formations et MOOC</li>
-            <li class="
-            <?php
-            if (in_array("11", $lessons_id, true))
-                echo 'lessonCompleted';
-            ?>">Tour d’horizon des outils du marché</li>
-            <li class="
-            <?php
-            if (in_array("11", $lessons_id, true))
-                echo 'lessonCompleted';
-            ?>">Où travailler</li>
-        </ol>
     </div>
 </div>
 
-<span class="buttonNavMooc" onclick="openNav()">Menu</span>
+<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>
