@@ -72,30 +72,6 @@ function lesson_button($atts)
     }
 }
 
-add_shortcode('nav_mooc', 'navMooc'); //shloud be in controllers/init.php ?
-function navMooc()
-{
-    if (!is_admin()) {
-        require_once(ABSPATH . 'wp-includes/pluggable.php');
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
-            global $post;
-            if (has_shortcode($post->post_content, 'nav_mooc')) {
-                $lessons = (new Model_Lesson)->get_all($user->ID);
-
-                $lessons_slug = array();
-                foreach ($lessons as $lesson) {
-                    array_push($lessons_slug, $lesson->lesson_slug);
-                }
-
-                ob_start();
-                require_once('views/nav-mooc.php');
-                return ob_get_clean();
-            }
-        }
-    }
-}
-
 add_shortcode('quiz', 'quiz');
 function quiz($atts)
 {
@@ -137,24 +113,64 @@ function quiz($atts)
         }
     }
 }
+add_shortcode('nav_mooc', 'navMooc'); //shloud be in controllers/init.php ?
+function navMooc()
+{
+    if (!is_admin()) {
+        require_once(ABSPATH . 'wp-includes/pluggable.php');
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user();
+            global $post;
+            if (has_shortcode($post->post_content, 'nav_mooc')) {
+                $lessons = (new Model_Lesson)->get_all($user->ID);
+
+                $lessons_slug = array();
+                foreach ($lessons as $lesson) {
+                    array_push($lessons_slug, $lesson->lesson_slug);
+                }
+
+                ob_start();
+                require_once('views/nav-mooc.php');
+                return ob_get_clean();
+            }
+        }
+    }
+}
 
 add_action('admin_menu', 'adminMenu');
 
 function mooc()
 {
+    // require_once(ABSPATH . 'wp-includes/pluggable.php');
+    // if (is_user_logged_in()) {
+    $user = wp_get_current_user();
+    // global $post;
+    // if (has_shortcode($post->post_content, 'nav_mooc')) {
+    $lessons = (new Model_Lesson)->get_all($user->ID);
+
+    $lessons_slug = array();
+    foreach ($lessons as $lesson) {
+        array_push($lessons_slug, $lesson->lesson_slug);
+    }
+
     // ob_start();
     require_once('views/nav-mooc.php');
+    // return ob_get_clean();
+    //     }
+    // }
+    // ob_start();
+    // require_once('views/nav-mooc.php');
     // return ob_get_clean();
 }
 
 
 function adminMenu()
-    {
-        $user = wp_get_current_user();
-        if (in_array('subscriber', (array) $user->roles)) {
-            remove_menu_page('index.php');
-            add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', 'mooc', 'dashicons-welcome-learn-more', 6);
-            // add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu');
-            // add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2');
-        }
+{
+    $user = wp_get_current_user();
+    if (in_array('subscriber', (array) $user->roles)) {
+        remove_menu_page('index.php');
+        add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', 'mooc', 'dashicons-welcome-learn-more', 6);
+        // add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu');
+        // add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2');
     }
+}

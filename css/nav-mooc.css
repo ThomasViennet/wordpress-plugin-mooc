@@ -17,17 +17,18 @@
 }
 
 .navMooc h2 {
-    font-weight: bold !important;
-    transition: 0.3s;
+    /* font-weight: lighter; */
+    transition: 0.1s;
 }
 
 .navMooc h2:hover {
     /* text-decoration: underline; */
-    font-weight: bolder !important;
+    font-weight: normal;
     color: #cd2653;
 }
 
 .navMooc a {
+    font-family: "Roboto";
     text-decoration: none;
     color: #0a2463;
     display: block;

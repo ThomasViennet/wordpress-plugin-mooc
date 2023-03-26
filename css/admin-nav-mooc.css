@@ -5,20 +5,26 @@
     z-index: 1;
     margin-left: 0px;
     text-align: left;
+    font-size: 1.5em;
 }
 
 .navMooc h2 {
-    font-weight: bold !important;
-    transition: 0.2s;
+    /* font-weight: lighter; */
+    transition: 0.2s !important;
 }
 
 .navMooc h2:hover {
-    text-decoration: underline;
-    font-weight: bolder !important;
+    /* text-decoration: underline; */
+    font-weight: normal;
     color: #cd2653;
 }
 
+.navMooc li {
+    padding: 5px;
+}
+
 .navMooc a {
+    font-family: "Roboto";
     text-decoration: none;
     color: #0a2463;
     display: block;
@@ -27,6 +33,19 @@
 
 .navMooc a:hover {
     font-weight: bold;
+    color: #cd2653;
+}
+
+.lessonCompleted::before {
+    font: normal 20px/1 dashicons;
+    content: '\f118';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 7px;
+    vertical-align: middle;
+    text-decoration: none !important;
     color: #cd2653;
 }
 
