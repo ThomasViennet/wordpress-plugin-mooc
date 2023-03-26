@@ -1,0 +1,41 @@
+#bodyNavMooc {}
+
+.navMooc {
+    padding: 10px;
+    z-index: 1;
+    margin-left: 0px;
+    text-align: left;
+}
+
+.navMooc h2 {
+    font-weight: bold !important;
+    transition: 0.2s;
+}
+
+.navMooc h2:hover {
+    text-decoration: underline;
+    font-weight: bolder !important;
+    color: #cd2653;
+}
+
+.navMooc a {
+    text-decoration: none;
+    color: #0a2463;
+    display: block;
+    transition: 0.3s !important;
+}
+
+.navMooc a:hover {
+    font-weight: bold;
+    color: #cd2653;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}

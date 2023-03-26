@@ -97,7 +97,7 @@ class Controllers_Init
 
     public static function styleAdmin()
     {
-        echo '<link rel="stylesheet" href="' . plugins_url('/../css/dashboard.css', __FILE__) . '" type="text/css" media="all" />';
+        echo '<link rel="stylesheet" href="' . plugins_url('/../css/admin-nav-mooc.css', __FILE__) . '" type="text/css" media="all" />';
     }
 
     public static function styleFront()
