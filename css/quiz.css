@@ -1,0 +1,25 @@
+label {
+    font-size: inherit !important;
+}
+/* 
+input[type=radio]:checked+label::after {
+    left: 0.67rem !important;
+    top: 0.35rem !important;
+    border: 0.25rem solid black !important;
+}
+
+input[type=radio]:focus+label::before {
+    outline: 0.2rem solid !important;
+    outline-offset: 0.2rem !important;
+}
+
+input[type=radio] {
+    left: 0.67rem !important;
+    top: 0.35rem !important;
+    border: 0.25rem solid black !important;
+} */
+
+/* input[type=radio] {
+    outline: 0.2rem solid !important;
+    outline-offset: 0.2rem !important;
+} */

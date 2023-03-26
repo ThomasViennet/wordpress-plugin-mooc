@@ -8,7 +8,7 @@ $title = "Qu'est-ce que le SEO ?";
 
 <form method="post" action="?action=submit">
 
-    <h4>Question 1 ?</h4>
+    <h3>Question 1 ?</h3>
     <label for="europe">
         <input type="radio" name="question1" value="europe" id="europe" <?php if ($checked->execute('europe', $answers[0])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[0])) echo '✅'; ?>
@@ -22,7 +22,7 @@ $title = "Qu'est-ce que le SEO ?";
     <p>Explications : Blablablabla</p>
 
 
-    <h4>Question 2 ?</h4>
+    <h3>Question 2 ?</h3>
     <label for="europe2">
         <input type="radio" name="question2" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[1])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[1])) echo '✅'; ?>
@@ -35,7 +35,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 3 ?</h4>
+    <h3>Question 3 ?</h3>
     <label for="europe2">
         <input type="radio" name="question3" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[2])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[2])) echo '✅'; ?>
@@ -48,7 +48,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 4 ?</h4>
+    <h3>Question 4 ?</h3>
     <label for="europe2">
         <input type="radio" name="question4" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[3])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[3])) echo '✅'; ?>
@@ -61,7 +61,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 5 ?</h4>
+    <h3>Question 5 ?</h3>
     <label for="europe2">
         <input type="radio" name="question5" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[4])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[4])) echo '✅'; ?>
@@ -74,7 +74,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 6 ?</h4>
+    <h3>Question 6 ?</h3>
     <label for="europe2">
         <input type="radio" name="question6" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[5])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[5])) echo '✅'; ?>
@@ -87,7 +87,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 7 ?</h4>
+    <h3>Question 7 ?</h3>
     <label for="europe2">
         <input type="radio" name="question7" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[6])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[6])) echo '✅'; ?>
@@ -100,7 +100,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 8 ?</h4>
+    <h3>Question 8 ?</h3>
     <label for="europe2">
         <input type="radio" name="question8" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[7])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[7])) echo '✅'; ?>
@@ -113,7 +113,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 9 ?</h4>
+    <h3>Question 9 ?</h3>
     <label for="europe2">
         <input type="radio" name="question9" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[8])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[8])) echo '✅'; ?>
@@ -126,7 +126,7 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <h4>Question 10 ?</h4>
+    <h3>Question 10 ?</h3>
     <label for="europe2">
         <input type="radio" name="question10" value="europe" id="europe2" <?php if ($checked->execute('europe', $answers[9])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[9])) echo '✅'; ?>
@@ -142,7 +142,7 @@ $title = "Qu'est-ce que le SEO ?";
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <input type="submit" value="Valider" />
+        <input type="submit" value="Valider mes réponses" />
 </form>
 
 <?php
