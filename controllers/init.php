@@ -4,14 +4,14 @@
  * When the plugin is activated, this class adds the necessary tables and custom templates.
  */
 
-// namespace Mooc\Controllers\Initialisation;
+// namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
 require_once(dirname(__FILE__) . '/../models/lesson.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
 
-use Mooc\Models\Init\Models_Init;
+use Mooc\Models\Init\Model_Init;
 
 class Controllers_Init
 {
@@ -41,7 +41,7 @@ class Controllers_Init
 
     public static function createTables() //doesn't work here but work in mooc.php
     {
-        (new Models_Init)->createTales();
+        (new Model_Init)->createTables();
     }
 
     public static function adminBar()

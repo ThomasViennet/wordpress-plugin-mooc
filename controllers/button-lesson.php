@@ -22,7 +22,7 @@ class ButtonLesson
             $lesson_status = "Uncompleted";
             $label_button = "J'ai terminé ce cours";
         }
-        
+
         require_once(dirname(__FILE__) . '/../views/button-lesson.php');
     }
 

@@ -1,5 +1,5 @@
 <?php
-    $title = "Inscription";
+    $title = "S'inscrire à la formation";
     // $skillsAssessed = 'Connaissances générales sur le SEO';
 ?>
 
@@ -9,8 +9,8 @@
     <input type="text" name="user_login" placeholder="Identifiant" id="user_login" style="margin:5px 0"/>
     <input type="email" name="user_email" placeholder="Email" id="user_email" style="margin:5px 0"/>
     <?php do_action('register_form'); ?>
-    <input type="submit" value="S'inscrire à la formation" id="register" style="margin:5px 0"/>
-    <p><a href="wp-login.php">J'ai déjà un compte</a></p>
+    <input type="submit" value="Valider l'inscription" id="register" style="margin:5px 0"/>
+    <p><a href="/wp-login.php">J'ai déjà un compte</a></p>
 </form>
 
 <?php $content = ob_get_clean(); ?>

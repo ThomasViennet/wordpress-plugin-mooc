@@ -12,6 +12,17 @@
  * Author URI: https://www.referencime.fr/consultant-seo-freelance
  */
 
+
+require_once('models/init.php');
+
+use Mooc\Models\Init\Model_Init;
+
+register_activation_hook(__FILE__, 'createTables');
+function createTables()
+{
+    (new Model_Init)->createTables();
+}
+
 require_once('controllers/init.php');
 require_once('controllers/save-answers.php');
 require_once('controllers/dashboard.php');
@@ -20,28 +31,14 @@ require_once('controllers/registration.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/button-lesson.php');
 
-require_once('models/lesson.php');
-
-use Mooc\Models\Lesson\Model_Lesson;
-
-// use Mooc\Controllers\Initialisation\Controllers_Init;
 use Mooc\Controllers\SaveAnswers\SaveAnswers;
 use Mooc\Controllers\ViewQuiz\ViewQuiz;
 use Mooc\Controllers\Registration\Registration;
 use Mooc\Controllers\Dashboard\Dashboard;
-// use Mooc\Controllers\NavMooc\NavMooc;
 use Mooc\Controllers\ButtonLesson\ButtonLesson;
 
-
-// require_once('models/init.php');
-
-// use Mooc\Models\Init\Models_Init;
-
-// register_activation_hook(__FILE__, 'createTables');
-// function createTables()
-// {
-//     (new Models_Init)->createTales();
-// }
+require_once('models/lesson.php'); //to delete
+use Mooc\Models\Lesson\Model_Lesson; //to delete
 
 add_action('init', array('Controllers_Init', 'init'));
 
@@ -138,32 +135,6 @@ function navMooc()
 }
 
 add_action('admin_menu', 'adminMenu');
-
-function mooc()
-{
-    // require_once(ABSPATH . 'wp-includes/pluggable.php');
-    // if (is_user_logged_in()) {
-    $user = wp_get_current_user();
-    // global $post;
-    // if (has_shortcode($post->post_content, 'nav_mooc')) {
-    $lessons = (new Model_Lesson)->get_all($user->ID);
-
-    $lessons_slug = array();
-    foreach ($lessons as $lesson) {
-        array_push($lessons_slug, $lesson->lesson_slug);
-    }
-
-    // ob_start();
-    require_once('views/nav-mooc.php');
-    // return ob_get_clean();
-    //     }
-    // }
-    // ob_start();
-    // require_once('views/nav-mooc.php');
-    // return ob_get_clean();
-}
-
-
 function adminMenu()
 {
     $user = wp_get_current_user();
@@ -173,4 +144,17 @@ function adminMenu()
         // add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu');
         // add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2');
     }
+}
+
+function mooc()
+{
+    $user = wp_get_current_user();
+    $lessons = (new Model_Lesson)->get_all($user->ID);
+
+    $lessons_slug = array();
+    foreach ($lessons as $lesson) {
+        array_push($lessons_slug, $lesson->lesson_slug);
+    }
+
+    require_once('views/nav-mooc.php');
 }

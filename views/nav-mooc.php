@@ -11,7 +11,7 @@
         <a href="https://referencime.fr/formation-seo-gratuite/quest-ce-que-le-seo/">
             <h2 class="
             <?php
-            if (in_array("2023", $lessons_slug, true))
+            if (in_array("quest-ce-que-le-seo", $lessons_slug, true))
                 echo 'lessonCompleted';
             ?>">Découvrez l'univers du SEO</h2>
         </a>

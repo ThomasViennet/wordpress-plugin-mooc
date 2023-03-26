@@ -6,10 +6,10 @@
 
 namespace Mooc\Controllers\ViewQuiz;
 
-require_once(dirname(__FILE__) . '/../models/mooc.php');
+require_once(dirname(__FILE__) . '/../models/quiz.php');
 require_once(dirname(__FILE__) . '/../lib/checked.php');
 
-use Mooc\Models\Mooc\MoocFreeSeo;
+use Mooc\Models\Quiz\Quiz;
 use Mooc\Lib\Checked\Checked;
 
 class ViewQuiz
@@ -18,7 +18,7 @@ class ViewQuiz
     {
         if (!empty($user_id)) {
 
-            $moocFreeSeo = (new MoocFreeSeo)->get($user_id, $quiz_id);
+            $moocFreeSeo = (new Quiz)->get($user_id, $quiz_id);
             $checked = new Checked();
             $note = 0;
 

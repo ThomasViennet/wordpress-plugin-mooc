@@ -6,19 +6,18 @@
 
 namespace Mooc\Models\Init;
 
-class Models_Init
+class Model_Init
 {
-    public function createTales()
+    public function createTables()
     {
         global $wpdb;
-        $cfdb = apply_filters('mooc_database', $wpdb);
 
-        $table_quizzes = $cfdb->prefix . 'quizzes';
-        $table_lessons = $cfdb->prefix . 'lessons';
+        $table_quizzes = $wpdb->prefix . 'quizzes';
+        $table_lessons = $wpdb->prefix . 'lessons';
 
-        if ($cfdb->get_var("SHOW TABLES LIKE '$table_quizzes'") != $table_quizzes) {
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes'") != $table_quizzes) {
 
-            $charset_collate = $cfdb->get_charset_collate();
+            $charset_collate = $wpdb->get_charset_collate();
 
             $sql = "CREATE TABLE $table_quizzes (
             id bigint(20) NOT NULL AUTO_INCREMENT,
@@ -33,9 +32,9 @@ class Models_Init
             dbDelta($sql);
         }
 
-        if ($cfdb->get_var("SHOW TABLES LIKE '$table_lessons'") != $table_lessons) {
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_lessons'") != $table_lessons) {
 
-            $charset_collate = $cfdb->get_charset_collate();
+            $charset_collate = $wpdb->get_charset_collate();
 
             $sql = "CREATE TABLE $table_lessons (
             id bigint(20) NOT NULL AUTO_INCREMENT,
