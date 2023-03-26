@@ -1,8 +1,8 @@
 <?php
 $title = "Sommaire des cours SEO";
+ob_start();
 ?>
 
-<?php ob_start(); ?>
 <h2><a href="https://referencime.fr/formation-seo-gratuite/quest-ce-que-le-seo/">Qu’est-ce que le SEO ?</a></h2>
 <ol>
     <li><span style="text-decoration: underline;">Qu’est-ce que le concept E-A-T de Google ? </span><br><em>Ce concept tiré directement des guidelines fournit aux&nbsp;Quality Raters de Google, permet en grande partie de juger de la qualité d’un contenu sur internet.</em></li>
@@ -65,5 +65,6 @@ $title = "Sommaire des cours SEO";
     <li><span style="text-decoration: underline;">Où travailler</span> – En cours de création<br><em>Vous pouvez travailler au sein d’une entreprise, pour une agence ou encore en freelance.</em> </li>
 </ol>
 
-<?php $content = ob_get_clean(); ?>
-<?php require('layout.php') ?>
+<?php
+$content = ob_get_clean();
+require('layout.php');

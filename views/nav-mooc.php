@@ -1,7 +1,12 @@
 <div id="navMooc" class="is-style-wide navMooc">
 
     <div id="bodyNavMooc">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <?php
+        if (!is_admin()) {
+            echo '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+        }
+        ?>
+        <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
 
         <a href="https://referencime.fr/formation-seo-gratuite/quest-ce-que-le-seo/">
             <h2 class="
@@ -331,5 +336,7 @@
 
     </div>
 </div>
-
-<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>
+<?php
+if (!is_admin()) {
+    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>';
+}

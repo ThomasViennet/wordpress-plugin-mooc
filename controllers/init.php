@@ -88,7 +88,7 @@ class Controllers_Init
                 'parent' => false,
                 'id'     => 'retour-site',
                 'title'  => 'Retour au site',
-                'href'   => esc_url('/'),
+                'href'   => esc_url(get_home_url('/')),
                 'meta'   => false
             );
         }
@@ -107,13 +107,9 @@ class Controllers_Init
         <script type="text/javascript" src="' . plugins_url('/../js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
-    // public static function wpLogin($redirect_to, $request, $user)
-    // {
-    //     return home_url('wp-admin/admin.php?page=dashboard');
-    // }
-
-    public static function wpLogin($user_login)
+    public static function wpLogin()
     {
-        return home_url('wp-admin/admin.php?page=dashboard');
+        wp_safe_redirect('wp-admin/admin.php?page=dashboard');
+        exit;
     }
 }

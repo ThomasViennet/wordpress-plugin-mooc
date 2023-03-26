@@ -1,4 +1,4 @@
-body {
+/* body {
     width: 80%;
 }
 
@@ -11,7 +11,7 @@ body {
     border-left: solid 2px;
     border-color: white;
     background-color: rgba(0, 141, 5, 0.5);
-    /* color: white; */
+    color: white;
 }
 
 #wp-admin-bar-formation-seo .ab-item:before {
@@ -25,4 +25,120 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-image: none !important;
     margin-right: 6px;
+} */
+
+#bodyNavMooc {
+    /* padding: 100px; */
+    /* background-color: white; */
+}
+
+.navMooc {
+    /* height: 100%; */
+    /* width: 100%; */
+    padding: 10px;
+    /* position: fixed; */
+    z-index: 1;
+    /* top: 0; */
+    margin-left: 0px;
+    /* background-color: white; */
+    /* overflow-x: hidden; */
+    /* transition: 0.5s; */
+    text-align: left;
+    /* z-index: 999; */
+}
+
+.navMooc h2 {
+    font-weight: bold !important;
+    transition: 0.2s;
+}
+
+.navMooc h2:hover {
+    text-decoration: underline;
+    font-weight: bolder !important;
+    color: #cd2653;
+}
+
+.navMooc a {
+    text-decoration: none;
+    color: #0a2463;
+    display: block;
+    transition: 0.3s !important;
+}
+
+.navMooc a:hover {
+    font-weight: bold;
+    color: #cd2653;
+}
+
+/* .navMooc .closebtn {
+    position: absolute;
+    padding-top: 60px;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.buttonNavMooc {
+    font-size: 1.2em;
+    cursor: pointer;
+    bottom: 0px;
+    background-color: white;
+    z-index: 998;
+    position: fixed;
+    margin-bottom: auto;
+    display: block;
+    width: 100%;
+    vertical-align: middle;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    color: #0a2463;
+    margin-bottom: 0px !important;
+}
+
+.buttonNavMooc::before {
+    font: normal 20px/1 dashicons;
+    content: '\f118';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: none !important;
+    margin-right: 7px;
+    vertical-align: middle;
+    color: #cd2653;
+    padding: 10px 0;
+}
+
+.buttonNavMooc:hover {
+    background-color: #cd2653;
+    color: white !important;
+}
+
+.buttonNavMooc:hover::before {
+    color: white;
+}
+
+.lessonCompleted::before {
+    font: normal 20px/1 dashicons;
+    content: '\f118';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 7px;
+    vertical-align: middle;
+    text-decoration: none !important;
+    color: #cd2653;
+} */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
