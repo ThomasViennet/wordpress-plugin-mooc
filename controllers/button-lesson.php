@@ -14,7 +14,6 @@ class ButtonLesson
 {
     public function display(int $user_id, string $lesson_slug)
     {
-
         if (!empty((new Model_Lesson())->get($user_id, $lesson_slug))) {
             $lesson_status = "Completed";
             $label_button = "Je n'ai pas terminé ce cours";

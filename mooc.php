@@ -47,21 +47,25 @@ function lesson_button($atts)
 {
     if (!is_admin()) {
         if (is_user_logged_in()) {
+
             $user = wp_get_current_user();
             $button_lesson = new ButtonLesson;
+            global $post;
 
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'lesson_button') {
+                    
                     if ($_POST['lesson_status'] != "Completed") {
-                        $button_lesson->save_lesson_completed($user->ID, $atts['lesson_slug']);
+                        $button_lesson->save_lesson_completed($user->ID, basename(get_permalink()));
+                        
                     } else {
-                        $button_lesson->delete_lesson_completed($user->ID, $atts['lesson_slug']);
+                        $button_lesson->delete_lesson_completed($user->ID, basename(get_permalink()));
                     }
                 }
             }
 
             ob_start();
-            $button_lesson->display($user->ID, $atts['lesson_slug']);
+            $button_lesson->display($user->ID, basename(get_permalink()));
             return ob_get_clean();
         } else {
             (new Registration)->execute();
@@ -157,4 +161,30 @@ function mooc()
     }
 
     require_once('views/nav-mooc.php');
+}
+
+add_shortcode('registration', 'registration'); //shloud be in controllers/init.php ?
+function registration()
+{
+    if (!is_admin()) {
+        // require_once(ABSPATH . 'wp-includes/pluggable.php');
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user();
+            global $post;
+            if (has_shortcode($post->post_content, 'registration')) {
+                $lessons = (new Model_Lesson)->get_all($user->ID);
+
+                $lessons_slug = array();
+                foreach ($lessons as $lesson) {
+                    array_push($lessons_slug, $lesson->lesson_slug);
+                }
+
+                ob_start();
+                require_once('views/nav-mooc.php');
+                return ob_get_clean();
+            }
+        } else {
+            return (new Registration)->execute();
+        }
+    }
 }
