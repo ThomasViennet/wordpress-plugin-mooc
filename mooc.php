@@ -12,17 +12,6 @@
  * Author URI: https://www.referencime.fr/consultant-seo-freelance
  */
 
-
-require_once('models/init.php');
-
-use Mooc\Models\Init\Model_Init;
-
-register_activation_hook(__FILE__, 'createTables');
-function createTables()
-{
-    (new Model_Init)->createTables();
-}
-
 require_once('controllers/init.php');
 require_once('controllers/save-answers.php');
 require_once('controllers/dashboard.php');
@@ -37,9 +26,21 @@ use Mooc\Controllers\Registration\Registration;
 use Mooc\Controllers\Dashboard\Dashboard;
 use Mooc\Controllers\ButtonLesson\ButtonLesson;
 
-require_once('models/lesson.php'); //to delete
-use Mooc\Models\Lesson\Model_Lesson; //to delete
+// START - need a controller
+require_once('models/lesson.php');
+require_once('models/init.php');
 
+use Mooc\Models\Lesson\Model_Lesson;
+use Mooc\Models\Init\Model_Init;
+// END - need a controller
+
+register_activation_hook(__FILE__, 'createTables');
+function createTables()
+{
+    (new Model_Init)->createTables();
+}
+
+//Contains the filter and action hooks
 add_action('init', array('Controllers_Init', 'init'));
 
 add_shortcode('lesson_button', 'lesson_button');
@@ -54,10 +55,9 @@ function lesson_button($atts)
 
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'lesson_button') {
-                    
+
                     if ($_POST['lesson_status'] != "Completed") {
                         $button_lesson->save_lesson_completed($user->ID, basename(get_permalink()));
-                        
                     } else {
                         $button_lesson->delete_lesson_completed($user->ID, basename(get_permalink()));
                     }
@@ -73,6 +73,7 @@ function lesson_button($atts)
     }
 }
 
+//WIP
 add_shortcode('quiz', 'quiz');
 function quiz($atts)
 {
@@ -114,11 +115,12 @@ function quiz($atts)
         }
     }
 }
-add_shortcode('nav_mooc', 'navMooc'); //shloud be in controllers/init.php ?
+
+add_shortcode('nav_mooc', 'navMooc');
 function navMooc()
 {
     if (!is_admin()) {
-        require_once(ABSPATH . 'wp-includes/pluggable.php');
+        require_once(ABSPATH . 'wp-includes/pluggable.php'); //Useless ?
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
             global $post;
@@ -138,6 +140,7 @@ function navMooc()
     }
 }
 
+//Add item "Formation SEO" at the admin menu which one target the dashboard of the mooc in BO
 add_action('admin_menu', 'adminMenu');
 function adminMenu()
 {
@@ -145,11 +148,10 @@ function adminMenu()
     if (in_array('subscriber', (array) $user->roles)) {
         remove_menu_page('index.php');
         add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', 'mooc', 'dashicons-welcome-learn-more', 6);
-        // add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu');
-        // add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2');
     }
 }
 
+//Displaying the navigation of the mooc taking into account the lessons completed by the user
 function mooc()
 {
     $user = wp_get_current_user();
@@ -163,7 +165,7 @@ function mooc()
     require_once('views/nav-mooc.php');
 }
 
-add_shortcode('registration', 'registration'); //shloud be in controllers/init.php ?
+add_shortcode('registration', 'registration');
 function registration()
 {
     if (!is_admin()) {
@@ -181,7 +183,7 @@ function registration()
 
                 ob_start();
                 require_once('views/nav-mooc.php');
-                return ob_get_clean();
+                return ob_get_clean(); //ob_ useless ? 
             }
         } else {
             return (new Registration)->execute();

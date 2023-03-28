@@ -37,6 +37,7 @@ class Controllers_Init
         add_action('wp_enqueue_scripts',  array('Controllers_Init', 'styleFront'));
 
         add_filter('wp_login', array('Controllers_Init', 'wpLogin'));
+        add_filter('wp_new_user_notification_email', array('Controllers_Init', 'custom_wp_new_user_notification_email'), 10, 3);
     }
 
     public static function createTables() //doesn't work here but work in mooc.php
@@ -112,5 +113,23 @@ class Controllers_Init
     {
         wp_safe_redirect('wp-admin/admin.php?page=dashboard');
         exit;
+    }
+
+    function custom_wp_new_user_notification_email($wp_new_user_notification_email, $user, $blogname)
+    {
+        $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
+        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier SEO gratuitement.' . "\r\n";
+        $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis 🫶 ' . "\r\n";
+        $message .= 'https://g.page/r/CaBcALRtf65YEB0/review' . "\r\n\r\n";
+        $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
+        $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
+        $message .= "Bonne lecture," . "\r\n";
+        $message .= "Thomas Viennet" . "\r\n";
+
+        $wp_new_user_notification_email['message'] = $message;
+        $wp_new_user_notification_email['subject'] = 'Inscription formation SEO';
+        $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
+
+        return $wp_new_user_notification_email;
     }
 }
