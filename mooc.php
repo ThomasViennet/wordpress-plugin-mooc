@@ -40,7 +40,7 @@ function createTables()
     (new Model_Init)->createTables();
 }
 
-//Contains the filter and action hooks
+//Contains the filters and actions hooks
 add_action('init', array('Controllers_Init', 'init'));
 
 add_shortcode('lesson_button', 'lesson_button');
@@ -67,8 +67,6 @@ function lesson_button($atts)
             ob_start();
             $button_lesson->display($user->ID, basename(get_permalink()));
             return ob_get_clean();
-        } else {
-            (new Registration)->execute();
         }
     }
 }
@@ -100,7 +98,7 @@ function quiz($atts)
                         $_POST['question8'],
                         $_POST['question9'],
                         $_POST['question10']
-                    ]; //should be in controller ?
+                    ]; //should be in controller
 
                     (new SaveAnswers())->execute($user->ID, $atts['id'], serialize($answers));
                 }
@@ -140,6 +138,7 @@ function navMooc()
     }
 }
 
+//START - Should be in controllers init
 //Add item "Formation SEO" at the admin menu which one target the dashboard of the mooc in BO
 add_action('admin_menu', 'adminMenu');
 function adminMenu()
@@ -165,28 +164,16 @@ function mooc()
     require_once('views/nav-mooc.php');
 }
 
+//END - Should be in controllers init
+
 add_shortcode('registration', 'registration');
 function registration()
 {
     if (!is_admin()) {
-        // require_once(ABSPATH . 'wp-includes/pluggable.php');
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
-            global $post;
-            if (has_shortcode($post->post_content, 'registration')) {
-                $lessons = (new Model_Lesson)->get_all($user->ID);
-
-                $lessons_slug = array();
-                foreach ($lessons as $lesson) {
-                    array_push($lessons_slug, $lesson->lesson_slug);
-                }
-
-                ob_start();
-                require_once('views/nav-mooc.php');
-                return ob_get_clean(); //ob_ useless ? 
-            }
+        if (!is_user_logged_in()) {
+            (new Registration)->execute();
         } else {
-            return (new Registration)->execute();
+            # code...
         }
     }
 }

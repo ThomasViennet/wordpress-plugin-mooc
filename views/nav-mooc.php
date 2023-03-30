@@ -9,11 +9,11 @@
         ?>
 
         <a href="/formation-seo-gratuite/quest-ce-que-le-seo/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("quest-ce-que-le-seo", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Découvrez l'univers du SEO</h2>
+            ?>">Découvrez l'univers du SEO</h3>
         </a>
 
         <ol>
@@ -61,11 +61,11 @@
         </ol>
 
         <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("comment-fonctionne-un-moteur-de-recherche", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Découvrez le fonctionnennement d'un moteur de recherche</h2>
+            ?>">Découvrez le fonctionnennement d'un moteur de recherche</h3>
         </a>
 
 
@@ -165,11 +165,11 @@
         </ol>
 
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("toutes-les-optimisations-pour-les-moteurs-de-recherche-seo", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Optimisations on-site</h2>
+            ?>">Optimisations on-site</h3>
         </a>
 
 
@@ -257,11 +257,11 @@
         </ol>
 
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("creer-une-strategie-seo-perenne-et-pertinente", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Créer une stratégie SEO pour Google</h2>
+            ?>">Créer une stratégie SEO pour Google</h3>
         </a>
 
         <ol>
@@ -327,11 +327,11 @@
         </ol>
 
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("ressources-pour-continuer-votre-formation-seo-gratuitement", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Ressources utiles</h2>
+            ?>">Ressources utiles</h3>
         </a>
 
     </div>
