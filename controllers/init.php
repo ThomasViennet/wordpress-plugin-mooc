@@ -119,7 +119,7 @@ class Controllers_Init
     function custom_wp_new_user_notification_email($wp_new_user_notification_email, $user, $blogname)
     {
         $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
-        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier SEO gratuitement.' . "\r\n\r\n";
+        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n\r\n";
         $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis 🫶 ' . "\r\n";
         $message .= 'https://g.page/r/CaBcALRtf65YEB0/review' . "\r\n\r\n";
         $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";

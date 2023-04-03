@@ -1,5 +1,5 @@
 <?php
-$title = "Qu'est-ce que le SEO ?";
+$title = "Comment fonctionne un moteur de recherche ?";
 ?>
 
 <?php ob_start(); ?>
@@ -8,17 +8,28 @@ $title = "Qu'est-ce que le SEO ?";
 
 <form method="post" action="?action=submit">
 
-    <h3>Question 1 ?</h3>
-    <label for="europe">
-        <input type="radio" name="question1" value="europe" id="europe" <?php if ($checked->execute('europe', $answers[0])) echo 'checked'; ?>>
+    <h3>Quelle(s) affirmation(s) est/sont vraie(s) ?</h3>
+    <label for="1">
+        <input type="radio" name="1" value="1" id="europe" <?php if ($checked->execute('1', $answers[0])) echo 'checked'; ?>>
         <?php if ($checked->execute('europe', $answers[0])) echo '✅'; ?>
-        Europe
+        Après une action SEO, on peut perdre des positions avant d'en gagner
     </label>
-    <label for="afrique">
-        <input type="radio" name="question1" value="afrique" id="afrique" <?php if ($checked->execute('afrique', $answers[0])) echo 'checked'; ?>>
+    <label for="2">
+        <input type="radio" name="2" value="2" id="afrique" <?php if ($checked->execute('1', $answers[0])) echo 'checked'; ?>>
         <?php if ($checked->execute('afrique', $answers[0])) echo '⛔️'; ?>
-        Afrique
+        Dès que Google a pris en considération une action SEO, on arrive à la nouvelle position qu'on mérite
     </label>
+    <label for="3">
+        <input type="radio" name="3" value="3" id="afrique" <?php if ($checked->execute('1', $answers[0])) echo 'checked'; ?>>
+        <?php if ($checked->execute('afrique', $answers[0])) echo '⛔️'; ?>
+        Après une action SEO, si on perd des positions, il est préférable d'effectuer un rollback
+    </label>
+
+    <?php 
+    // if (condition) {
+    //     # code...
+    // }
+    ?>
     <p>Explications : Blablablabla</p>
 
 
@@ -139,17 +150,5 @@ $title = "Qu'est-ce que le SEO ?";
     </label>
     <p>Explications : Blablablabla</p>
 
-    <?php
-    if ($userAllowedToRespond) {
-    ?>
-        <input type="submit" value="Valider mes réponses" />
-</form>
-
-<?php
-    } else {
-        echo '<strong>Note : $note/10</strong>';
-    }
-
-    $content = ob_get_clean(); ?>
-
-<?php require('layout.php') ?>
+<?php $content = ob_get_clean(); ?>
+<?php require('layout-quizzes.php') ?>

@@ -23,6 +23,7 @@ class Model_Init
             id bigint(20) NOT NULL AUTO_INCREMENT,
             user_id bigint(20) NOT NULL,
             quiz_id bigint(20) NOT NULL,
+            quiz_name longtext NOT NULL,
             quiz_answers longtext NOT NULL,
             creation_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
             PRIMARY KEY  (id)

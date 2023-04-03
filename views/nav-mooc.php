@@ -1,7 +1,7 @@
 <div id="navMooc" class="is-style-wide navMooc">
 
     <div id="bodyNavMooc">
-        
+
         <?php
         if (!is_admin()) {
             echo '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
@@ -57,8 +57,19 @@
                     echo 'lessonCompleted';
                 ?>">Le SMO</li>
             </a>
-
         </ol>
+
+        <a href="/mooc/quiz?quiz_name=univers-seo" class="
+                <?php
+                if (in_array("univers-SEO", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : L'univers du SEO
+        </a>
+
 
         <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/">
             <h3 class="
@@ -164,6 +175,18 @@
 
         </ol>
 
+        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+                <?php
+                if (in_array("fonctionnement-moteur-recherche", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Fonctionnement d'un moteur de recherche
+        </a>
+
+
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
             <h3 class="
             <?php
@@ -256,6 +279,17 @@
 
         </ol>
 
+        <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
+                <?php
+                if (in_array("optimisations-referencement-naturel", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Optimisations du référencement naturel
+        </a>
+
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
             <h3 class="
             <?php
@@ -325,6 +359,17 @@
             </a>
 
         </ol>
+
+        <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+                <?php
+                if (in_array("strategie-seo", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Stratégie SEO
+        </a>
 
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
             <h3 class="

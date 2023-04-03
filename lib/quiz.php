@@ -4,15 +4,15 @@
  * Check the question that corresponds to the user's answer
  */
 
-namespace Mooc\lib\Checked;
+namespace Mooc\lib\Quiz;
 
 // require_once(dirname(__FILE__) . '/../models/mooc.php');
 
 // use Mooc\Models\Mooc\MoocFreeSeo;
 
-class Checked
+class Lib_Quiz
 {
-    public function execute(string $question, string $answers)
+    public function checkAnswer(string $question, string $answers)
     {
         if ($question == $answers) {
             return TRUE;
