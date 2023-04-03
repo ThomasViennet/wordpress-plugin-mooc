@@ -2,23 +2,37 @@ label {
     font-size: inherit !important;
 }
 
-/* input[type=radio]:checked+label::after {
-    left: 0.67rem !important;
-    top: 0.35rem !important;
-    border: 0.25rem solid black !important;
-}
-
-input[type=radio]:focus+label::before {
-    outline: 0.2rem solid !important;
-    outline-offset: 0.2rem !important;
-} */
-
 input[type=checkbox] {
     margin-right: 1em !important;
     
 }
 
-/* input[type=radio] {
-    outline: 0.2rem solid !important;
-    outline-offset: 0.2rem !important;
-} */
+.correctAnswer {
+    color: green;
+}
+
+.correctAnswer::before {
+    font: normal 20px/1 dashicons;
+    content: '\f147';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    text-decoration: none !important;
+}
+
+.wrongAnswer {
+    color: red;
+}
+
+.wrongAnswer::before {
+    font: normal 20px/1 dashicons;
+    content: '\f158';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    text-decoration: none !important;
+}

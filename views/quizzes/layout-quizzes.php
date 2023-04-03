@@ -20,17 +20,30 @@
             if ($option[1] == $question[0]) {
 
                 echo '
-                <label for="' . $option[0] . '">
+                <label for="' . $option[0] . '" class="';
+
+                if ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'good') {
+                    echo 'correctAnswer';
+                    $note++; //bad idea to do this here?
+                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'wrong') {
+                    echo 'wrongAnswer';
+                    $note--; //bad idea to do this here?
+                }
+
+                echo '">
                 <input type="checkbox" name="question_' . $question[0] . '[]" value="' . $option[0] . '" id="' . $option[0] . '"';
 
-                //il faut que $answer[x]  correspondent à $question[x]
-                if ($lib_quiz->checkAnswer($option, $answers[$key])) {
+                if ($lib_quiz->isChecked($option, $answers[$key])) {
                     echo 'checked';
                 }
                 echo '>';
                 echo $option[0];
-                // print_r($answers);
                 echo '</label>';
+                //Count the number of correct answers
+                
+                if ($option[4]) {
+                    $totalPoints++;
+                }
             }
         }
     }
@@ -43,5 +56,10 @@
 </form>
 <?php
     } else {
-        echo '<strong>Note : $note/10</strong>';
+        //do not display the results, just indicate whether the quiz is successful or not
+        $percentageCorrectAnswers = $note / $totalPoints;
+        echo '<strong>Note : ' . $note . '/' . $totalPoints . '</strong>'; //totalPoints x2 supérieur
+        if ($percentageCorrectAnswers >= 0.8) {
+            echo 'super';
+        }
     }

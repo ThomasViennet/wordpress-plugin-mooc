@@ -13,14 +13,14 @@ namespace Mooc\lib\Quiz;
 class Lib_Quiz
 {
     //$answers can be a string or an array
-    public function checkAnswer(array $option, $answers)
+    public function isChecked(array $option, $answers)
     {
         if (gettype($answers) == 'array') {
             foreach ($answers as $answer) {
                 if ($option[0] == $answer) {
                     return TRUE;
                     break;
-                } 
+                }
             }
         } elseif (gettype($answers) == 'string') {
             if ($option[0] == $answers) {
@@ -29,24 +29,35 @@ class Lib_Quiz
         }
     }
 
-    public function isCorrectAnswer(array $option, $answers)
+    public function isCorrectAnswer(array $option, $answers, int $note)
     {
-        
-        if (gettype($answers) == 'array') {
+        if ($option[4]) { //If this is the correct answer
+            if (gettype($answers) == 'array') {
 
-            // Get correct answer
-            foreach ($option as $option) {
-                
-
-                if($option[4]) {//If correct answer
-                    
+                foreach ($answers as $answer) {
+                    if ($option[0] == $answer) {
+                        return 'good';
+                        break;
+                    }
+                }
+            } elseif (gettype($answers) == 'string') {
+                if ($option[0] == $answers) {
+                    return 'good';
                 }
             }
+        } else {
+            if (gettype($answers) == 'array') {
 
-            
-        } elseif (gettype($answers) == 'string') {
-            if ($option == $answers) {
-                return TRUE;
+                foreach ($answers as $answer) {
+                    if ($option[0] == $answer) {
+                        return 'wrong';
+                        break;
+                    }
+                }
+            } elseif (gettype($answers) == 'string') {
+                if ($option[0] == $answers) {
+                    return FALSE;// wrong ?
+                }
             }
         }
     }
