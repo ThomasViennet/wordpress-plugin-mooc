@@ -13,21 +13,23 @@
 <form method="post" action="?quiz_name=<?= $_GET['quiz_name'] ?>&action=submit">
 
     <?php
-    foreach ($questions as $question) {
-        echo '<h3>' . $question[0] . '</h3>';
+    foreach ($questions as $key => $question) {
+        echo '<h3>' . $question[1] . '</h3>';
 
         foreach ($options as $option) {
             if ($option[1] == $question[0]) {
 
                 echo '
                 <label for="' . $option[0] . '">
-                <input type="radio" name="' . $question[0] . '" value="' . $option[0] . '" id="' . $option[0] . '"';
+                <input type="checkbox" name="question_' . $question[0] . '[]" value="' . $option[0] . '" id="' . $option[0] . '"';
 
-                if ($lib_quiz->checkAnswer($option[0], $answers[0])) {
+                //il faut que $answer[x]  correspondent à $question[x]
+                if ($lib_quiz->checkAnswer($option, $answers[$key])) {
                     echo 'checked';
                 }
                 echo '>';
                 echo $option[0];
+                // print_r($answers);
                 echo '</label>';
             }
         }

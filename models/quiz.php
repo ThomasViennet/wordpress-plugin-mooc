@@ -16,7 +16,7 @@ class Model_Quiz
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'quizzes';
-        $data = $wpdb->get_row('SELECT * FROM '. $table_name.' WHERE quiz_name = "' . $quiz_name . '"');
+        $data = $wpdb->get_row('SELECT * FROM '. $table_name.' WHERE quiz_name = "' . $quiz_name . '" AND user_id = '.$user_id);
 
         if ($wpdb->num_rows > 0) {
             

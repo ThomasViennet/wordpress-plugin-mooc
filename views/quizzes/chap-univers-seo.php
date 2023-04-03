@@ -15,15 +15,16 @@ $chapites = array(
 );
 
 $questions = array(
-    ['question 1', 'univers-seo', 'free'],
-    ['question 2', 'univers-seo', 'free'],
-    ['question 3', 'univers-seo', 'free']
+    ['1', 'Quelle(s) affirmation(s) est/sont vraie(s) ?', 'univers-seo', 'free'],
+    ['2', 'question 2', 'univers-seo', 'free'],
+    ['3', 'question 3', 'univers-seo', 'free']
 );
 
 $options = array(
-    ['réponse 1', 'question 1', 'univers-seo', 'free'],
-    ['réponse 2', 'question 1', 'univers-seo', 'free'],
-    ['réponse 3', 'question 1', 'univers-seo', 'free'],
+    ['La part de marché mondial de Google en 2021 était supérieur à 90%', '1', 'univers-seo', 'free', 'TRUE'],
+    ['La part de marché mondial de Google en 2021 était approximativement de 80%', '1', 'univers-seo', 'free', 'FALSE'],
+    ['93% des expériences en ligne commencent avec un moteur de recherche', '1', 'univers-seo', 'free', 'TRUE'],
+    ['83% des expériences en ligne commencent avec un moteur de recherche', '1', 'univers-seo', 'free', 'FALSE'],
 
     ['réponse 1', 'question 2', 'univers-seo', 'free'],
     ['réponse 2', 'question 2', 'univers-seo', 'free'],

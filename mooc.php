@@ -112,17 +112,19 @@ function quiz()
         if (isset($_GET['action']) && $_GET['action'] == 'submit') {
 
             $answers = [
-                $_POST['question1'],
-                $_POST['question2'],
-                $_POST['question3'],
-                $_POST['question4'],
-                $_POST['question5'],
-                $_POST['question6'],
-                $_POST['question7'],
-                $_POST['question8'],
-                $_POST['question9'],
-                $_POST['question10']
+                $_POST['question_1'],
+                $_POST['question_2'],
+                $_POST['question_3'],
+                $_POST['question_4'],
+                $_POST['question_5'],
+                $_POST['question_6'],
+                $_POST['question_7'],
+                $_POST['question_8'],
+                $_POST['question_9'],
+                $_POST['question_10']
             ];
+
+            echo $_POST['question_1'];
 
             (new Controller_Quiz())->saveAnswers($user->ID, $quiz_id, $_GET['quiz_name'], serialize($answers));
         }
