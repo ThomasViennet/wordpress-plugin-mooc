@@ -29,7 +29,7 @@ class Lib_Quiz
         }
     }
 
-    public function isCorrectAnswer(array $option, $answers, int $note)
+    public function isCorrectAnswer(array $option, $answers)
     {
         if ($option[4]) { //If this is the correct answer
             if (gettype($answers) == 'array') {

@@ -61,11 +61,11 @@
 
         <!-- need to have the info in the base to indicate if the quiz is validated -->
         <a href="/mooc/quiz?quiz_name=univers-seo" class="
-                <?php
-                if (in_array("univers-seo", $quizzes_name, true)) {
+        <?php
+                if (in_array("univers-seo", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
-                } else {
-                    echo '';
+                } elseif (in_array("univers-seo", $quizzes_name_failed, true)) {
+                    echo 'quizFailed';
                 }
                 ?>">
             Quiz : L'univers du SEO
@@ -363,10 +363,10 @@
 
         <a href="/mooc/quiz?quiz_name=strategie-seo" class="
                 <?php
-                if (in_array("strategie-seo", $quizzes_name, true)) {
+                if (in_array("strategie-seo", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
-                } else {
-                    echo '';
+                } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
+                    echo 'quizFailed';
                 }
                 ?>">
             Quiz : Stratégie SEO

@@ -48,20 +48,23 @@ ob_start();
     if ($userAllowedToRespond) {
     ?>
         <input type="submit" value="Valider mes réponses" />
+    <?php
+    }
+    ?>
 </form>
 <?php
-
+if (!$userAllowedToRespond) {
+    //need to save in data base if user succes the quiz or not to display result whithout check at the end and use ob_
+    $percentageCorrectAnswers = $note / $totalPoints;
+    if ($percentageCorrectAnswers >= $successIndicator) {
+        $alert = 'Vous avez réussi ce quiz 🎉';
     } else {
-        //need to save in data base if user succes the quiz or not to display result whithout check at the end and use ob_
-        $percentageCorrectAnswers = $note / $totalPoints;
-        if ($percentageCorrectAnswers >= $successIndicator) {
-            $alert = 'super';
-        } else {
-            $alert = 'oups';
-        }
+        $alert = 'Vous n\'avez pas validé ce quiz.<br>
+            Vous n\'avez pas atteint le seuil de validation de cet exercice, c\'est-à-dire ' . ($successIndicator * 100) . '%';
     }
+}
 
-    $quiz = ob_get_clean();
+$quiz = ob_get_clean();
 ?>
 
 

@@ -30,13 +30,17 @@ class Controller_NavMooc
                 }
 
                 $quizzes = (new Model_Quiz())->get_all($user->ID);
-                $quizzes_name = array();
+                $quizzes_name_win = array();
+                $quizzes_name_failed = array();
+                
                 foreach ($quizzes as $quiz) {
-                    array_push($quizzes_name, $quiz->quiz_name);
+                    if ($quiz->quiz_status == 'Success') {
+                        array_push($quizzes_name_win, $quiz->quiz_name);
+                    } elseif ($quiz->quiz_status == 'Failed') {
+                        array_push($quizzes_name_failed, $quiz->quiz_name);
+                    }
                 }
 
-                var_dump($quizzes_name);
-                
                 require_once(dirname(__FILE__) . '/../views/nav-mooc.php');
             }
         }

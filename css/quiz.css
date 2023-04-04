@@ -48,15 +48,3 @@ input[type=checkbox] {
     text-decoration: none !important;
     color: #cd2653;
 }
-
-.quizFailed::after {
-    font: normal 20px/1 dashicons;
-    content: '\f153';
-    font-size: 1.2em;
-    speak: never;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    vertical-align: bottom;
-    text-decoration: none !important;
-    color: #cd2653;
-}

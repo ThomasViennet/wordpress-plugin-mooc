@@ -129,6 +129,19 @@
     color: #cd2653;
 }
 
+.quizFailed::before {
+    font: normal 20px/1 dashicons;
+    content: '\f335';
+    font-size: 1.2em;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 0px;
+    vertical-align: middle;
+    text-decoration: none !important;
+    color: #cd2653;
+}
+
 
 @media screen and (max-height: 450px) {
     .sidenav {
