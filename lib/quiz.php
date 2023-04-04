@@ -56,7 +56,7 @@ class Lib_Quiz
                 }
             } elseif (gettype($answers) == 'string') {
                 if ($option[0] == $answers) {
-                    return FALSE;// wrong ?
+                    return 'wrong';
                 }
             }
         }

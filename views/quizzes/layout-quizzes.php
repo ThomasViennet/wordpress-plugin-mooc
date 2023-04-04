@@ -1,14 +1,6 @@
-<h2><?= $title; ?></h2>
-
-<h3>Connaissances évaluées</h3>
-
-<ul>
-    <?php
-    foreach ($knowledgeEvaluated as $key => $value) {
-        echo '<li>' . $value . '</li>';
-    }
-    ?>
-</ul>
+<?php
+ob_start();
+?>
 
 <form method="post" action="?quiz_name=<?= $_GET['quiz_name'] ?>&action=submit">
 
@@ -31,7 +23,7 @@
                 }
 
                 echo '">
-                <input type="checkbox" name="question_' . $question[0] . '[]" value="' . $option[0] . '" id="' . $option[0] . '"';
+                <input type="checkbox" name="' . $question[0] . '[]" value="' . $option[0] . '" id="' . $option[0] . '"';
 
                 if ($lib_quiz->isChecked($option, $answers[$key])) {
                     echo 'checked';
@@ -40,12 +32,14 @@
                 echo $option[0];
                 echo '</label>';
                 //Count the number of correct answers
-                
+
                 if ($option[4]) {
                     $totalPoints++;
                 }
             }
         }
+
+        echo $explanations[$key][0];
     }
     ?>
 
@@ -55,11 +49,39 @@
         <input type="submit" value="Valider mes réponses" />
 </form>
 <?php
+
     } else {
-        //do not display the results, just indicate whether the quiz is successful or not
+        //need to save in data base if user succes the quiz or not to display result whithout check at the end and use ob_
         $percentageCorrectAnswers = $note / $totalPoints;
-        echo '<strong>Note : ' . $note . '/' . $totalPoints . '</strong>'; //totalPoints x2 supérieur
-        if ($percentageCorrectAnswers >= 0.8) {
-            echo 'super';
+        if ($percentageCorrectAnswers >= 0.6) {
+            $alert = 'super';
+        } else {
+            $alert = 'oups';
         }
+        echo $percentageCorrectAnswers;
     }
+
+    $quiz = ob_get_clean();
+?>
+
+
+<h2 class='
+<?php 
+if ($percentageCorrectAnswers >= 0.6) {
+    echo 'quizValidated';
+    } else {
+        echo 'quizFailed';
+    } 
+    ?>'><?= $title; ?></h2>
+<?= '<p>' . $alert . '</p>'; ?>
+<h3>Connaissances évaluées</h3>
+
+<ul>
+    <?php
+    foreach ($knowledgeEvaluated as $key => $value) {
+        echo '<li>' . $value . '</li>';
+    }
+    ?>
+</ul>
+
+<?= $quiz; ?>

@@ -59,6 +59,7 @@
             </a>
         </ol>
 
+        <!-- need to have the info in the base to indicate if the quiz is validated -->
         <a href="/mooc/quiz?quiz_name=univers-seo" class="
                 <?php
                 if (in_array("univers-SEO", $quiz_slug, true)) {

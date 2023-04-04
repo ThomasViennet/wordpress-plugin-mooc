@@ -106,22 +106,20 @@ function quiz()
         $user = wp_get_current_user();
         $quiz_id = 0; //Will be usefull when there will are a CRUD for quizzes
 
-        // (new User())->answeredQuiz()
-        //Controller which use modele to know if user has already answered to this quiz
-
         if (isset($_GET['action']) && $_GET['action'] == 'submit') {
+            //check if the user has answered all the questions
 
             $answers = [
-                $_POST['question_1'],
-                $_POST['question_2'],
-                $_POST['question_3'],
-                $_POST['question_4'],
-                $_POST['question_5'],
-                $_POST['question_6'],
-                $_POST['question_7'],
-                $_POST['question_8'],
-                $_POST['question_9'],
-                $_POST['question_10']
+                $_POST['question1'],
+                $_POST['question2'],
+                $_POST['question3'],
+                $_POST['question4'],
+                $_POST['question5'],
+                $_POST['question6'],
+                $_POST['question7'],
+                $_POST['question8'],
+                $_POST['question9'],
+                $_POST['question10']
             ];
 
             echo $_POST['question_1'];
