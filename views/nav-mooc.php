@@ -1,7 +1,7 @@
 <div id="navMooc" class="is-style-wide navMooc">
 
     <div id="bodyNavMooc">
-        
+
         <?php
         if (!is_admin()) {
             echo '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
@@ -9,11 +9,11 @@
         ?>
 
         <a href="/formation-seo-gratuite/quest-ce-que-le-seo/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("quest-ce-que-le-seo", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Découvrez l'univers du SEO</h2>
+            ?>">Découvrez l'univers du SEO</h3>
         </a>
 
         <ol>
@@ -57,15 +57,27 @@
                     echo 'lessonCompleted';
                 ?>">Le SMO</li>
             </a>
-
         </ol>
 
+        <!-- need to have the info in the base to indicate if the quiz is validated -->
+        <a href="/mooc/quiz?quiz_name=univers-seo" class="
+                <?php
+                if (in_array("univers-SEO", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : L'univers du SEO
+        </a>
+
+
         <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("comment-fonctionne-un-moteur-de-recherche", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Découvrez le fonctionnennement d'un moteur de recherche</h2>
+            ?>">Découvrez le fonctionnennement d'un moteur de recherche</h3>
         </a>
 
 
@@ -164,12 +176,24 @@
 
         </ol>
 
+        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+                <?php
+                if (in_array("fonctionnement-moteur-recherche", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Fonctionnement d'un moteur de recherche
+        </a>
+
+
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("toutes-les-optimisations-pour-les-moteurs-de-recherche-seo", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Optimisations on-site</h2>
+            ?>">Optimisations on-site</h3>
         </a>
 
 
@@ -256,12 +280,23 @@
 
         </ol>
 
+        <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
+                <?php
+                if (in_array("optimisations-referencement-naturel", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Optimisations du référencement naturel
+        </a>
+
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("creer-une-strategie-seo-perenne-et-pertinente", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Créer une stratégie SEO pour Google</h2>
+            ?>">Créer une stratégie SEO pour Google</h3>
         </a>
 
         <ol>
@@ -326,12 +361,23 @@
 
         </ol>
 
+        <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+                <?php
+                if (in_array("strategie-seo", $quiz_slug, true)) {
+                    echo 'quizCompleted';
+                } else {
+                    echo 'quiz';
+                }
+                ?>">
+            Quiz : Stratégie SEO
+        </a>
+
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
-            <h2 class="
+            <h3 class="
             <?php
             if (in_array("ressources-pour-continuer-votre-formation-seo-gratuitement", $lessons_slug, true))
                 echo 'lessonCompleted';
-            ?>">Ressources utiles</h2>
+            ?>">Ressources utiles</h3>
         </a>
 
     </div>

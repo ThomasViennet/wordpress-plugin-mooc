@@ -2,6 +2,7 @@
 
 /**
  * Registration form
+ * To put in class User
  */
 
 namespace Mooc\Controllers\Registration;

@@ -1,4 +1,6 @@
-#bodyNavMooc {}
+#bodyNavMooc {
+    line-height: initial;
+}
 
 .navMooc {
     padding: 10px;
