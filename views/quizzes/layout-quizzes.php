@@ -46,7 +46,7 @@ ob_start();
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <input type="submit" value="Valider mes réponses" />
+        <input type="submit" value="Valider mes réponses"/>
 </form>
 <?php
 

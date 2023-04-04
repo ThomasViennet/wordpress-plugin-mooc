@@ -107,6 +107,7 @@ class Controllers_Init
         <link rel="stylesheet" href="' . plugins_url('/../css/nav-mooc.css', __FILE__) . '" type="text/css" media="all" />
         <link rel="stylesheet" href="' . plugins_url('/../css/quiz.css', __FILE__) . '" type="text/css" media="all" />
         <link rel="stylesheet" href="' . plugins_url('/../css/lesson.css', __FILE__) . '" type="text/css" media="all" />
+        <link rel="stylesheet" href="' . plugins_url('/../css/button-lesson.css', __FILE__) . '" type="text/css" media="all" />
         <script type="text/javascript" src="' . plugins_url('/../js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
