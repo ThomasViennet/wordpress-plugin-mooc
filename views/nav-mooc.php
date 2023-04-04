@@ -385,5 +385,5 @@
 
 <?php
 if (!is_admin()) {
-    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>';
+    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu de la formation</span>';
 }
