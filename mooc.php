@@ -122,8 +122,6 @@ function quiz()
                 $_POST['question10']
             ];
 
-            echo $_POST['question_1'];
-
             (new Controller_Quiz())->saveAnswers($user->ID, $quiz_id, $_GET['quiz_name'], serialize($answers));
         }
 

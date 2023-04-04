@@ -9,6 +9,7 @@ class Model_Quiz
     public int $quiz_id;
     public string $quiz_name;
     public string $quiz_answers;
+    public string $quiz_status;
     public string $creation_date;
 
     //Update quiz_id when CRUD will be ready
@@ -25,6 +26,7 @@ class Model_Quiz
             $this->quiz_id = $data->quiz_id;
             $this->quiz_name = $data->quiz_name;
             $this->quiz_answers = $data->quiz_answers;
+            $this->quiz_status = $data->quiz_status;
             $this->creation_date = $data->creation_date;
 
             return $this;
@@ -34,7 +36,7 @@ class Model_Quiz
     }
 
     //Update quiz_id when CRUD will be ready
-    public function save(int $user_id, int $quiz_id, string $quiz_name,string $quiz_answers)
+    public function save(int $user_id, int $quiz_id, string $quiz_name,string $quiz_answers, string $quiz_status)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'quizzes';
@@ -43,6 +45,7 @@ class Model_Quiz
             'quiz_id' => $quiz_id,
             'quiz_name' => $quiz_name,
             'quiz_answers' => $quiz_answers,
+            'quiz_status' => $quiz_status,
             'creation_date' => date("Y-m-d H:i:s")
         ));
     }

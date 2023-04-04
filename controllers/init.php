@@ -35,6 +35,7 @@ class Controllers_Init
         add_action('admin_bar_menu', array('Controllers_Init', 'addLinkAdminBar'));
         add_action('admin_enqueue_scripts', array('Controllers_Init', 'styleAdmin'));
         add_action('wp_enqueue_scripts',  array('Controllers_Init', 'styleFront'));
+        add_action('admin_menu', array('Controllers_Init', 'hide_wp_elements'));
 
         add_filter('wp_login', array('Controllers_Init', 'wpLogin'));
         add_filter('wp_new_user_notification_email', array('Controllers_Init', 'custom_wp_new_user_notification_email'), 10, 3);
@@ -56,6 +57,25 @@ class Controllers_Init
         }
     }
 
+    public static function hide_wp_elements()
+    {
+        $user = wp_get_current_user();
+        if (in_array('subscriber', (array) $user->roles)) {
+            remove_action('admin_notices', 'update_nag', 3);
+            add_filter( 'admin_footer_text', '__return_empty_string', 11 );
+            add_filter( 'update_footer',     '__return_empty_string', 11 );
+        }
+    }
+
+    // public static function hideAlerteBo()
+    // {
+    //     if (!current_user_can('administrator'))
+    //     {
+    //         echo '<style>';
+    //         echo '.update_nag{display:none}';
+    //         echo '</style>';
+    //     }
+    // }
     // public static function adminMenu()
     // {
     //     $user = wp_get_current_user();

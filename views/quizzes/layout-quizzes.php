@@ -31,34 +31,34 @@ ob_start();
                 echo '>';
                 echo $option[0];
                 echo '</label>';
-                //Count the number of correct answers
 
+                //Count the number of correct answers
                 if ($option[4]) {
                     $totalPoints++;
                 }
             }
         }
-
-        echo $explanations[$key][0];
+        if (!$userAllowedToRespond) {
+            echo '<blockquote>' . $explanations[$key][0] . '</blockquote>';
+        }
     }
     ?>
 
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <input type="submit" value="Valider mes réponses"/>
+        <input type="submit" value="Valider mes réponses" />
 </form>
 <?php
 
     } else {
         //need to save in data base if user succes the quiz or not to display result whithout check at the end and use ob_
         $percentageCorrectAnswers = $note / $totalPoints;
-        if ($percentageCorrectAnswers >= 0.6) {
+        if ($percentageCorrectAnswers >= $successIndicator) {
             $alert = 'super';
         } else {
             $alert = 'oups';
         }
-        echo $percentageCorrectAnswers;
     }
 
     $quiz = ob_get_clean();
@@ -66,13 +66,13 @@ ob_start();
 
 
 <h2 class='
-<?php 
-if ($percentageCorrectAnswers >= 0.6) {
+<?php
+if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is define for each quiz
     echo 'quizValidated';
-    } else {
-        echo 'quizFailed';
-    } 
-    ?>'><?= $title; ?></h2>
+} elseif (isset($percentageCorrectAnswers)) {
+    echo 'quizFailed';
+}
+?>'><?= $title; ?></h2>
 <?= '<p>' . $alert . '</p>'; ?>
 <h3>Connaissances évaluées</h3>
 
