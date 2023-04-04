@@ -62,10 +62,10 @@
         <!-- need to have the info in the base to indicate if the quiz is validated -->
         <a href="/mooc/quiz?quiz_name=univers-seo" class="
                 <?php
-                if (in_array("univers-SEO", $quiz_slug, true)) {
+                if (in_array("univers-seo", $quizzes_name, true)) {
                     echo 'quizCompleted';
                 } else {
-                    echo 'quiz';
+                    echo '';
                 }
                 ?>">
             Quiz : L'univers du SEO
@@ -178,10 +178,10 @@
 
         <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                 <?php
-                if (in_array("fonctionnement-moteur-recherche", $quiz_slug, true)) {
+                if (in_array("fonctionnement-moteur-recherche", $quizzes_name, true)) {
                     echo 'quizCompleted';
                 } else {
-                    echo 'quiz';
+                    echo '';
                 }
                 ?>">
             Quiz : Fonctionnement d'un moteur de recherche
@@ -282,10 +282,10 @@
 
         <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
                 <?php
-                if (in_array("optimisations-referencement-naturel", $quiz_slug, true)) {
+                if (in_array("optimisations-referencement-naturel", $quizzes_name, true)) {
                     echo 'quizCompleted';
                 } else {
-                    echo 'quiz';
+                    echo '';
                 }
                 ?>">
             Quiz : Optimisations du référencement naturel
@@ -363,10 +363,10 @@
 
         <a href="/mooc/quiz?quiz_name=strategie-seo" class="
                 <?php
-                if (in_array("strategie-seo", $quiz_slug, true)) {
+                if (in_array("strategie-seo", $quizzes_name, true)) {
                     echo 'quizCompleted';
                 } else {
-                    echo 'quiz';
+                    echo '';
                 }
                 ?>">
             Quiz : Stratégie SEO

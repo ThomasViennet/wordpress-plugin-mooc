@@ -18,15 +18,16 @@ require_once('controllers/init.php');
 require_once('controllers/quiz.php');
 require_once('controllers/registration.php');
 require_once('controllers/nav-mooc.php');
-require_once('controllers/button-lesson.php');
+require_once('controllers/lesson.php');
 require_once('controllers/user.php');
 
+use Mooc\Controllers\NavMooc\Controller_NavMooc;
 use Mooc\Controllers\User\Controller_User;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 // use Mooc\Controllers\SaveAnswers\SaveAnswers;
 use Mooc\Controllers\Registration\Registration;
 // use Mooc\Controllers\Dashboard\Dashboard;
-use Mooc\Controllers\ButtonLesson\ButtonLesson;
+use Mooc\Controllers\Lesson\Controller_Lesson;
 
 // START - need a controller
 require_once('models/lesson.php');
@@ -52,22 +53,22 @@ function lesson_button()
         if (is_user_logged_in()) {
 
             $user = wp_get_current_user();
-            $button_lesson = new ButtonLesson;
+            $lesson = new Controller_Lesson;
             global $post;
 
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'lesson_button') {
 
                     if ($_POST['lesson_status'] != "Completed") {
-                        $button_lesson->save_lesson_completed($user->ID, basename(get_permalink()));
+                        $lesson->saveLessonCompleted($user->ID, basename(get_permalink()));
                     } else {
-                        $button_lesson->delete_lesson_completed($user->ID, basename(get_permalink()));
+                        $lesson->deleteLessonCompleted($user->ID, basename(get_permalink()));
                     }
                 }
             }
 
             ob_start();
-            $button_lesson->display($user->ID, basename(get_permalink()));
+            $lesson->displayButton($user->ID, basename(get_permalink()));
             return ob_get_clean();
         }
     }
@@ -82,16 +83,26 @@ function navMooc()
             $user = wp_get_current_user();
             global $post;
             if (has_shortcode($post->post_content, 'nav_mooc')) {
-                $lessons = (new Model_Lesson)->get_all($user->ID);
-
-                $lessons_slug = array();
-                foreach ($lessons as $lesson) {
-                    array_push($lessons_slug, $lesson->lesson_slug);
-                }
 
                 ob_start();
-                require_once('views/nav-mooc.php');
+                (new Controller_NavMooc)->display();
                 return ob_get_clean();
+
+                // $lessons = (new Model_Lesson)->get_all($user->ID);
+                // $lessons_slug = array();
+                // foreach ($lessons as $lesson) {
+                //     array_push($lessons_slug, $lesson->lesson_slug);
+                // }
+
+                // $quizzes = (new Model_Quiz())->get_all($user->ID);
+                // $quizzes_name = array();
+                // foreach ($quizzes as $quiz) {
+                //     array_push($quizzes_name, $quiz->$quiz_name);
+                // }
+
+                // ob_start();
+                // require_once('views/nav-mooc.php');
+                // return ob_get_clean();
             }
         }
     }
