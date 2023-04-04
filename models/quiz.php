@@ -35,6 +35,17 @@ class Model_Quiz
         }
     }
 
+    public function get_all(int $user_id)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'quizzes';
+
+        $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %s", $user_id);
+        $data = $wpdb->get_results($sql);
+
+        return $data;
+    }
+
     //Update quiz_id when CRUD will be ready
     public function save(int $user_id, int $quiz_id, string $quiz_name,string $quiz_answers, string $quiz_status)
     {

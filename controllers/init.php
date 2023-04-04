@@ -31,7 +31,6 @@ class Controllers_Init
         register_activation_hook(__FILE__, 'createTables');
 
         add_action('wp_before_admin_bar_render', array('Controllers_Init', 'adminBar'));
-        // add_action('admin_menu', array('Controllers_Init', 'adminMenu'), 1);
         add_action('admin_bar_menu', array('Controllers_Init', 'addLinkAdminBar'));
         add_action('admin_enqueue_scripts', array('Controllers_Init', 'styleAdmin'));
         add_action('wp_enqueue_scripts',  array('Controllers_Init', 'styleFront'));
@@ -41,10 +40,11 @@ class Controllers_Init
         add_filter('wp_new_user_notification_email', array('Controllers_Init', 'custom_wp_new_user_notification_email'), 10, 3);
     }
 
-    public static function createTables() //doesn't work here but work in mooc.php
-    {
-        (new Model_Init)->createTables();
-    }
+    //doesn't work here but work in mooc.php
+    // public static function createTables() 
+    // {
+    //     (new Model_Init)->createTables();
+    // }
 
     public static function adminBar()
     {
@@ -66,33 +66,6 @@ class Controllers_Init
             add_filter( 'update_footer',     '__return_empty_string', 11 );
         }
     }
-
-    // public static function hideAlerteBo()
-    // {
-    //     if (!current_user_can('administrator'))
-    //     {
-    //         echo '<style>';
-    //         echo '.update_nag{display:none}';
-    //         echo '</style>';
-    //     }
-    // }
-    // public static function adminMenu()
-    // {
-    //     $user = wp_get_current_user();
-    //     if (in_array('subscriber', (array) $user->roles)) {
-    //         remove_menu_page('index.php');
-    //         add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', 'mooc', 'dashicons-welcome-learn-more', 6);
-    //         // add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu');
-    //         // add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2');
-    //     }
-    // }
-
-    // public static function mooc()
-    // {
-    //     ob_start();
-    //     require_once(dirname(__FILE__) . '/../views/dashboard.php');
-    //     return ob_get_clean();
-    // }
 
     public static function addLinkAdminBar($admin_bar)
     {

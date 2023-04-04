@@ -2,15 +2,18 @@
 
 /**
  * Dashboard of a mooc student
+ * USELESS?
  */
 
-// namespace Mooc\Controllers\NavMooc;
+namespace Mooc\Controllers\NavMooc;
 
 require_once(dirname(__FILE__) . '/../models/lesson.php');
+require_once(dirname(__FILE__) . '/../models/quiz.php');
 
 use Mooc\Models\Lesson\Model_Lesson;
+use Mooc\Models\Quiz\Model_Quiz;
 
-class NavMooc
+class Controller_NavMooc
 {
     public static function display()
     {
@@ -19,15 +22,25 @@ class NavMooc
             $user = wp_get_current_user();
             global $post;
             if (has_shortcode($post->post_content, 'nav_mooc')) {
+
                 $lessons = (new Model_Lesson())->get_all($user->ID);
-                
                 $lessons_id = array();
                 foreach ($lessons as $lesson) {
                     array_push($lessons_id, $lesson->lesson_id);
                 }
 
-                var_dump($lessons_id);
+                $quizzes = (new Model_Quiz())->get_all($user->ID);
+                $quizzes_name_win = array();
+                $quizzes_name_failed = array();
                 
+                foreach ($quizzes as $quiz) {
+                    if ($quiz->quiz_status == 'Success') {
+                        array_push($quizzes_name_win, $quiz->quiz_name);
+                    } elseif ($quiz->quiz_status == 'Failed') {
+                        array_push($quizzes_name_failed, $quiz->quiz_name);
+                    }
+                }
+
                 require_once(dirname(__FILE__) . '/../views/nav-mooc.php');
             }
         }
