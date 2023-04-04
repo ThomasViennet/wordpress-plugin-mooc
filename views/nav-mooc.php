@@ -60,7 +60,7 @@
         </ol>
 
         <!-- need to have the info in the base to indicate if the quiz is validated -->
-        <!-- <a href="/mooc/quiz?quiz_name=univers-seo" class="
+        <a href="/mooc/quiz?quiz_name=univers-seo" class="
                 <?php
                 if (in_array("univers-SEO", $quiz_slug, true)) {
                     echo 'quizCompleted';
@@ -69,7 +69,7 @@
                 }
                 ?>">
             Quiz : L'univers du SEO
-        </a> -->
+        </a>
 
 
         <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/">
@@ -176,7 +176,7 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                 <?php
                 if (in_array("fonctionnement-moteur-recherche", $quiz_slug, true)) {
                     echo 'quizCompleted';
@@ -185,7 +185,7 @@
                 }
                 ?>">
             Quiz : Fonctionnement d'un moteur de recherche
-        </a> -->
+        </a>
 
 
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
@@ -280,7 +280,7 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
+        <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
                 <?php
                 if (in_array("optimisations-referencement-naturel", $quiz_slug, true)) {
                     echo 'quizCompleted';
@@ -289,7 +289,7 @@
                 }
                 ?>">
             Quiz : Optimisations du référencement naturel
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
             <h3 class="
@@ -361,7 +361,7 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+        <a href="/mooc/quiz?quiz_name=strategie-seo" class="
                 <?php
                 if (in_array("strategie-seo", $quiz_slug, true)) {
                     echo 'quizCompleted';
@@ -370,7 +370,7 @@
                 }
                 ?>">
             Quiz : Stratégie SEO
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
             <h3 class="
@@ -385,5 +385,5 @@
 
 <?php
 if (!is_admin()) {
-    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu de la formation</span>';
+    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>';
 }

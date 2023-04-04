@@ -35,7 +35,7 @@ $options = array(
     ["Le SMO permet augmenter indirectement le pagerank", 'question3', 'univers-seo', 'free', TRUE],
     ["Le SMO permet de réduire directement le pagerank", 'question3', 'univers-seo', 'free', FALSE],
 
-    ["Ils modifient le classement des résultats de recherche s'ils ne sont pas satisfaisants", 'question4', 'univers-seo', 'free', FALSE],
+    ["Ils modifient le classement des résultats de recherche ils ne sont pas satisfaisants", 'question4', 'univers-seo', 'free', FALSE],
     ["Ils donnent une note aux sites pour aider Google à filtrer les mauvais résultats en temps réel", 'question4', 'univers-seo', 'free', FALSE],
     ["Ils catégorisent des informations pour aider Google à améliorer ses algorithmes", 'question4', 'univers-seo', 'free', TRUE]
 );
@@ -58,6 +58,7 @@ $knowledgeEvaluated = array(
 $note = 0;
 $totalPoints = 0;
 $alert = '';
+$successIndicator = 0.7;
 
-require('layout-quizzes.php') ?>
+
 

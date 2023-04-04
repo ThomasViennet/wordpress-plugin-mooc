@@ -6,7 +6,6 @@
         left: 0;
         width: 100%;
         height: 46px;
-        transition: 0.3s;
     }
 }
 
@@ -15,18 +14,20 @@
         top: 32px;
         left: 0;
         width: 100%;
-        transition: 0.3s;
     }
 }
 
 .buttonLesson {
     position: fixed;
     z-index: 1;
+    background-color: #cd2653 !important;
+    color: white!important;
+    transition: 0.3s!important;
 }
 
 .buttonLesson:hover {
     transition: 0.3s;
     text-decoration: none !important;
-    background-color: white;
+    background-color: white!important;
     color: #cd2653 !important;
 }
