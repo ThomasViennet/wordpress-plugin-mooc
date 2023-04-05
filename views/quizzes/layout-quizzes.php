@@ -6,7 +6,7 @@ ob_start();
 
     <?php
     foreach ($questions as $key => $question) {
-        echo '<h3>' . $question[1] . '</h3>';
+        echo '<h4>' . $question[1] . '</h4>';
 
         foreach ($options as $option) {
             if ($option[1] == $question[0]) {
@@ -47,7 +47,7 @@ ob_start();
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <input type="submit" value="Valider mes réponses" />
+        <p style="text-align:center;padding:3em;"><input type="submit" value="Valider mes réponses"/></p>
     <?php
     }
     ?>
@@ -86,5 +86,5 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     }
     ?>
 </ul>
-
+<h3>Questions</h3>
 <?= $quiz; ?>
