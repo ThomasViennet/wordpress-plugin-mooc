@@ -14,10 +14,10 @@ ob_start();
                 echo '
                 <label for="' . $option[0] . '" class="';
 
-                if ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'good') {
+                if ($option[4]) {
                     echo 'correctAnswer';
                     $note++; //bad idea to do this here?
-                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'wrong') {
+                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key]) == 'wrong') {
                     echo 'wrongAnswer';
                     $note--; //bad idea to do this here?
                 }
@@ -59,8 +59,7 @@ if (!$userAllowedToRespond) {
     if ($percentageCorrectAnswers >= $successIndicator) {
         $alert = 'Vous avez réussi ce quiz 🎉';
     } else {
-        $alert = 'Vous n\'avez pas validé ce quiz.<br>
-            Vous n\'avez pas atteint le seuil de validation de cet exercice, c\'est-à-dire ' . ($successIndicator * 100) . '%';
+        $alert = 'Vous n\'avez pas atteint le seuil de validation de ' . ($successIndicator * 10) . '/10.';
     }
 }
 
