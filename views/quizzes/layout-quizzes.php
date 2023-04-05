@@ -6,7 +6,7 @@ ob_start();
 
     <?php
     foreach ($questions as $key => $question) {
-        echo '<h3>' . $question[1] . '</h3>';
+        echo '<h4>' . $question[1] . '</h4>';
 
         foreach ($options as $option) {
             if ($option[1] == $question[0]) {
@@ -14,10 +14,10 @@ ob_start();
                 echo '
                 <label for="' . $option[0] . '" class="';
 
-                if ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'good') {
+                if ($option[4]) {
                     echo 'correctAnswer';
                     $note++; //bad idea to do this here?
-                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key], $note) == 'wrong') {
+                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key]) == 'wrong') {
                     echo 'wrongAnswer';
                     $note--; //bad idea to do this here?
                 }
@@ -47,7 +47,7 @@ ob_start();
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <input type="submit" value="Valider mes réponses" />
+        <p style="text-align:center;padding:3em;"><input type="submit" value="Valider mes réponses"/></p>
     <?php
     }
     ?>
@@ -59,8 +59,7 @@ if (!$userAllowedToRespond) {
     if ($percentageCorrectAnswers >= $successIndicator) {
         $alert = 'Vous avez réussi ce quiz 🎉';
     } else {
-        $alert = 'Vous n\'avez pas validé ce quiz.<br>
-            Vous n\'avez pas atteint le seuil de validation de cet exercice, c\'est-à-dire ' . ($successIndicator * 100) . '%';
+        $alert = 'Vous n\'avez pas atteint le seuil de validation de ' . ($successIndicator * 10) . '/10.';
     }
 }
 
@@ -86,5 +85,14 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     }
     ?>
 </ul>
+<h3>Calcul des points</h3>
 
+<ul>
+    <li>1 point par bonne réponse</li>
+    <li>1 point par mauvaise réponse</li>
+    <li>Pour réussir le quiz, il faut obtenir une note minimale de 7/10</li>
+</ul>
+
+
+<h3>Questions</h3>
 <?= $quiz; ?>
