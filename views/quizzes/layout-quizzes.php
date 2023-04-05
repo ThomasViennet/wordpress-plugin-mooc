@@ -86,5 +86,14 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     }
     ?>
 </ul>
+<h3>Calcul des points</h3>
+
+<ul>
+    <li>1 point par bonne réponse</li>
+    <li>1 point par mauvaise réponse</li>
+    <li>Pour réussir le quiz, il faut obtenir une note minimale de 7/10</li>
+</ul>
+
+
 <h3>Questions</h3>
 <?= $quiz; ?>
