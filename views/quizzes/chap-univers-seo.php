@@ -22,26 +22,27 @@ $questions = array(
 );
 
 $options = array(
-    ['La part de marché mondial de Google en 2021 était supérieur à 90%', 'question1', 'univers-seo', 'free', TRUE],
-    ['La part de marché mondial de Google en 2021 était approximativement de 80%', 'question1', 'univers-seo', 'free', FALSE],
+    ['La part de marché mondial de Google en 2022 était supérieur à 90%', 'question1', 'univers-seo', 'free', TRUE],
+    ['La part de marché mondial de Google en 2022 était approximativement de 80%', 'question1', 'univers-seo', 'free', FALSE],
     ['93% des expériences en ligne commencent avec un moteur de recherche', 'question1', 'univers-seo', 'free', TRUE],
     ['83% des expériences en ligne commencent avec un moteur de recherche', 'question1', 'univers-seo', 'free', FALSE],
 
-    ["Niveau de maturité de internaute élevé + Volume de recherche faible + Niveau de concurrence faible", 'question2', 'univers-seo', 'free', TRUE],
-    ["Niveau de maturité de internaute faible + Volume de recherche élevé + Niveau de concurrence élevé", 'question2', 'univers-seo', 'free', FALSE],
-    ["Niveau de maturité de internaute faible + Volume de recherche faible + Niveau de concurrence faible", 'question2', 'univers-seo', 'free', FALSE],
+    ['Niveau de maturité de l\'internaute élevé + Volume de recherche faible + Niveau de concurrence faible', 'question2', 'univers-seo', 'free', TRUE],
+    ['Niveau de maturité de l\'internaute faible + Volume de recherche élevé + Niveau de concurrence élevé', 'question2', 'univers-seo', 'free', FALSE],
+    ['Niveau de maturité de l\'internaute faible + Volume de recherche faible + Niveau de concurrence faible', 'question2', 'univers-seo', 'free', FALSE],
 
-    ["Le SMO permet augmenter directement le pagerank", 'question3', 'univers-seo', 'free', FALSE],
-    ["Le SMO permet augmenter indirectement le pagerank", 'question3', 'univers-seo', 'free', TRUE],
-    ["Le SMO permet de réduire directement le pagerank", 'question3', 'univers-seo', 'free', FALSE],
+    ['Le SMO permet d\'augmenter directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
+    ['Le SMO permet d\'augmenter indirectement le pagerank', 'question3', 'univers-seo', 'free', TRUE],
+    ['Le SMO permet de réduire directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
 
-    ["Ils modifient le classement des résultats de recherche ils ne sont pas satisfaisants", 'question4', 'univers-seo', 'free', FALSE],
-    ["Ils donnent une note aux sites pour aider Google à filtrer les mauvais résultats en temps réel", 'question4', 'univers-seo', 'free', FALSE],
-    ["Ils catégorisent des informations pour aider Google à améliorer ses algorithmes", 'question4', 'univers-seo', 'free', TRUE]
+    ['Ils modifient le classement des résultats de recherche s\'ils ne sont pas satisfaisants', 'question4', 'univers-seo', 'free', FALSE],
+    ['Ils donnent une note aux sites pour aider Google à filtrer les mauvais résultats en temps réel', 'question4', 'univers-seo', 'free', FALSE],
+    ['Ils catégorisent des informations pour aider Google à améliorer ses algorithmes', 'question4', 'univers-seo', 'free', TRUE]
 );
 
 $explanations = array(
-    ['clarification 1', 'question1', 'univers-seo', 'free'],
+    ['93% des expériences en ligne commencent avec un moteur de recherche - <a href="https://www.imforza.com/blog/8-seo-stats-that-are-hard-to-ignore/">Source imforza.com</a><br>
+    La part de marché mondial de Google en 2022 était supérieur à 90% - <a href="https://gs.statcounter.com/search-engine-market-share#monthly-202201-202212-bar">Source statcounter.com</a>', 'question1', 'univers-seo', 'free'],
     ['clarification 2', 'question2', 'univers-seo', 'free'],
     ['clarification 3', 'question3', 'univers-seo', 'free'],
     ['clarification 4', 'question4', 'univers-seo', 'free'],

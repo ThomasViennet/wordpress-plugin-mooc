@@ -17,13 +17,13 @@ class Lib_Quiz
     {
         if (gettype($answers) == 'array') {
             foreach ($answers as $answer) {
-                if ($option[0] == $answer) {
+                if ($option[0] == stripslashes($answer)) {
                     return TRUE;
                     break;
                 }
             }
         } elseif (gettype($answers) == 'string') {
-            if ($option[0] == $answers) {
+            if ($option[0] == stripslashes($answers)) {
                 return TRUE;
             }
         }
@@ -35,13 +35,13 @@ class Lib_Quiz
             if (gettype($answers) == 'array') {
 
                 foreach ($answers as $answer) {
-                    if ($option[0] == $answer) {
+                    if ($option[0] == stripslashes($answer)) {
                         return 'good';
                         break;
                     }
                 }
             } elseif (gettype($answers) == 'string') {
-                if ($option[0] == $answers) {
+                if ($option[0] == stripslashes($answers)) {
                     return 'good';
                 }
             }
@@ -49,13 +49,13 @@ class Lib_Quiz
             if (gettype($answers) == 'array') {
 
                 foreach ($answers as $answer) {
-                    if ($option[0] == $answer) {
+                    if ($option[0] == stripslashes($answer)) {
                         return 'wrong';
                         break;
                     }
                 }
             } elseif (gettype($answers) == 'string') {
-                if ($option[0] == $answers) {
+                if ($option[0] == stripslashes($answers)) {
                     return 'wrong';
                 }
             }
