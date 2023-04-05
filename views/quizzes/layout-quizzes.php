@@ -14,7 +14,7 @@ ob_start();
                 echo '
                 <label for="' . $option[0] . '" class="';
 
-                if ($option[4]) {
+                if ($option[4] && !$userAllowedToRespond) {
                     echo 'correctAnswer';
                     $note++; //bad idea to do this here?
                 } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key]) == 'wrong') {
@@ -89,7 +89,7 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
 
 <ul>
     <li>1 point par bonne réponse</li>
-    <li>1 point par mauvaise réponse</li>
+    <li>-1 point par mauvaise réponse</li>
     <li>Pour réussir le quiz, il faut obtenir une note minimale de 7/10</li>
 </ul>
 

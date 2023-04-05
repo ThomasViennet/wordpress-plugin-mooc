@@ -1,87 +1,67 @@
 label {
-    font-size: inherit !important;
+  font-size: inherit !important;
 }
 
 input[type=checkbox] {
-    position: relative;
-      border: 2px solid white;
-      border-radius: 2px;
-      background: none;
-      cursor: pointer;
-      line-height: 0;
-      margin: 0 1em 0 0!important;
-      outline: 0;
-      padding: 0 !important;
-      vertical-align: inherit!important;
-      /* height: 20px!important;
-      width: 20px!important; */
-      -webkit-appearance: none;
-    opacity: .5;
-  }
-  
-  input[type=checkbox]:hover {
-    opacity: 1;
-  }
-  
-  input[type=checkbox]:checked {
-    /* background-color: #cd2653; */
-    /* color:white!important; */
-    opacity: 1;
-  }
-  
-  input[type=checkbox]:before {
-    /* content: ''; */
-    border:solid white!important;
-    /* position: absolute; */
-    /* right: 50%;
-    top: 50%; */
-    /* width: 4px;
-    height: 10px;
-    border: solid #FFF;
-    border-width: 0 2px 2px 0; */
-    /* margin: -1px -1px 0 -1px;
-    transform: rotate(45deg) translate(-50%, -50%);
-    z-index: 2; */
-  }
+  position: relative;
+  border: solid white !important;
+  border-radius: 2px !important;
+  margin: 0 1em 0 0 !important;
+  padding: 0 !important;
+  vertical-align: inherit !important;
+  opacity: .5;
+}
+
+input[type=checkbox]:hover {
+  opacity: 1;
+}
+
+input[type=checkbox]:checked {
+  opacity: 1;
+}
+
+input[type=checkbox]:before {
+  /* border:solid white!important; */
+}
 
 .correctAnswer {
-    color: green;
+  color: #48D448;
 }
 
 .correctAnswer::before {
-    font: normal 20px/1 dashicons;
-    content: '\f147';
-    font-size: 1.2em;
-    speak: never;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    vertical-align: middle;
-    text-decoration: none !important;
+  font: normal 20px/1 dashicons;
+  content: '\f147';
+  font-size: 1.2em;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  text-decoration: none !important;
 }
 
 .wrongAnswer {
-    color: red;
+  color: #CD2653;
 }
 
 .wrongAnswer::before {
-    font: normal 20px/1 dashicons;
-    content: '\f335';
-    font-size: 1.2em;
-    speak: never;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    vertical-align: middle;
-    text-decoration: none !important;
+  font: normal 20px/1 dashicons;
+  content: '\f335';
+  font-size: 1.2em;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  text-decoration: none !important;
 }
 
 .quizValidated::after {
-    font: normal 20px/1 dashicons;
-    content: '\f313';
-    font-size: 1.2em;
-    speak: never;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    vertical-align: bottom;
-    text-decoration: none !important;
-    color: #cd2653;
+  font: normal 20px/1 dashicons;
+  content: '\f313';
+  font-size: 1.2em;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: bottom;
+  text-decoration: none !important;
+  color: #cd2653;
 }
