@@ -126,22 +126,6 @@ function navMooc()
                 ob_start();
                 (new Controller_NavMooc)->display();
                 return ob_get_clean();
-
-                // $lessons = (new Model_Lesson)->get_all($user->ID);
-                // $lessons_slug = array();
-                // foreach ($lessons as $lesson) {
-                //     array_push($lessons_slug, $lesson->lesson_slug);
-                // }
-
-                // $quizzes = (new Model_Quiz())->get_all($user->ID);
-                // $quizzes_name = array();
-                // foreach ($quizzes as $quiz) {
-                //     array_push($quizzes_name, $quiz->$quiz_name);
-                // }
-
-                // ob_start();
-                // require_once('views/nav-mooc.php');
-                // return ob_get_clean();
             }
         }
     }

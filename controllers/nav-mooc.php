@@ -24,9 +24,9 @@ class Controller_NavMooc
             if (has_shortcode($post->post_content, 'nav_mooc')) {
 
                 $lessons = (new Model_Lesson())->get_all($user->ID);
-                $lessons_id = array();
+                $lessons_slug = array();
                 foreach ($lessons as $lesson) {
-                    array_push($lessons_id, $lesson->lesson_id);
+                    array_push($lessons_slug, $lesson->lesson_slug);
                 }
 
                 $quizzes = (new Model_Quiz())->get_all($user->ID);
