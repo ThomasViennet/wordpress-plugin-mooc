@@ -4,7 +4,7 @@
 * use of variables similar to the answer of a database.
 */
 
-$title = "L'univers du SEO ?";
+$title = "L'univers du SEO";
 
 $formation = array(
     'free'

@@ -62,12 +62,12 @@
         <!-- The URL "/quiz" must work -->
         <a href="/quiz?quiz_name=univers-seo" class="
         <?php
-                if (in_array("univers-seo", $quizzes_name_win, true)) {
-                    echo 'quizCompleted';
-                } elseif (in_array("univers-seo", $quizzes_name_failed, true)) {
-                    echo 'quizFailed';
-                }
-                ?>">
+        if (in_array("univers-seo", $quizzes_name_win, true)) {
+            echo 'quizCompleted';
+        } elseif (in_array("univers-seo", $quizzes_name_failed, true)) {
+            echo 'quizFailed';
+        }
+        ?>">
             Quiz : L'univers du SEO
         </a>
 
@@ -176,16 +176,16 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                 <?php
-                if (in_array("fonctionnement-moteur-recherche", $quizzes_name, true)) {
+                if (in_array("fonctionnement-moteur-recherche", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
-                } else {
-                    echo '';
+                } elseif (in_array("fonctionnement-moteur-recherche", $quizzes_name_failed, true)) {
+                    echo 'quizFailed';
                 }
-                ?>">
+                ?>>">
             Quiz : Fonctionnement d'un moteur de recherche
-        </a> -->
+        </a>
 
 
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
@@ -280,16 +280,16 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
+        <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
                 <?php
-                if (in_array("optimisations-referencement-naturel", $quizzes_name, true)) {
+                if (in_array("optimisations-seo", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
-                } else {
-                    echo '';
+                } elseif (in_array("optimisations-seo", $quizzes_name_failed, true)) {
+                    echo 'quizFailed';
                 }
                 ?>">
             Quiz : Optimisations du référencement naturel
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
             <h3 class="
@@ -361,8 +361,8 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=strategie-seo" class="
-                <?php
+        <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+        <?php
                 if (in_array("strategie-seo", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
                 } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
@@ -370,7 +370,7 @@
                 }
                 ?>">
             Quiz : Stratégie SEO
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
             <h3 class="

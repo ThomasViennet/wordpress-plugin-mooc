@@ -29,20 +29,24 @@ class Lib_Quiz
         }
     }
 
-    public function isCorrectAnswer(array $option, $answers)
+    public function isCorrectAnswer(array $option, $answers): bool
     {
         if ($option[4]) { //If this is the correct answer
             if (gettype($answers) == 'array') {
 
                 foreach ($answers as $answer) {
                     if ($option[0] == stripslashes($answer)) {
-                        return 'good';
+                        return TRUE;
                         break;
+                    } else {
+                        return FALSE;
                     }
                 }
             } elseif (gettype($answers) == 'string') {
                 if ($option[0] == stripslashes($answers)) {
-                    return 'good';
+                    return TRUE;
+                } else {
+                    return FALSE;
                 }
             }
         } else {
@@ -50,13 +54,17 @@ class Lib_Quiz
 
                 foreach ($answers as $answer) {
                     if ($option[0] == stripslashes($answer)) {
-                        return 'wrong';
+                        return FALSE;
                         break;
+                    } else {
+                        return TRUE;
                     }
                 }
             } elseif (gettype($answers) == 'string') {
                 if ($option[0] == stripslashes($answers)) {
-                    return 'wrong';
+                    return FALSE;
+                } else {
+                    return TRUE;
                 }
             }
         }
