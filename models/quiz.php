@@ -12,7 +12,7 @@ class Model_Quiz
     public string $quiz_status;
     public string $creation_date;
 
-    //Update quiz_id when CRUD will be ready
+    //toupdate quiz_id when CRUD will be ready
     public function get(int $user_id, string $quiz_name) 
     {
         global $wpdb;

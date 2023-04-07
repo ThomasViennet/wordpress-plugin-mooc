@@ -29,36 +29,30 @@ class Lib_Quiz
         }
     }
 
-    public function isCorrectAnswer(array $option, $answers)
+    public function isCorrectAnswer(array $option, $answers): bool
     {
-        if ($option[4]) { //If this is the correct answer
-            if (gettype($answers) == 'array') {
+        $result = FALSE;
 
-                foreach ($answers as $answer) {
-                    if ($option[0] == stripslashes($answer)) {
-                        return 'good';
-                        break;
+        if (gettype($answers) == 'array') {
+
+            foreach ($answers as $answer) {
+                if ($option[0] == stripslashes($answer)) {
+                    if ($option[4]) { //$option[4] = If this is the correct answer
+                        $result = TRUE;
+                    } else {
+                        $result = FALSE;
                     }
-                }
-            } elseif (gettype($answers) == 'string') {
-                if ($option[0] == stripslashes($answers)) {
-                    return 'good';
+                    break;
                 }
             }
-        } else {
-            if (gettype($answers) == 'array') {
-
-                foreach ($answers as $answer) {
-                    if ($option[0] == stripslashes($answer)) {
-                        return 'wrong';
-                        break;
-                    }
-                }
-            } elseif (gettype($answers) == 'string') {
-                if ($option[0] == stripslashes($answers)) {
-                    return 'wrong';
-                }
+        } elseif (gettype($answers) == 'string') {
+            if ($option[0] == stripslashes($answers)) {
+                $result = TRUE;
+            } else {
+                $result = FALSE;
             }
         }
+
+        return $result;
     }
 }

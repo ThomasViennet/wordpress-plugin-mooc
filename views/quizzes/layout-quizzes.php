@@ -14,12 +14,18 @@ ob_start();
                 echo '
                 <label for="' . $option[0] . '" class="';
 
-                if ($option[4] && !$userAllowedToRespond) {
-                    echo 'correctAnswer';
-                    $note++; //bad idea to do this here?
-                } elseif ($lib_quiz->isCorrectAnswer($option, $answers[$key]) == 'wrong') {
-                    echo 'wrongAnswer';
-                    $note--; //bad idea to do this here?
+                if (!$userAllowedToRespond) {
+
+                    if ($option[4]) {
+                        echo 'correctAnswer';
+                        //s'il a pas répondu answer[key] est vide 
+                        if ($lib_quiz->isCorrectAnswer($option, $answers[$key])) {
+                            $note++; //bad idea to do this here?
+                        }
+                    } elseif (!$lib_quiz->isCorrectAnswer($option, $answers[$key]) && $lib_quiz->isChecked($option, $answers[$key])) {
+                        echo 'wrongAnswer';
+                        $note--; //bad idea to do this here?
+                    }
                 }
 
                 echo '">
@@ -47,7 +53,7 @@ ob_start();
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <p style="text-align:center;padding:3em;"><input type="submit" value="Valider mes réponses"/></p>
+        <p style="text-align:center;padding:3em;"><input type="submit" value="Valider mes réponses" /></p>
     <?php
     }
     ?>
@@ -86,7 +92,7 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     ?>
 </ul>
 <h3>Calcul des points</h3>
-
+<!-- <p><?= $note . '/' . $totalPoints ?></p> -->
 <ul>
     <li>1 point par bonne réponse</li>
     <li>-1 point par mauvaise réponse</li>

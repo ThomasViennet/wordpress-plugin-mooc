@@ -11,42 +11,88 @@ $formation = array(
 );
 
 $chapites = array(
-    ['univers-seo', 'free']
+    ['fonctionnement-moteur-recherche', 'free']
 );
 
 $questions = array(
-    ['question 1', 'univers-seo', 'free'],
-    ['question 2', 'univers-seo', 'free'],
-    ['question 3', 'univers-seo', 'free']
+    ['question1', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question2', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question3', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question4', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question5', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question6', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question7', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question8', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question9', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question10', '', 'fonctionnement-moteur-recherche', 'free']
 );
 
 $options = array(
-    ['réponse 1', 'question 1', 'univers-seo', 'free'],
-    ['réponse 2', 'question 1', 'univers-seo', 'free'],
-    ['réponse 3', 'question 1', 'univers-seo', 'free'],
+    ['', 'question1', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question1', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question1', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question1', 'fonctionnement-moteur-recherche', 'free', FALSE],
 
-    ['réponse 1', 'question 2', 'univers-seo', 'free'],
-    ['réponse 2', 'question 2', 'univers-seo', 'free'],
-    ['réponse 3', 'question 2', 'univers-seo', 'free'],
+    ['', 'question2', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question2', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question2', 'fonctionnement-moteur-recherche', 'free', FALSE],
 
-    ['réponse 1', 'question 3', 'univers-seo', 'free'],
-    ['réponse 2', 'question 3', 'univers-seo', 'free'],
-    ['réponse 3', 'question 3', 'univers-seo', 'free']
+    ['', 'question3', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question3', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question3', 'fonctionnement-moteur-recherche', 'free', FALSE],
+
+    ['', 'question4', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question4', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question4', 'fonctionnement-moteur-recherche', 'free', TRUE],
+
+    ['', 'question5', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question5', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question5', 'fonctionnement-moteur-recherche', 'free', TRUE],
+
+    ['', 'question6', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question6', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question6', 'fonctionnement-moteur-recherche', 'free', TRUE],
+
+    ['', 'question7', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question7', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question7', 'fonctionnement-moteur-recherche', 'free', FALSE],
+
+    ['', 'question8', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question8', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question8', 'fonctionnement-moteur-recherche', 'free', FALSE],
+
+    ['', 'question9', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question9', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question9', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question9', 'fonctionnement-moteur-recherche', 'free', TRUE],
+
+    ['', 'question10', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['', 'question10', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['', 'question10', 'fonctionnement-moteur-recherche', 'free', FALSE],
 );
 
-$clarification = array(
-    ['clarification 1', 'question 1', 'univers-seo', 'free'],
-    ['clarification 2', 'question 2', 'univers-seo', 'free'],
-    ['clarification 3', 'question 3', 'univers-seo', 'free']
+$explanations = array(
+    ['', 'question1', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question2', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question3', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question4', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question5', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question6', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question7', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question8', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question9', 'fonctionnement-moteur-recherche', 'free'],
+    ['', 'question10', 'fonctionnement-moteur-recherche', 'free'],
 );
 
 
 $knowledgeEvaluated = array(
-    'Connaissances générales sur le SEO',
-    'Connaissances générales sur le SEA',
-    'Connaissances générales sur le SMO',
-    'Connaissances générales sur le SXO'
+    '',
+    '',
+    '',
+    ''
 );
-// if ($checked->execute('europe', $answers[0])) echo '✅'; 
-require('layout-quizzes.php') ?>
 
+$note = 0;
+$totalPoints = 0;
+$alert = '';
+$successIndicator = 0.7;
