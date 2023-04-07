@@ -31,42 +31,28 @@ class Lib_Quiz
 
     public function isCorrectAnswer(array $option, $answers): bool
     {
-        if ($option[4]) { //If this is the correct answer
-            if (gettype($answers) == 'array') {
+        $result = FALSE;
 
-                foreach ($answers as $answer) {
-                    if ($option[0] == stripslashes($answer)) {
-                        return TRUE;
-                        break;
+        if (gettype($answers) == 'array') {
+
+            foreach ($answers as $answer) {
+                if ($option[0] == stripslashes($answer)) {
+                    if ($option[4]) { //$option[4] = If this is the correct answer
+                        $result = TRUE;
                     } else {
-                        return FALSE;
+                        $result = FALSE;
                     }
-                }
-            } elseif (gettype($answers) == 'string') {
-                if ($option[0] == stripslashes($answers)) {
-                    return TRUE;
-                } else {
-                    return FALSE;
+                    break;
                 }
             }
-        } else {
-            if (gettype($answers) == 'array') {
-
-                foreach ($answers as $answer) {
-                    if ($option[0] == stripslashes($answer)) {
-                        return FALSE;
-                        break;
-                    } else {
-                        return TRUE;
-                    }
-                }
-            } elseif (gettype($answers) == 'string') {
-                if ($option[0] == stripslashes($answers)) {
-                    return FALSE;
-                } else {
-                    return TRUE;
-                }
+        } elseif (gettype($answers) == 'string') {
+            if ($option[0] == stripslashes($answers)) {
+                $result = TRUE;
+            } else {
+                $result = FALSE;
             }
         }
+
+        return $result;
     }
 }

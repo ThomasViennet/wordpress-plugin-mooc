@@ -92,7 +92,7 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     ?>
 </ul>
 <h3>Calcul des points</h3>
-<p><?= $note . '/' . $totalPoints ?></p>
+<!-- <p><?= $note . '/' . $totalPoints ?></p> -->
 <ul>
     <li>1 point par bonne réponse</li>
     <li>-1 point par mauvaise réponse</li>
