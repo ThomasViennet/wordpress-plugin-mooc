@@ -13,10 +13,7 @@
  */
 
 require_once('controllers/init.php');
-// require_once('controllers/save-answers.php');
-// require_once('controllers/dashboard.php');
 require_once('controllers/quiz.php');
-require_once('controllers/registration.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/user.php');
@@ -24,27 +21,34 @@ require_once('controllers/user.php');
 use Mooc\Controllers\NavMooc\Controller_NavMooc;
 use Mooc\Controllers\User\Controller_User;
 use Mooc\Controllers\Quiz\Controller_Quiz;
-// use Mooc\Controllers\SaveAnswers\SaveAnswers;
-use Mooc\Controllers\Registration\Registration;
-// use Mooc\Controllers\Dashboard\Dashboard;
 use Mooc\Controllers\Lesson\Controller_Lesson;
 
-// START - need a controller
-require_once('models/lesson.php');
-require_once('models/init.php');
+register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));//Create the tables in the database
+add_action('init', array(new Controller_Init(), 'init'));//Contains the filters and actions hooks
 
-use Mooc\Models\Lesson\Model_Lesson;
-use Mooc\Models\Init\Model_Init;
-// END - need a controller
 
-register_activation_hook(__FILE__, 'createTables');
-function createTables()
+//Shortcodes
+add_shortcode('registration', 'registration');
+function registration()
 {
-    (new Model_Init)->createTables();
+    if (!is_admin()) {
+        if (!is_user_logged_in()) {
+            (new Controller_User)->registration();
+        }
+    }
 }
 
-//Contains the filters and actions hooks
-add_action('init', array('Controllers_Init', 'init'));
+add_shortcode('nav_mooc', 'navMooc');
+function navMooc()
+{
+    if (!is_admin()) {
+        if (is_user_logged_in()) {
+            ob_start();
+            (new Controller_NavMooc)->display();
+            return ob_get_clean();
+        }
+    }
+}
 
 add_shortcode('lesson_button', 'lesson_button');
 function lesson_button()
@@ -54,7 +58,6 @@ function lesson_button()
 
             $user = wp_get_current_user();
             $lesson = new Controller_Lesson;
-            global $post;
 
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'lesson_button') {
@@ -105,66 +108,9 @@ function quiz()
         ob_start();
         (new Controller_Quiz())->viewQuiz($user->ID, $_GET['quiz_name']);
         return ob_get_clean();
-        
     } else {
         ob_start();
-        (new Registration)->execute();
+        (new Controller_User)->registration();
         return ob_get_clean();
-    }
-}
-
-add_shortcode('nav_mooc', 'navMooc');
-function navMooc()
-{
-    if (!is_admin()) {
-        // require_once(ABSPATH . 'wp-includes/pluggable.php'); //Useless ?
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
-            global $post;
-            if (has_shortcode($post->post_content, 'nav_mooc')) {
-
-                ob_start();
-                (new Controller_NavMooc)->display();
-                return ob_get_clean();
-            }
-        }
-    }
-}
-
-//START - Should be in controllers init
-//Add item "Formation SEO" at the admin menu which one target the dashboard of the mooc in BO
-add_action('admin_menu', 'adminMenu');
-function adminMenu()
-{
-    $user = wp_get_current_user();
-    if (in_array('subscriber', (array) $user->roles)) {
-        remove_menu_page('index.php');
-        add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', 'mooc', 'dashicons-welcome-learn-more', 6);
-    }
-}
-
-//Displaying the navigation of the mooc taking into account the lessons completed by the user
-function mooc()
-{
-    $user = wp_get_current_user();
-    $lessons = (new Model_Lesson)->get_all($user->ID);
-
-    $lessons_slug = array();
-    foreach ($lessons as $lesson) {
-        array_push($lessons_slug, $lesson->lesson_slug);
-    }
-
-    require_once('views/nav-mooc.php');
-}
-
-//END - Should be in controllers init
-
-add_shortcode('registration', 'registration');
-function registration()
-{
-    if (!is_admin()) {
-        if (!is_user_logged_in()) {
-            (new Registration)->execute();
-        }
     }
 }

@@ -7,13 +7,13 @@
 // namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
-require_once(dirname(__FILE__) . '/../models/lesson.php');
+require_once(dirname(__FILE__) . '/nav-mooc.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
-
 use Mooc\Models\Init\Model_Init;
+use Mooc\Controllers\NavMooc\Controller_NavMooc;
 
-class Controllers_Init
+class Controller_Init
 {
     private static $initiated = false;
 
@@ -28,23 +28,36 @@ class Controllers_Init
     {
         self::$initiated = true;
 
-        register_activation_hook(__FILE__, 'createTables');
+        add_action('wp_before_admin_bar_render', array('Controller_Init', 'adminBar'));
+        add_action('admin_bar_menu', array('Controller_Init', 'addLinkAdminBar'));
+        add_action('admin_enqueue_scripts', array('Controller_Init', 'styleAdmin'));
+        add_action('wp_enqueue_scripts',  array('Controller_Init', 'styleFront'));
+        add_action('admin_menu', array('Controller_Init', 'hideElements'));
+        add_action('admin_menu', array('Controller_Init', 'addElements'));
 
-        add_action('wp_before_admin_bar_render', array('Controllers_Init', 'adminBar'));
-        add_action('admin_bar_menu', array('Controllers_Init', 'addLinkAdminBar'));
-        add_action('admin_enqueue_scripts', array('Controllers_Init', 'styleAdmin'));
-        add_action('wp_enqueue_scripts',  array('Controllers_Init', 'styleFront'));
-        add_action('admin_menu', array('Controllers_Init', 'hide_wp_elements'));
-
-        add_filter('wp_login', array('Controllers_Init', 'wpLogin'));
-        add_filter('wp_new_user_notification_email', array('Controllers_Init', 'custom_wp_new_user_notification_email'), 10, 3);
+        add_filter('wp_login', array('Controller_Init', 'wpLogin'));
+        add_filter('wp_new_user_notification_email', array('Controller_Init', 'custom_wp_new_user_notification_email'), 10, 3);
     }
 
-    //doesn't work here but work in mooc.php
-    // public static function createTables() 
-    // {
-    //     (new Model_Init)->createTables();
-    // }
+    public static function createTables()
+    {
+        (new Model_Init)->createTables();
+    }
+
+    public static function addElements()
+    {
+        $user = wp_get_current_user();
+        if (in_array('subscriber', (array) $user->roles)) {
+            remove_menu_page('index.php');
+            add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', array('Controller_Init', 'mooc'), 'dashicons-welcome-learn-more', 6);
+        }
+    }
+
+    //Displaying the navigation of the mooc taking into account the lessons completed by the user
+    public static function mooc()
+    {
+        return (new Controller_NavMooc)->display();
+    }
 
     public static function adminBar()
     {
@@ -57,13 +70,13 @@ class Controllers_Init
         }
     }
 
-    public static function hide_wp_elements()
+    public static function hideElements()
     {
         $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
             remove_action('admin_notices', 'update_nag', 3);
-            add_filter( 'admin_footer_text', '__return_empty_string', 11 );
-            add_filter( 'update_footer',     '__return_empty_string', 11 );
+            add_filter('admin_footer_text', '__return_empty_string', 11);
+            add_filter('update_footer',     '__return_empty_string', 11);
         }
     }
 
