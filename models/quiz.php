@@ -35,7 +35,7 @@ class Model_Quiz
         }
     }
 
-    public function get_all(int $user_id)
+    public function getAll(int $user_id)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'quizzes';

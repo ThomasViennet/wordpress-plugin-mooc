@@ -43,9 +43,9 @@ function navMooc()
 {
     if (!is_admin()) {
         if (is_user_logged_in()) {
-            ob_start();
+            // ob_start();
             (new Controller_NavMooc)->display();
-            return ob_get_clean();
+            // return ob_get_clean();
         }
     }
 }
@@ -70,9 +70,9 @@ function lesson_button()
                 }
             }
 
-            ob_start();
+            // ob_start();
             $lesson->displayButton($user->ID, basename(get_permalink()));
-            return ob_get_clean();
+            // return ob_get_clean();
         }
     }
 }
@@ -109,8 +109,6 @@ function quiz()
         (new Controller_Quiz())->viewQuiz($user->ID, $_GET['quiz_name']);
         return ob_get_clean();
     } else {
-        ob_start();
         (new Controller_User)->registration();
-        return ob_get_clean();
     }
 }

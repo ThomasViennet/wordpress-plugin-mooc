@@ -24,7 +24,7 @@ class Controller_NavMooc
             array_push($lessons_slug, $lesson->lesson_slug);
         }
 
-        $quizzes = (new Model_Quiz())->get_all($user->ID);
+        $quizzes = (new Model_Quiz())->getAll($user->ID);
         $quizzes_name_win = array();
         $quizzes_name_failed = array();
 
