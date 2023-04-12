@@ -34,8 +34,8 @@ class Controller_Init
         add_action('wp_enqueue_scripts',  array('Controller_Init', 'styleFront'));
         add_action('admin_menu', array('Controller_Init', 'hideElements'));
         add_action('admin_menu', array('Controller_Init', 'addElements'));
+        add_action('wp_login', array('Controller_Init', 'wpLogin'), 10, 2);
 
-        add_filter('wp_login', array('Controller_Init', 'wpLogin'));
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
     }
 
@@ -46,11 +46,8 @@ class Controller_Init
 
     public static function addElements()
     {
-        $user = wp_get_current_user();
-        if (in_array('subscriber', (array) $user->roles)) {
-            remove_menu_page('index.php');
-            add_menu_page('Mooc', 'Formation SEO', 'subscriber', 'dashboard', array('Controller_Init', 'mooc'), 'dashicons-welcome-learn-more', 6);
-        }
+        remove_menu_page('index.php');
+        add_menu_page('Mooc', 'Formation SEO', 'read', 'dashboard', array('Controller_Init', 'mooc'), 'dashicons-welcome-learn-more', 6);
     }
 
     //Displaying the navigation of the mooc taking into account the lessons completed by the user
@@ -117,11 +114,13 @@ class Controller_Init
         <script type="text/javascript" src="' . plugins_url('/../js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
-    public static function wpLogin()
+    public static function wpLogin($user_login, WP_User $user)
     {
-        $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
             wp_safe_redirect('wp-admin/admin.php?page=dashboard');
+            exit;
+        } else {
+            wp_safe_redirect('wp-admin');
             exit;
         }
     }
