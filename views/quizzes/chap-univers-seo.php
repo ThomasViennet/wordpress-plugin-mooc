@@ -16,11 +16,11 @@ $chapites = array(
 
 $questions = array(
     ['question1', 'Pourquoi être visible sur Google ?', 'univers-seo', 'free'],
-    ['question2', 'Quelles sont les caractéristiques de la longue traîne ?', 'univers-seo', 'free'],
+    ['question2', 'Les caractéristiques de la longue traîne sont ...', 'univers-seo', 'free'],
     ['question3', 'Le SMO permet ...', 'univers-seo', 'free'],
-    ['question4', 'À quoi servent les Quality Raters ?', 'univers-seo', 'free'],
+    ['question4', 'Le rôle des Quality Raters est de ...', 'univers-seo', 'free'],
     ['question5', 'Un contenu YMYL c\'est ...', 'univers-seo', 'free'],
-    ['question6', 'Qu\'est-ce que le pogo-sticking ?', 'univers-seo', 'free'],
+    ['question6', 'Le pogo-sticking c\'est ...', 'univers-seo', 'free'],
     ['question7', 'Les principaux aspects jugés avec le concept EEAT sont ...', 'univers-seo', 'free'],
     ['question8', 'Les principaux signaux UX que Google prend en considération sont ...', 'univers-seo', 'free'],
     ['question9', 'Pourquoi utiliser le SEA ?', 'univers-seo', 'free'],
@@ -37,13 +37,13 @@ $options = array(
     ['Niveau de maturité de l\'internaute faible + Volume de recherche élevé + Niveau de concurrence élevé', 'question2', 'univers-seo', 'free', FALSE],
     ['Niveau de maturité de l\'internaute faible + Volume de recherche faible + Niveau de concurrence faible', 'question2', 'univers-seo', 'free', FALSE],
 
-    ['d\'augmenter directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
-    ['d\'augmenter indirectement le pagerank', 'question3', 'univers-seo', 'free', TRUE],
-    ['de réduire directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
+    ['D\'augmenter directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
+    ['D\'augmenter indirectement le pagerank', 'question3', 'univers-seo', 'free', TRUE],
+    ['De réduire directement le pagerank', 'question3', 'univers-seo', 'free', FALSE],
 
-    ['Ils modifient le classement des résultats de recherche s\'ils ne sont pas satisfaisants', 'question4', 'univers-seo', 'free', FALSE],
-    ['Ils donnent une note aux sites pour aider Google à filtrer les mauvais résultats en temps réel', 'question4', 'univers-seo', 'free', FALSE],
-    ['Ils catégorisent des informations pour aider Google à améliorer ses algorithmes', 'question4', 'univers-seo', 'free', TRUE],
+    ['Modifier le classement des résultats de recherche s\'ils ne sont pas satisfaisants', 'question4', 'univers-seo', 'free', FALSE],
+    ['Donner une note aux sites pour aider Google à filtrer les mauvais résultats en temps réel', 'question4', 'univers-seo', 'free', FALSE],
+    ['Catégoriser des informations pour aider Google à améliorer ses algorithmes', 'question4', 'univers-seo', 'free', TRUE],
 
     ['Un contenu qui a pour objectif de tromper les algorithmes de Google', 'question5', 'univers-seo', 'free', FALSE],
     ['Un contenu qui respect à la lettre les conseils de Google', 'question5', 'univers-seo', 'free', FALSE],
