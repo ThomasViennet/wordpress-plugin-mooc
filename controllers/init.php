@@ -119,8 +119,11 @@ class Controller_Init
 
     public static function wpLogin()
     {
-        wp_safe_redirect('wp-admin/admin.php?page=dashboard');
-        exit;
+        $user = wp_get_current_user();
+        if (in_array('subscriber', (array) $user->roles)) {
+            wp_safe_redirect('wp-admin/admin.php?page=dashboard');
+            exit;
+        }
     }
 
     function newUserEmail($wp_new_user_notification_email, $user, $blogname)
