@@ -43,15 +43,13 @@ function navMooc()
 {
     if (!is_admin()) {
         if (is_user_logged_in()) {
-            // ob_start();
             (new Controller_NavMooc)->display();
-            // return ob_get_clean();
         }
     }
 }
 
-add_shortcode('lesson_button', 'lesson_button');
-function lesson_button()
+add_shortcode('lesson_button', 'lessonButton');
+function lessonButton()
 {
     if (!is_admin()) {
         if (is_user_logged_in()) {
@@ -69,10 +67,7 @@ function lesson_button()
                     }
                 }
             }
-
-            // ob_start();
             $lesson->displayButton($user->ID, basename(get_permalink()));
-            // return ob_get_clean();
         }
     }
 }
@@ -87,8 +82,9 @@ function quiz()
         $quiz_id = 0; //Will be usefull when there will are a CRUD for quizzes
 
         if (isset($_GET['action']) && $_GET['action'] == 'submit') {
-            //check if the user has answered all the questions
-
+            
+            //Need to check if the user has answered all the questions
+            
             $answers = [
                 $_POST['question1'],
                 $_POST['question2'],
@@ -104,10 +100,7 @@ function quiz()
 
             (new Controller_Quiz())->saveAnswers($user->ID, $quiz_id, $_GET['quiz_name'], $answers);
         }
-
-        ob_start();
         (new Controller_Quiz())->viewQuiz($user->ID, $_GET['quiz_name']);
-        return ob_get_clean();
     } else {
         (new Controller_User)->registration();
     }

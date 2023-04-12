@@ -36,7 +36,7 @@ class Controller_Init
         add_action('admin_menu', array('Controller_Init', 'addElements'));
 
         add_filter('wp_login', array('Controller_Init', 'wpLogin'));
-        add_filter('wp_new_user_notification_email', array('Controller_Init', 'custom_wp_new_user_notification_email'), 10, 3);
+        add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
     }
 
     public static function createTables()
@@ -123,7 +123,7 @@ class Controller_Init
         exit;
     }
 
-    function custom_wp_new_user_notification_email($wp_new_user_notification_email, $user, $blogname)
+    function newUserEmail($wp_new_user_notification_email, $user, $blogname)
     {
         $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
         $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n\r\n";
