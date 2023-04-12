@@ -16,7 +16,7 @@ $chapites = array(
 
 $questions = array(
     ['question1', 'Question 1', 'fonctionnement-moteur-recherche', 'free'],
-    ['question2', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question2', 'Question 2', 'fonctionnement-moteur-recherche', 'free'],
     ['question3', '', 'fonctionnement-moteur-recherche', 'free'],
     ['question4', '', 'fonctionnement-moteur-recherche', 'free'],
     ['question5', '', 'fonctionnement-moteur-recherche', 'free'],
