@@ -15,7 +15,7 @@ $chapites = array(
 );
 
 $questions = array(
-    ['question1', '', 'fonctionnement-moteur-recherche', 'free'],
+    ['question1', 'Question 1', 'fonctionnement-moteur-recherche', 'free'],
     ['question2', '', 'fonctionnement-moteur-recherche', 'free'],
     ['question3', '', 'fonctionnement-moteur-recherche', 'free'],
     ['question4', '', 'fonctionnement-moteur-recherche', 'free'],
@@ -28,7 +28,7 @@ $questions = array(
 );
 
 $options = array(
-    ['', 'question1', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['Option 1', 'question1', 'fonctionnement-moteur-recherche', 'free', TRUE],
     ['', 'question1', 'fonctionnement-moteur-recherche', 'free', FALSE],
     ['', 'question1', 'fonctionnement-moteur-recherche', 'free', TRUE],
     ['', 'question1', 'fonctionnement-moteur-recherche', 'free', FALSE],
@@ -72,7 +72,7 @@ $options = array(
 );
 
 $explanations = array(
-    ['', 'question1', 'fonctionnement-moteur-recherche', 'free'],
+    ['Explanation 1', 'question1', 'fonctionnement-moteur-recherche', 'free'],
     ['', 'question2', 'fonctionnement-moteur-recherche', 'free'],
     ['', 'question3', 'fonctionnement-moteur-recherche', 'free'],
     ['', 'question4', 'fonctionnement-moteur-recherche', 'free'],
@@ -86,7 +86,7 @@ $explanations = array(
 
 
 $knowledgeEvaluated = array(
-    '',
+    'Google',
     '',
     '',
     ''
