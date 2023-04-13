@@ -79,7 +79,7 @@ $explanations = array(
     <br>Toutefois, la visibilité offerte pas ces médias, favorise la génération des liens entrants (backlinks) en dofollow sur d’autres sites.', 'question3', 'univers-seo', 'free'],
     ['Les évaluations des Quality Raters n’impactent pas le classement des pages.<br>
     <br>Leur travail sert à juger de qualité des mises à jour des algorithmes de Google.<br>
-    <br>Source : <a href="https://support.google.com/websearch/answer/9281931?hl=fr">support.google.com</a>', 'question4', 'univers-seo', 'free'],
+    <cite>Source : <a href="https://support.google.com/websearch/answer/9281931?hl=fr">support.google.com</a></cite>', 'question4', 'univers-seo', 'free'],
     ['Un contenu fait partie de la catégorie <i>Your Money Your Life</i> (YMYL) s\'il a pour effet d\'impacter le bonheur futur, la santé, la stabilité financière ou la sécurité de leurs lecteurs.<br>
     <br>
     Il peut s\'agir par exemple de sujets liés à la banque, la santé, l\'assurance, le juridique etc.', 'question5', 'univers-seo', 'free'],
@@ -89,8 +89,7 @@ $explanations = array(
     Cela a pour effet d’indiquer à Google que le contenu de cette page web n’est pas pertinent pour répondre à son intention de recherche.<br>
     <br>
     Par conséquent, Google adapte la pondération de ses critères de classement pour proposer de meilleurs résultats la prochaine fois.<br>
-    <br>
-    <a href="https://referencime.fr/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-un-algorithme-de-learning-to-rank/">Plus d\'informations</a>', 'question6', 'univers-seo', 'free'],
+    <cite><a href="https://referencime.fr/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-un-algorithme-de-learning-to-rank/">Plus d\'informations</a></cite>', 'question6', 'univers-seo', 'free'],
 
     ['Les aspects permettant de juger le niveau EEAT sont :
     <ul>
@@ -102,14 +101,16 @@ $explanations = array(
     <li>La fiabilité du contenu principal.</li>
     <li>La fiabilité du site web.</li>
     </ul>
-    Source : <a href="https://static.googleusercontent.com/media/guidelines.raterhub.com/fr//searchqualityevaluatorguidelines.pdf">General Guidelines of Search Quality Rating Program</a>', 'question7', 'univers-seo', 'free'],
+    <cite>Source : <a href="https://static.googleusercontent.com/media/guidelines.raterhub.com/fr//searchqualityevaluatorguidelines.pdf">General Guidelines of Search Quality Rating Program</a></cite>',
+    'question7', 'univers-seo', 'free'
+    ],
 
     ['Les signaux web essentiels (Core Web Vitals) sont : 
     <ul><li>Les performances de chargement (Largest Content full Paint / LCP) pour afficher les éléments essentiels tels que le titre, illustration et le contenu principal.</li>
     <li>L’interactivité de la page (First Input Delay / FID) évalue la réactivité du chargement de la page grâce au délai entre la première interaction faite par l’utilisateur et le temps où son navigateur pourra lui répondre.</li>
     <li>La stabilité visuelle (Cumulative Layout Shift / CLS) évalue les différents changements de mis en page subis par l’internaute (décalage des différents blocs).</li></ul>
     <img decoding="async" width="1024" height="270" src="https://referencime.fr/wp-content/uploads/2022/02/SXO-crite%CC%80res-de-performances-1024x270.png" alt="Les signaux web essentiels (Core Web Vitals)" class="wp-image-5392 entered lazyloaded" data-lazy-srcset="https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-1024x270.png 1024w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-300x79.png 300w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-768x203.png 768w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-1200x317.png 1200w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances.png 1418w" data-lazy-sizes="(max-width: 1024px) 100vw, 1024px" data-lazy-src="https://referencime.fr/wp-content/uploads/2022/02/SXO-crite%CC%80res-de-performances-1024x270.png" data-ll-status="loaded" sizes="(max-width: 1024px) 100vw, 1024px" srcset="https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-1024x270.png 1024w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-300x79.png 300w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-768x203.png 768w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances-1200x317.png 1200w, https://referencime.fr/wp-content/uploads/2022/02/SXO-critères-de-performances.png 1418w"><br>
-    <a href="https://web.dev/vitals/">Plus d\'informations</a>
+        <cite><a href="https://web.dev/vitals/">Plus d\'informations</a></cite>
     ', 'question8', 'univers-seo', 'free'],
     
     ['Comme pour le SMO, le SEA n\'impact pas directement le SEO.<br>

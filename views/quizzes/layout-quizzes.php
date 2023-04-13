@@ -12,7 +12,7 @@ ob_start();
             if ($option[1] == $question[0]) {
 
                 echo '
-                <label for="' . $option[0] . '" class="';
+                <label for="' . htmlspecialchars($option[0]) . '" class="';
 
                 if (!$userAllowedToRespond) {
 
@@ -29,13 +29,13 @@ ob_start();
                 }
 
                 echo '">
-                <input type="checkbox" name="' . $question[0] . '[]" value="' . $option[0] . '" id="' . $option[0] . '"';
+                <input type="checkbox" name="' . htmlspecialchars($question[0]) . '[]" value="' . htmlspecialchars($option[0]) . '" id="' . htmlspecialchars($option[0]) . '"';
 
                 if ($lib_quiz->isChecked($option, $answers[$key])) {
                     echo 'checked';
                 }
                 echo '>';
-                echo $option[0];
+                echo htmlspecialchars($option[0]);
                 echo '</label>';
 
                 //Count the number of correct answers
@@ -96,7 +96,9 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
 <ul>
     <li>1 point par bonne réponse</li>
     <li>-1 point par mauvaise réponse</li>
-    <li>Pour réussir le quiz, il faut obtenir une note minimale de 7/10</li>
+    <li>Toutes les réponses peuvent être bonnes</li>
+    <li>Toutes les réponses peuvent être mauvaises</li>
+    <li>Pour réussir le quiz, il faut obtenir au moins 70% de la note maximale.</li>
 </ul>
 
 
