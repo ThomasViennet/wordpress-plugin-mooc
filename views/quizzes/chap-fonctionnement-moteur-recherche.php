@@ -142,7 +142,7 @@ $explanations = array(
 
 
 $knowledgeEvaluated = array(
-    'Connaissances générales sur le fonctionnement d\'un moteur de recherche'
+    'Connaissances générales sur le fonctionnement d\'un moteur de recherche. Test'
 );
 
 $note = 0;
