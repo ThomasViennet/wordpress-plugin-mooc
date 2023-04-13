@@ -23,8 +23,8 @@ use Mooc\Controllers\User\Controller_User;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
 
-register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));//Create the tables in the database
-add_action('init', array(new Controller_Init(), 'init'));//Contains the filters and actions hooks
+register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
+add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
 
 
 //Shortcodes
@@ -33,7 +33,9 @@ function registration()
 {
     if (!is_admin()) {
         if (!is_user_logged_in()) {
-            (new Controller_User)->registration();
+            ob_start();
+            Controller_User::displayRegistrationForm();
+            return ob_get_clean();
         }
     }
 }
@@ -41,9 +43,11 @@ function registration()
 add_shortcode('nav_mooc', 'navMooc');
 function navMooc()
 {
-    if (!is_admin()) {
+    if (!is_customize_preview()) {
         if (is_user_logged_in()) {
-            (new Controller_NavMooc)->display();
+            ob_start();
+            Controller_NavMooc::display();
+            return ob_get_clean();
         }
     }
 }
@@ -51,23 +55,24 @@ function navMooc()
 add_shortcode('lesson_button', 'lessonButton');
 function lessonButton()
 {
-    if (!is_admin()) {
+    if (!is_customize_preview()) {
         if (is_user_logged_in()) {
 
             $user = wp_get_current_user();
-            $lesson = new Controller_Lesson;
 
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'lesson_button') {
 
                     if ($_POST['lesson_status'] != "Completed") {
-                        $lesson->saveLessonCompleted($user->ID, basename(get_permalink()));
+                        Controller_Lesson::saveLessonCompleted($user->ID, basename(get_permalink()));
                     } else {
-                        $lesson->deleteLessonCompleted($user->ID, basename(get_permalink()));
+                        Controller_Lesson::deleteLessonCompleted($user->ID, basename(get_permalink()));
                     }
                 }
             }
-            $lesson->displayButton($user->ID, basename(get_permalink()));
+            ob_start();
+            Controller_Lesson::displayButton($user->ID, basename(get_permalink()));
+            return ob_get_clean();
         }
     }
 }
@@ -82,9 +87,9 @@ function quiz()
         $quiz_id = 0; //Will be usefull when there will are a CRUD for quizzes
 
         if (isset($_GET['action']) && $_GET['action'] == 'submit') {
-            
+
             //Need to check if the user has answered all the questions
-            
+
             $answers = [
                 $_POST['question1'],
                 $_POST['question2'],
@@ -98,10 +103,12 @@ function quiz()
                 $_POST['question10']
             ];
 
-            (new Controller_Quiz())->saveAnswers($user->ID, $quiz_id, $_GET['quiz_name'], $answers);
+            Controller_Quiz::saveAnswers($user->ID, $quiz_id, $_GET['quiz_name'], $answers);
         }
-        (new Controller_Quiz())->viewQuiz($user->ID, $_GET['quiz_name']);
+        ob_start();
+        Controller_Quiz::viewQuiz($user->ID, $_GET['quiz_name']);
+        return ob_get_clean();
     } else {
-        (new Controller_User)->registration();
+        Controller_User::displayRegistrationForm();
     }
 }

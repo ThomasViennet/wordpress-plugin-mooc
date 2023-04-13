@@ -8,7 +8,7 @@ namespace Mooc\Controllers\User;
 
 class Controller_User
 {
-    public function registration()
+    public static function displayRegistrationForm()
     {
         require_once(dirname(__FILE__) . '/../views/registration.php');
     }

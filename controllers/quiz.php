@@ -15,7 +15,7 @@ use Mooc\Lib\Quiz\Lib_Quiz;
 
 class Controller_Quiz
 {
-    public function viewQuiz(int $user_id, string $quiz_name)
+    public static function viewQuiz(int $user_id, string $quiz_name)
     {
         if (!empty($user_id)) {
 
@@ -37,7 +37,7 @@ class Controller_Quiz
         }
     }
 
-    public function saveAnswers(int $user_id, int $quiz_id, string $quiz_name, array $quiz_answers)
+    public static function saveAnswers(int $user_id, int $quiz_id, string $quiz_name, array $quiz_answers)
     {
         require(dirname(__FILE__) . '/../views/quizzes/chap-univers-seo.php'); //Need data like this until CRUD Quiz has done
         $lib_quiz = new Lib_Quiz();
@@ -72,7 +72,7 @@ class Controller_Quiz
     }
 
     //WIP
-    public function answeredQuiz(int $user_id, string $quiz_name)
+    public static function answeredQuiz(int $user_id, string $quiz_name)
     {
         // require_once(dirname(__FILE__) . '/../views/dashboard.php');//useless ?
     }

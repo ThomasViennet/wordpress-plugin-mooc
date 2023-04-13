@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Dashboard of a mooc student
+ * Action of the button to complete a lesson
  */
 
 namespace Mooc\Controllers\Lesson;
@@ -12,7 +12,7 @@ use Mooc\Models\Lesson\Model_Lesson;
 
 class Controller_Lesson
 {
-    public function displayButton(int $user_id, string $lesson_slug)
+    public static function displayButton(int $user_id, string $lesson_slug)
     {
         if (!empty((new Model_Lesson())->get($user_id, $lesson_slug))) {
             $lesson_status = "Completed";
@@ -25,12 +25,12 @@ class Controller_Lesson
         require_once(dirname(__FILE__) . '/../views/button-lesson.php');
     }
 
-    public function saveLessonCompleted(int $user_id, string $lesson_slug)
+    public static function saveLessonCompleted(int $user_id, string $lesson_slug)
     {
         (new Model_Lesson())->save($user_id, $lesson_slug);
     }
 
-    public function deleteLessonCompleted(int $user_id, string $lesson_slug)
+    public static function deleteLessonCompleted(int $user_id, string $lesson_slug)
     {
         (new Model_Lesson())->delete($user_id, $lesson_slug);
     }
