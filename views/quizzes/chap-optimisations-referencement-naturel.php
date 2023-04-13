@@ -15,7 +15,7 @@ $chapites = array(
 );
 
 $questions = array(
-    ['question1', '', 'optimistions-seo', 'free'],
+    ['question1', 'Le robots.txt c’est …', 'optimistions-seo', 'free'],
     ['question2', '', 'optimistions-seo', 'free'],
     ['question3', '', 'optimistions-seo', 'free'],
     ['question4', '', 'optimistions-seo', 'free'],
@@ -28,10 +28,9 @@ $questions = array(
 );
 
 $options = array(
-    ['', 'question1', 'optimistions-seo', 'free', TRUE],
-    ['', 'question1', 'optimistions-seo', 'free', FALSE],
-    ['', 'question1', 'optimistions-seo', 'free', TRUE],
-    ['', 'question1', 'optimistions-seo', 'free', FALSE],
+    ['Un protocole permettant à un webmestre d\'informer les moteurs de recherche des adresses d\'un site web disponibles pour l\'indexation automatique', 'question1', 'optimistions-seo', 'free', FALSE],
+    ['Un fichier qui permet d\'influencer la fréquence à laquelle un moteur de recherche peut crawler un site (quotidiennement, mensuellement, etc.)', 'question1', 'optimistions-seo', 'free', FALSE],
+    ['Un fichier qui permet de donner des instructions de crawl aux moteurs de recherche', 'question1', 'optimistions-seo', 'free', TRUE],
 
     ['', 'question2', 'optimistions-seo', 'free', TRUE],
     ['', 'question2', 'optimistions-seo', 'free', FALSE],
@@ -72,7 +71,7 @@ $options = array(
 );
 
 $explanations = array(
-    ['', 'question1', 'optimistions-seo', 'free'],
+    ['Un fichier robots.txt contient les indications que doivent suivre les robots de Google, Bings et autres.', 'question1', 'optimistions-seo', 'free'],
     ['', 'question2', 'optimistions-seo', 'free'],
     ['', 'question3', 'optimistions-seo', 'free'],
     ['', 'question4', 'optimistions-seo', 'free'],
