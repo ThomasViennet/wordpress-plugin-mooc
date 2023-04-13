@@ -28,7 +28,7 @@ class Model_Lesson
         }
     }
 
-    public function getAll(int $user_id)
+    public static function getAll(int $user_id)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'lessons';
@@ -39,7 +39,7 @@ class Model_Lesson
         return $data;
     }
 
-    public function save(int $user_id, string $lesson_slug)
+    public static function save(int $user_id, string $lesson_slug)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'lessons';
@@ -51,7 +51,7 @@ class Model_Lesson
         ));
     }
 
-    public function delete(int $user_id, string $lesson_slug)
+    public static function delete(int $user_id, string $lesson_slug)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'lessons';

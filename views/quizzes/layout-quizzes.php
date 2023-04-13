@@ -63,7 +63,7 @@ if (!$userAllowedToRespond) {
     //need to save in data base if user succes the quiz or not to display result whithout check at the end and use ob_
     $percentageCorrectAnswers = $note / $totalPoints;
     if ($percentageCorrectAnswers >= $successIndicator) {
-        $alert = 'Vous avez réussi ce quiz 🎉';
+        $alert = 'Vous avez réussi ce quiz.';
     } else {
         $alert = 'Vous n\'avez pas atteint le seuil de validation de ' . ($successIndicator * 10) . '/10.';
     }
@@ -76,7 +76,7 @@ $quiz = ob_get_clean();
 <h2 class='
 <?php
 if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is define for each quiz
-    echo 'quizValidated';
+    echo 'quizCompleted';
 } elseif (isset($percentageCorrectAnswers)) {
     echo 'quizFailed';
 }

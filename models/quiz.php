@@ -35,7 +35,7 @@ class Model_Quiz
         }
     }
 
-    public function getAll(int $user_id)
+    public static function getAll(int $user_id)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'quizzes';
@@ -47,7 +47,7 @@ class Model_Quiz
     }
 
     //Update quiz_id when CRUD will be ready
-    public function save(int $user_id, int $quiz_id, string $quiz_name,string $quiz_answers, string $quiz_status)
+    public static function save(int $user_id, int $quiz_id, string $quiz_name,string $quiz_answers, string $quiz_status)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'quizzes';

@@ -59,7 +59,7 @@
             </a>
         </ol>
 
-        <!-- The URL "/quiz" must work -->
+        <!-- The URL "/quiz" must existe -->
         <a href="/quiz?quiz_name=univers-seo" class="
         <?php
         if (in_array("univers-seo", $quizzes_name_win, true)) {
@@ -176,14 +176,14 @@
 
         </ol>
 
-        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+        <a href="/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                 <?php
                 if (in_array("fonctionnement-moteur-recherche", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
                 } elseif (in_array("fonctionnement-moteur-recherche", $quizzes_name_failed, true)) {
                     echo 'quizFailed';
                 }
-                ?>>">
+                ?>">
             Quiz : Fonctionnement d'un moteur de recherche
         </a>
 
