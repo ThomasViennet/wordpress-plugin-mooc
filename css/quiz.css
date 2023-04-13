@@ -50,7 +50,7 @@ input[type=checkbox]:checked {
   text-decoration: none !important;
 }
 
-.quizValidated::after {
+/* .quizValidated::after {
   font: normal 20px/1 dashicons;
   content: '\f313';
   font-size: 1.2em;
@@ -60,4 +60,4 @@ input[type=checkbox]:checked {
   vertical-align: bottom;
   text-decoration: none !important;
   color: #cd2653;
-}
+} */
