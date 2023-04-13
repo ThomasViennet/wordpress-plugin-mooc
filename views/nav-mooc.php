@@ -206,6 +206,17 @@
                 ?>">Optimiser l’indexation des crawlers</li>
             </a>
 
+            <ol>
+                <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/optimisation-seo-du-crawl-des-moteurs-de-recherche/guide-seo-pour-les-codes-http-dune-url/">
+                    <li class="
+                    <?php
+                    if (in_array("guide-seo-pour-les-codes-http-dune-url", $lessons_slug, true))
+                        echo 'lessonCompleted';
+                    ?>">Code HTTP et SEO
+                    </li>
+                </a>
+            </ol>
+
             <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/les-optimisations-seo-dune-page-web/">
                 <li class="
                 <?php
@@ -280,16 +291,16 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=optimisations-referencement-naturel" class="
+        <a href="/quiz?quiz_name=optimisations-referencement-naturel" class="
                 <?php
-                if (in_array("optimisations-seo", $quizzes_name_win, true)) {
+                if (in_array("optimisations-referencement-naturel", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
-                } elseif (in_array("optimisations-seo", $quizzes_name_failed, true)) {
+                } elseif (in_array("optimisations-referencement-naturel", $quizzes_name_failed, true)) {
                     echo 'quizFailed';
                 }
                 ?>">
             Quiz : Optimisations du référencement naturel
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
             <h3 class="
@@ -363,12 +374,12 @@
 
         <!-- <a href="/mooc/quiz?quiz_name=strategie-seo" class="
         <?php
-                if (in_array("strategie-seo", $quizzes_name_win, true)) {
-                    echo 'quizCompleted';
-                } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
-                    echo 'quizFailed';
-                }
-                ?>">
+        if (in_array("strategie-seo", $quizzes_name_win, true)) {
+            echo 'quizCompleted';
+        } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
+            echo 'quizFailed';
+        }
+        ?>">
             Quiz : Stratégie SEO
         </a> -->
 
