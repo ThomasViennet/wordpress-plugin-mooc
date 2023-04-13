@@ -82,9 +82,9 @@ $explanations = array(
     ],
 
     [
-        '<p>Un algorithme de "learning to rank" consiste à « apprendre à classer » les résultats en fonction du comportement des internautes.</p>
+        '<p>Un algorithme de "learning to rank" consiste à "apprendre à classer" les résultats en fonction du comportement des internautes.</p>
         <p>Un algorithme de "transition rank" peut servir à détecter une action de manipulation de classement en observant la réaction du webmaster.</p>
-        <p>Google peut réduire ses coûts en retardant l\'application d\'un filtre sur une URL indexée tant que celle-ci est peu test.</p>',
+        <p>Google peut réduire ses coûts en retardant l\'application d\'un filtre sur une URL indexée tant que celle-ci est pas/peu visible dans les résultats de recherche.</p>',
         'question2', 'fonctionnement-moteur-recherche', 'free'
     ],
 
