@@ -176,7 +176,7 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
+        <a href="/mooc/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                 <?php
                 if (in_array("fonctionnement-moteur-recherche", $quizzes_name_win, true)) {
                     echo 'quizCompleted';
@@ -185,7 +185,7 @@
                 }
                 ?>>">
             Quiz : Fonctionnement d'un moteur de recherche
-        </a> -->
+        </a>
 
 
         <a href="/formation-seo-gratuite/toutes-les-optimisations-pour-les-moteurs-de-recherche-seo/">
