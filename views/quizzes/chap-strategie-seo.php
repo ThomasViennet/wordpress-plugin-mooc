@@ -4,7 +4,7 @@
 * use of variables similar to the answer of a database.
 */
 
-$title = "Stratégie SEO";
+$title = "Conception d'une stratégie SEO";
 
 $formation = array(
     'free'
@@ -86,10 +86,7 @@ $explanations = array(
 
 
 $knowledgeEvaluated = array(
-    '',
-    '',
-    '',
-    ''
+    'Connaissances générales sur la conception d\'une stratégie SEO.'
 );
 
 $note = 0;
