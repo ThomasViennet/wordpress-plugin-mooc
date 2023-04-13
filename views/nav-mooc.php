@@ -299,7 +299,7 @@
                     echo 'quizFailed';
                 }
                 ?>">
-            Quiz : Optimisations du référencement naturel
+            Quiz : Optimisations on-site
         </a>
 
         <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">

@@ -4,7 +4,7 @@
 * use of variables similar to the answer of a database.
 */
 
-$title = "Optimisations du référencement naturel";
+$title = "Optimisations on-site pour le référencement naturel";
 
 $formation = array(
     'free'
