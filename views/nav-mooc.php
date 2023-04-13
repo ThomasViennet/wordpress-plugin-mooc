@@ -311,13 +311,12 @@
         </a>
 
         <ol>
-
             <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/strategie-de-mots-cles/">
                 <li class="
                 <?php
-                if (in_array("strategie-de-mots-cles", $lessons_slug, true))
+                if (in_array("creer-une-liste-de-mots-cles", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Créer une liste de mots-clés</li>
+                ?>">Créer liste de mots-clés</li>
             </a>
             <ol>
 
@@ -328,14 +327,6 @@
                     echo 'lessonCompleted';
                 ?>">Le triangle d’or de Google</li>
                 </a>
-
-                <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/strategie-de-mots-cles/la-recherche-universelle/">
-                    <li class="
-                <?php
-                if (in_array("la-recherche-universelle", $lessons_slug, true))
-                    echo 'lessonCompleted';
-                ?>">La recherche universelle</li>
-                </a>
             </ol>
 
             <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/mots-cles-et-semantique-seo/">
@@ -343,15 +334,7 @@
                 <?php
                 if (in_array("mots-cles-et-semantique-seo", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Utiliser la sémantique en SEO</li>
-            </a>
-
-            <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/cocon-semantique/">
-                <li class="
-                <?php
-                if (in_array("cocon-semantique", $lessons_slug, true))
-                    echo 'lessonCompleted';
-                ?>">Créer un cocon sémantique</li>
+                ?>">Créer un contenu sémantiquement optimisé</li>
             </a>
 
             <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/creer-un-maillage-interne/">
@@ -359,7 +342,7 @@
                 <?php
                 if (in_array("creer-un-maillage-interne", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Créer un maillage interne</li>
+                ?>">Créer un maillage interne optimisé</li>
             </a>
 
             <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/quest-ce-que-le-netlinking/">
@@ -372,16 +355,16 @@
 
         </ol>
 
-        <!-- <a href="/mooc/quiz?quiz_name=strategie-seo" class="
-        <?php
-        if (in_array("strategie-seo", $quizzes_name_win, true)) {
-            echo 'quizCompleted';
-        } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
-            echo 'quizFailed';
-        }
-        ?>">
+        <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+            <?php
+            if (in_array("strategie-seo", $quizzes_name_win, true)) {
+                echo 'quizCompleted';
+            } elseif (in_array("strategie-seo", $quizzes_name_failed, true)) {
+                echo 'quizFailed';
+            }
+            ?>">
             Quiz : Stratégie SEO
-        </a> -->
+        </a>
 
         <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
             <h3 class="
