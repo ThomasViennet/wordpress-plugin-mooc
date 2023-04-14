@@ -16,10 +16,10 @@ require_once('controllers/init.php');
 require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
-require_once('controllers/user.php');
+require_once('controllers/mooc.php');
 
-use Mooc\Controllers\NavMooc\Controller_NavMooc;
-use Mooc\Controllers\User\Controller_User;
+use Mooc\Controllers\NavMooc\Controller_NavMooc;//to put in Mooc.php
+use Mooc\Controllers\Mooc\Controller_Mooc;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
 
@@ -34,7 +34,7 @@ function registration()
     if (!is_admin()) {
         if (!is_user_logged_in()) {
             ob_start();
-            Controller_User::displayRegistrationForm();
+            Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
         }
     }
@@ -109,6 +109,6 @@ function quiz()
         Controller_Quiz::viewQuiz($user->ID, $_GET['quiz_name']);
         return ob_get_clean();
     } else {
-        Controller_User::displayRegistrationForm();
+        Controller_Mooc::displayRegistrationForm();
     }
 }
