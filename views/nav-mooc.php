@@ -375,7 +375,7 @@
             </ol>
 
             <h5>
-                <a href="/mooc/quiz?quiz_name=strategie-seo" class="
+                <a href="/quiz?quiz_name=strategie-seo" class="
                     <?php
                     if (in_array("strategie-seo", $quizzes_name_win, true)) {
                         echo 'quizCompleted';
