@@ -53,7 +53,7 @@ ob_start();
     <?php
     if ($userAllowedToRespond) {
     ?>
-        <p style="text-align:center;padding:3em;"><input type="submit" value="Valider mes réponses" /></p>
+        <p style="text-align:center;padding:3em;"><input type="submit" class="is-style-wide buttonLesson" value="Valider mes réponses" /></p>
     <?php
     }
     ?>
