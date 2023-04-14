@@ -46,7 +46,7 @@ $options = array(
     ['Vrai', 'question5', 'strategie-seo', 'free', TRUE],
     ['Faux', 'question5', 'strategie-seo', 'free', FALSE],
 
-    ['Essayez d’obtenir dès que possible tout vos liens', 'question6', 'strategie-seo', 'free', FALSE],
+    ['Essayez d’obtenir dès que possible tous vos liens', 'question6', 'strategie-seo', 'free', FALSE],
     ['Adaptez le rythme d’acquisition de liens au précédent', 'question6', 'strategie-seo', 'free', TRUE],
     ['Ciblez essentiellement vos URL stratégiques', 'question6', 'strategie-seo', 'free', FALSE],
     ['Répartissez naturellement les cibles des backlinks', 'question6', 'strategie-seo', 'free', TRUE],
@@ -89,13 +89,13 @@ $explanations = array(
         <li>Une étude du netlinking pour connaître les URL les plus  "populaire" d\'un point de vue externe.</li>
         <li>Une étude du maillage interne pour connaître les URL qui sont le plus populaire d\'un point vue interne.</li>
         </ul>
-        <p><strong>L\'attribut nofollow</strong> ne permet pas d\'éviter la fuite de PageRank. Il permet simplement de ne pas transmettre de PageRank à l\'URL ciblée.</p>
+        <p><strong>L\'attribut nofollow</strong> ne permet pas de sculpter la diffusion du PageRank interne. Il permet simplement de donner une indication aux moteurs de recherche.</p>
         ',
         'question2', 'strategie-seo', 'free'
     ],
     ['<p>La popularité induite par l\'acquisition de lien est plus importante si les liens proviennent de sites différents.</p>', 'question3', 'strategie-seo', 'free'],
     [
-        '<p><strong>Faire un spam report</strong> n’a pas d’effet immédiat, ce formulaire sert à Google pour prendre en considération la pratique dénoncer pour améliorer par la suite les filtres algorithmiques.</p>
+        '<p><strong>Faire un spam report</strong> n’a pas d’effet immédiat, ce formulaire sert à Google pour prendre en considération la pratique dénoncée afin d\'améliorer par la suite les filtres algorithmiques.</p>
         <p><strong>Désavouer les liens</strong> n’est utile que dans le cas d’une action manuelle d’un moteur de recherche. Cela dit cela permettra d’envoyer une signal d’alerte à Google sur ces sites spammy.</p>
         <p><strong>Analyser le netlinking</strong> de vos concurrents vous permet d\'estimer le gap à faire pour se positionner tout en gardant un profil de netlinking naturel.</p>',
         'question4', 'strategie-seo', 'free'
@@ -107,14 +107,13 @@ $explanations = array(
         'question5', 'strategie-seo', 'free'
     ],
     [
-        '<p>Google détecte l\'aquisition de liens artificielle grâce à une multitude de signaux.</p>
-        <p>Pour passer sous les radars de Google, il faut garder un profil de netlinking qui soit le plus naturel possible. En ce sens, étudier la concurrence vous permet d\'estimer ce qui est la norme en terme de netlinking pour votre thématique.
-        </p>',
+        '<p>Google détecte l\'acquisition de liens artificiels grâce à une multitude de signaux.</p>
+        <p>Pour passer sous les radars, il faut garder un profil de netlinking qui soit le plus naturel possible. En ce sens, étudier la concurrence vous permet d\'estimer ce qui est la norme en termes de netlinking pour votre thématique.</p>',
         'question6', 'strategie-seo', 'free'
     ],
     [
-        '<p>Il est important de faire une distinction entre les techniques black hat légales et illégales.</p>
-        <p>Tout ce qui va à l’encontre des règles de Google (manipulation du PageRank, etc.) n’est pas forcement illégal au yeux de la loi. Mais certaines techniques de « hacking » elles le sont (intrusion sur un serveur, etc.).</p>
+        '<p>Il est important de faire la distinction entre les techniques black hat légales et illégales.</p>
+        <p>Tout ce qui va à l’encontre des règles de Google (manipulation du PageRank, etc.) n’est pas forcement illégal aux yeux de la loi. Mais certaines techniques de « hacking » le sont : intrusion sur un serveur, etc.</p>
         <p>Pour ce qui est des techniques de hacking purement illégales, il va sans dire que vous ne devez en aucun cas en faire usage.</p>
         <p>Concernant les techniques légales, celles-ci peuvent quant à elles coûter cher si elles sont détectées par les moteurs de recherche. Mais elles peuvent être intéressantes / nécessaires pour répondre à des objectifs.</p>',
         'question7', 'strategie-seo', 'free'
@@ -133,7 +132,7 @@ $explanations = array(
     [
         '<p><strong>rel="sponsored"</strong> : permet d\'identifier les liens qui ont été créés pour de la publicité, du sponsoring ou d\'autres accords impliquant une rémunération.</p>
         <p><strong>rel="ugc"</strong> : UGC est l\'acronyme de "User Generated Content", qui signifie "Contenu généré par l\'utilisateur". La valeur de l\'attribut ugc est recommandée pour les liens qui se trouvent dans des contenus générés par les utilisateurs.</p>
-        <p><strong>rel="nofollow"</strong> : permet de faire un lien en indiquant qu\'on ne recommande la cible. Cela dit, En 2019, Google a annoncé que les attributs des liens (sponsored, ugc et nofollow) sont désormais considérés comme des indications parmi d’autres signaux. Par conséquent, l\'attribut nofollow est une simple indication qui n\'empêche pas Google de choisir de transmettre le PageRank.</p>
+        <p><strong>rel="nofollow"</strong> : en 2019, Google a annoncé que les attributs des liens (sponsored, ugc et nofollow) sont désormais considérés comme des indications parmi d’autres signaux. Par conséquent, l\'attribut nofollow est une simple indication qui n\'empêche pas Google de choisir de transmettre le PageRank.</p>
         ', 'question9', 'strategie-seo', 'free'
     ],
     [
