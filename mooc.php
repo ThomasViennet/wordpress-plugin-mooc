@@ -16,10 +16,10 @@ require_once('controllers/init.php');
 require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
-require_once('controllers/user.php');
+require_once('controllers/mooc.php');
 
-use Mooc\Controllers\NavMooc\Controller_NavMooc;
-use Mooc\Controllers\User\Controller_User;
+use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
+use Mooc\Controllers\Mooc\Controller_Mooc;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
 
@@ -34,8 +34,13 @@ function registration()
     if (!is_admin()) {
         if (!is_user_logged_in()) {
             ob_start();
-            Controller_User::displayRegistrationForm();
+            Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
+        } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in
+            return 
+            '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
+            <div class="wp-block-button"><a class="wp-block-button__link has-primary-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard" style="border-radius:100px;background-color:#cd2653">Continuer la formation</a></div>
+            </div>';
         }
     }
 }
@@ -55,7 +60,7 @@ function navMooc()
 add_shortcode('lesson_button', 'lessonButton');
 function lessonButton()
 {
-    if (!is_customize_preview()) {
+    if (!is_admin()) {
         if (is_user_logged_in()) {
 
             $user = wp_get_current_user();
@@ -64,7 +69,7 @@ function lessonButton()
                 if ($_GET['action'] == 'lesson_button') {
 
                     if ($_POST['lesson_status'] != "Completed") {
-                        Controller_Lesson::saveLessonCompleted($user->ID, basename(get_permalink()));
+                        Controller_Lesson::saveLessonCompleted($user->ID, $_POST['lesson_slug']);//Use $_POST['lesson_slug'] instead of basename(get_permalink()) to move to next lesson after submitting the form.
                     } else {
                         Controller_Lesson::deleteLessonCompleted($user->ID, basename(get_permalink()));
                     }
@@ -109,6 +114,6 @@ function quiz()
         Controller_Quiz::viewQuiz($user->ID, $_GET['quiz_name']);
         return ob_get_clean();
     } else {
-        Controller_User::displayRegistrationForm();
+        Controller_Mooc::displayRegistrationForm();
     }
 }

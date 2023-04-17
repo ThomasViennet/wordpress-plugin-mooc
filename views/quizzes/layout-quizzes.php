@@ -12,7 +12,7 @@ ob_start();
             if ($option[1] == $question[0]) {
 
                 echo '
-                <label for="' . htmlspecialchars($option[0]) . '" class="';
+                <label for="' . htmlspecialchars($question[0]) . htmlspecialchars($option[0]) . '" class="';
 
                 if (!$userAllowedToRespond) {
 
@@ -20,16 +20,16 @@ ob_start();
                         echo 'correctAnswer';
                         //s'il a pas répondu answer[key] est vide 
                         if ($lib_quiz->isCorrectAnswer($option, $answers[$key])) {
-                            $note++; //bad idea to do this here?
+                            $note++; //bad idea to do this here
                         }
                     } elseif (!$lib_quiz->isCorrectAnswer($option, $answers[$key]) && $lib_quiz->isChecked($option, $answers[$key])) {
                         echo 'wrongAnswer';
-                        $note--; //bad idea to do this here?
+                        $note--; //bad idea to do this here
                     }
                 }
 
                 echo '">
-                <input type="checkbox" name="' . htmlspecialchars($question[0]) . '[]" value="' . htmlspecialchars($option[0]) . '" id="' . htmlspecialchars($option[0]) . '"';
+                <input type="checkbox" name="' . htmlspecialchars($question[0]) . '[]" value="' . htmlspecialchars($option[0]) . '" id="' . htmlspecialchars($question[0]) . htmlspecialchars($option[0]) . '"';
 
                 if ($lib_quiz->isChecked($option, $answers[$key])) {
                     echo 'checked';
@@ -65,7 +65,7 @@ if (!$userAllowedToRespond) {
     if ($percentageCorrectAnswers >= $successIndicator) {
         $alert = 'Vous avez réussi ce quiz.';
     } else {
-        $alert = 'Vous n\'avez pas atteint le seuil de validation de ' . ($successIndicator * 10) . '/10.';
+        $alert = 'Vous n\'avez pas obtenu au moins ' . ($successIndicator * 100) . '% de la note maximale.';
     }
 }
 
@@ -98,7 +98,7 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     <li>-1 point par mauvaise réponse</li>
     <li>Toutes les réponses peuvent être bonnes</li>
     <li>Toutes les réponses peuvent être mauvaises</li>
-    <li>Pour réussir le quiz, il faut obtenir au moins 70% de la note maximale.</li>
+    <li>Pour réussir le quiz, il faut obtenir au moins <?= $successIndicator * 100 ?>% de la note maximale.</li>
 </ul>
 
 

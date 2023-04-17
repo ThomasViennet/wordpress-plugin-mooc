@@ -61,4 +61,22 @@ class Model_Lesson
             'lesson_slug' => $lesson_slug
         ));
     }
+
+    public static function getNextLessonSlug($lesson_slug)
+    {
+        // global $wpdb;
+        // $table_name = $wpdb->prefix . 'lessons';
+
+        // $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE lesson_slug = %s", $lesson_slug);
+        // $data = $wpdb->get_results($sql);
+
+        // return $data;
+
+        $lessons = array(
+            'slug',
+            'slug2',
+        );
+
+        return $lessons;
+    }
 }

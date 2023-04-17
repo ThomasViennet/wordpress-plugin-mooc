@@ -64,7 +64,7 @@
             </ol>
 
             <!-- The URL "/quiz" must existe -->
-            <h5>
+            <h4>
                 <a href="/quiz?quiz_name=univers-seo" class="
                     <?php
                     if (in_array("univers-seo", $quizzes_name_win, true)) {
@@ -75,7 +75,7 @@
                     ?>">
                     Quiz : Découvrez l'univers du SEO
                 </a>
-            </h5>
+            </h4>
 
             <h3>
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/">
@@ -84,7 +84,7 @@
                         <?php
                         if (in_array("comment-fonctionne-un-moteur-de-recherche", $lessons_slug, true))
                             echo 'lessonCompleted';
-                        ?>">Découvrez le fonctionnennement d'un moteur de recherche
+                        ?>">Découvrez le fonctionnement d'un moteur de recherche
                     </li>
                 </a>
             </h3>
@@ -122,7 +122,7 @@
                 <?php
                 if (in_array("comment-fonctionne-le-pagerank", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement du PageRank</li>
+                ?>">Fonctionnement du PageRank</li>
                 </a>
 
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-un-algorithme-de-learning-to-rank/">
@@ -130,7 +130,7 @@
                 <?php
                 if (in_array("comment-fonctionne-un-algorithme-de-learning-to-rank", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement du Learning to rank</li>
+                ?>">Fonctionnement du Learning to rank</li>
                 </a>
 
 
@@ -139,7 +139,7 @@
                 <?php
                 if (in_array("comment-fonctionne-lalgorithme-du-transition-rank", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement du Transition rank</li>
+                ?>">Fonctionnement du Transition rank</li>
                 </a>
 
 
@@ -148,7 +148,7 @@
                 <?php
                 if (in_array("comment-fonctionne-lalgorithme-bert", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement de Google BERT</li>
+                ?>">Fonctionnement de Google BERT</li>
                 </a>
 
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-lalgorithme-google-penguin/">
@@ -156,7 +156,7 @@
                 <?php
                 if (in_array("comment-fonctionne-lalgorithme-google-penguin", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement de Google Penguin</li>
+                ?>">Fonctionnement de Google Penguin</li>
                 </a>
 
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-lalgorithme-google-panda/">
@@ -164,7 +164,7 @@
                 <?php
                 if (in_array("comment-fonctionne-lalgorithme-google-panda", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement de Google Panda</li>
+                ?>">Fonctionnement de Google Panda</li>
                 </a>
 
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-le-duplicate-content/">
@@ -172,7 +172,7 @@
                 <?php
                 if (in_array("comment-fonctionne-le-duplicate-content", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement du Duplicate content</li>
+                ?>">Fonctionnement du Duplicate content</li>
                 </a>
 
                 <a href="/formation-seo-gratuite/comment-fonctionne-un-moteur-de-recherche/comment-fonctionne-le-le-knowledge-graph-de-google/">
@@ -180,12 +180,12 @@
                 <?php
                 if (in_array("comment-fonctionne-le-le-knowledge-graph-de-google", $lessons_slug, true))
                     echo 'lessonCompleted';
-                ?>">Fonctionnennement du Knowledge Graph de Google</li>
+                ?>">Fonctionnement du Knowledge Graph de Google</li>
                 </a>
 
             </ol>
 
-            <h5>
+            <h4>
                 <a href="/quiz?quiz_name=fonctionnement-moteur-recherche" class="
                     <?php
                     if (in_array("fonctionnement-moteur-recherche", $quizzes_name_win, true)) {
@@ -194,9 +194,9 @@
                         echo 'quizFailed';
                     }
                     ?>">
-                    Quiz : Découvrez le fonctionnennement d'un moteur de recherche
+                    Quiz : Découvrez le fonctionnement d'un moteur de recherche
                 </a>
-            </h5>
+            </h4>
 
 
             <h3>
@@ -305,7 +305,7 @@
 
             </ol>
 
-            <h5>
+            <h4>
                 <a href="/quiz?quiz_name=optimisations-referencement-naturel" class="
                     <?php
                     if (in_array("optimisations-referencement-naturel", $quizzes_name_win, true)) {
@@ -316,7 +316,7 @@
                     ?>">
                     Quiz : Optimisations on-site
                 </a>
-            </h5>
+            </h4>
 
             <h3>
                 <a href="/formation-seo-gratuite/creer-une-strategie-seo-perenne-et-pertinente/">
@@ -374,8 +374,8 @@
 
             </ol>
 
-            <h5>
-                <a href="/quiz?quiz_name=strategie-seo" class="
+            <h4>
+                <a href="/mooc/quiz?quiz_name=strategie-seo" class="
                     <?php
                     if (in_array("strategie-seo", $quizzes_name_win, true)) {
                         echo 'quizCompleted';
@@ -385,21 +385,22 @@
                     ?>">
                     Quiz : Créer une stratégie SEO pour Google
                 </a>
-            </h5>
-
+            </h4>
+            <h3>
             <a href="/formation-seo-gratuite/ressources-pour-continuer-votre-formation-seo-gratuitement/">
-                <h3 class="
+                <li class="
                         <?php
                         if (in_array("ressources-pour-continuer-votre-formation-seo-gratuitement", $lessons_slug, true))
                             echo 'lessonCompleted';
                         ?>">Ressources utiles
-                </h3>
+                </li>
             </a>
+            </h3>
         </ol>
     </div>
 </div>
 
 <?php
 if (!is_admin()) {
-    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu</span>';
+    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu de le formation</span>';
 }

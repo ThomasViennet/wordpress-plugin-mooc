@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Informtions about user
+ * Mooc
  */
 
-namespace Mooc\Controllers\User;
+namespace Mooc\Controllers\Mooc;
 
-class Controller_User
+class Controller_Mooc
 {
     public static function displayRegistrationForm()
     {
         require_once(dirname(__FILE__) . '/../views/registration.php');
     }
+
 }
