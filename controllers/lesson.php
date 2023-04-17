@@ -22,6 +22,9 @@ class Controller_Lesson
             $label_button = "J'ai terminé ce cours";
         }
 
+        //add the slug of next lesson to the target of the button
+        // $nextLesson_slug = (new Model_Lesson())->getNextLessonSlug($lesson_slug);
+        
         require_once(dirname(__FILE__) . '/../views/button-lesson.php');
     }
 

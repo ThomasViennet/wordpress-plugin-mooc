@@ -37,19 +37,24 @@ class Controller_Quiz
         }
     }
 
+    //WIP
     public static function saveAnswers(int $user_id, int $quiz_id, string $quiz_name, array $quiz_answers)
     {
-        require(dirname(__FILE__) . '/../views/quizzes/chap-univers-seo.php'); //Need data like this until CRUD Quiz has done
+        require(dirname(__FILE__) . '/../views/quizzes/chap-' . $quiz_name . '.php'); //Need data like this until CRUD Quiz has done
+
         $lib_quiz = new Lib_Quiz();
         $note = 0;
         $totalPoints = 0;
-        
+
         foreach ($questions as $key => $question) {
+
+            // si l'option est vrai et que l'utilisateur l'a bien chosi alors +1 si la réponse est mauvaise que l'utilisateur l'a bien choisie alors -1
             foreach ($options as $option) {
                 if ($option[1] == $question[0]) {
-                    if ($lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) == 'good') {
+
+                    if ($lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) && $lib_quiz->isChecked($option, $quiz_answers[$key])) {
                         $note++;
-                    } elseif ($lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) == 'wrong') {
+                    } elseif (!$lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) && $lib_quiz->isChecked($option, $quiz_answers[$key])) {
                         $note--;
                     }
         
@@ -62,6 +67,7 @@ class Controller_Quiz
         }
 
         $percentageCorrectAnswers = $note / $totalPoints;
+
         if ($percentageCorrectAnswers >= $successIndicator) {
             $quiz_status = 'Success';
         } else {

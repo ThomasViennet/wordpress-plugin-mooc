@@ -39,14 +39,14 @@ $options = array(
     ['Vrai', 'question3', 'strategie-seo', 'free', FALSE],
     ['Faux', 'question3', 'strategie-seo', 'free', TRUE],
 
-    ['De créer un "spam report" si vous constaté qu’un concurrent achète des liens pour que Google puisse rapidement intervenir', 'question4', 'strategie-seo', 'free', FALSE],
+    ['De créer un "spam report" si vous constatez qu’un concurrent achète des liens pour que Google puisse rapidement intervenir', 'question4', 'strategie-seo', 'free', FALSE],
     ['De vérifier régulièrement si votre site reçoit des liens "toxiques" pour les désavouer rapidement auprès de Google', 'question4', 'strategie-seo', 'free', FALSE],
     ['D’analyser le netlinking du top 20 de la SERP pour la requête que vous visez afin d’adapter votre stratégie', 'question4', 'strategie-seo', 'free', TRUE],
 
     ['Vrai', 'question5', 'strategie-seo', 'free', TRUE],
     ['Faux', 'question5', 'strategie-seo', 'free', FALSE],
 
-    ['Essayez d’obtenir dès que possible tout vos liens', 'question6', 'strategie-seo', 'free', FALSE],
+    ['Essayez d’obtenir dès que possible tous vos liens', 'question6', 'strategie-seo', 'free', FALSE],
     ['Adaptez le rythme d’acquisition de liens au précédent', 'question6', 'strategie-seo', 'free', TRUE],
     ['Ciblez essentiellement vos URL stratégiques', 'question6', 'strategie-seo', 'free', FALSE],
     ['Répartissez naturellement les cibles des backlinks', 'question6', 'strategie-seo', 'free', TRUE],
@@ -58,7 +58,7 @@ $options = array(
     ['Toutes les zones chaudes doivent contenir la requête ciblée', 'question8', 'strategie-seo', 'free', FALSE],
     ['Le contenu de l\'URL doit utiliser les mots attendus par Google', 'question8', 'strategie-seo', 'free', TRUE],
 
-    ['rel="Sponsored" permet d’indiquer à Google de ce lien à été sponsorisé / acheté', 'question9', 'strategie-seo', 'free', TRUE],
+    ['rel="Sponsored" permet d’indiquer à Google que ce lien à été sponsorisé / acheté', 'question9', 'strategie-seo', 'free', TRUE],
     ['rel="Nofollow" permet d’interdire à Google de transmettre du PageRank', 'question9', 'strategie-seo', 'free', FALSE],
     ['rel="UGC" permet d’indiquer à Google qui est l\'auteur du contenu', 'question9', 'strategie-seo', 'free', FALSE],
 

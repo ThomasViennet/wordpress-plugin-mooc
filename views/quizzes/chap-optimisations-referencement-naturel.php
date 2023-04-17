@@ -147,7 +147,7 @@ $explanations = array(
     ],
     [
         '<p>En avril 2014, Matt Cutts expliquait le code HTTP "404" engendrera un délai de 24 heures avant qu\'une action soit effectuée (par exemple, suppression de la page de l\'index de Google).
-        Alors que si le code d\'erreur est 410, l\'action sera menée immédiatement, sans délai.</p>
+        Alors que si le code d\'erreur est 410, l\'action sera menée immédiatement, sans délai.</p>
         <p>Dans le cas d\'une de HTTP vers HTTPS, il faut utiliser une redirection 301 qui indique l\'aspect permanent de celle-ci.</p>',
         'question10', 'optimisations-referencement-naturel', 'free'
     ],
