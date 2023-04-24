@@ -40,7 +40,7 @@
 
 .lessonCompleted::before {
     font: normal 20px/1 dashicons;
-    content: '\f118';
+    content: '\f147';
     font-size: 1.2em;
     speak: never;
     -webkit-font-smoothing: antialiased;
