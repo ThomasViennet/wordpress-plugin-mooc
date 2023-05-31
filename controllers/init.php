@@ -101,17 +101,17 @@ class Controller_Init
 
     public static function styleAdmin()
     {
-        echo '<link rel="stylesheet" href="' . plugins_url('/../css/admin-nav-mooc.css', __FILE__) . '" type="text/css" media="all" />';
+        echo '<link rel="stylesheet" href="' . plugins_url('/../assets/css/admin-nav-mooc.css', __FILE__) . '" type="text/css" media="all" />';
     }
 
     public static function styleFront()
     {
         echo '
-        <link rel="stylesheet" href="' . plugins_url('/../css/nav-mooc.css', __FILE__) . '" type="text/css" media="all" />
-        <link rel="stylesheet" href="' . plugins_url('/../css/quiz.css', __FILE__) . '" type="text/css" media="all" />
-        <link rel="stylesheet" href="' . plugins_url('/../css/lesson.css', __FILE__) . '" type="text/css" media="all" />
-        <link rel="stylesheet" href="' . plugins_url('/../css/button-lesson.css', __FILE__) . '" type="text/css" media="all" />
-        <script type="text/javascript" src="' . plugins_url('/../js/nav-mooc.js', __FILE__) . '"></script>';
+        <link rel="stylesheet" href="' . plugins_url('/../assets/css/nav-mooc.css', __FILE__) . '" type="text/css" media="all" />
+        <link rel="stylesheet" href="' . plugins_url('/../assets/css/quiz.css', __FILE__) . '" type="text/css" media="all" />
+        <link rel="stylesheet" href="' . plugins_url('/../assets/css/lesson.css', __FILE__) . '" type="text/css" media="all" />
+        <link rel="stylesheet" href="' . plugins_url('/../assets/css/button-lesson.css', __FILE__) . '" type="text/css" media="all" />
+        <script type="text/javascript" src="' . plugins_url('/../assets/js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
     public static function wpLogin($user_login, WP_User $user)

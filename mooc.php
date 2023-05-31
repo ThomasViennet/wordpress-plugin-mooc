@@ -4,7 +4,7 @@
  * Plugin Name: Mooc 
  * Plugin URI: https://www.referencime.fr  
  * Description: Mooc
- * Version: 0.1
+ * Version: 1
  * Author Name: Thomas Viennet (contact@referencime.fr)  
  * Author: Thomas Viennet (Référencime)  
  * Domain Path: /languages  
