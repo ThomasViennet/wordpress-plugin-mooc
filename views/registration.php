@@ -1,4 +1,4 @@
-<div id="form_registration_mooc" class="box-shadow padding has-text-align-center">
+<div class="padding border-radius box-shadow padding has-text-align-center">
     <h2>S'inscrire à la formation</h2>
     <form action="<?= site_url('wp-login.php?action=register', 'login_post') ?>" method="post">
         <input type="text" name="user_login" placeholder="Identifiant" id="user_login" style="margin:5px 0" />
