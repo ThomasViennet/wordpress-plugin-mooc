@@ -1,5 +1,7 @@
 #bodyNavMooc {
     padding: 7%;
+    z-index: 4;
+    position: relative;
 }
 
 .navMooc {
@@ -12,7 +14,7 @@
     overflow-x: hidden;
     transition: 0.5s;
     text-align: left;
-    z-index: 999;
+    z-index: 4;
 }
 
 .navMooc h2 {
