@@ -34,10 +34,10 @@ $options = array(
 
     ['Pondérer ses critères de classement en fonction des interactions qu\'ont les internautes avec les SERP', 'question2', 'fonctionnement-moteur-recherche', 'free', TRUE],
     ['Utiliser des algorithmes pour tester les réactions des webmasters qui font du SEO', 'question2', 'fonctionnement-moteur-recherche', 'free', TRUE],
-    ['Appliquer des filtres longtemps après une indexation d\'une URL lorsque celle-ci commence à gagner en visibilité', 'question2', 'fonctionnement-moteur-recherche', 'free', TRUE],
+    ['Appliquer des filtres longtemps après l\'indexation d\'une URL, lorsque celle-ci commence à gagner en visibilité', 'question2', 'fonctionnement-moteur-recherche', 'free', TRUE],
 
     ['On peut perdre des positions avant d\'en gagner', 'question3', 'fonctionnement-moteur-recherche', 'free', TRUE],
-    ['On arrive à la nouvelle position qu\'on mérite dès que Google a pris en considération', 'question3', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['On arrive à la nouvelle position qu\'on mérite, dès que Google la prise en considération', 'question3', 'fonctionnement-moteur-recherche', 'free', FALSE],
     ['Si on perd des positions, il est préférable d\'effectuer un rollback', 'question3', 'fonctionnement-moteur-recherche', 'free', FALSE],
 
     ['Pénalise particulièrement l\'utilisation d’ancres exactes', 'question4', 'fonctionnement-moteur-recherche', 'free', TRUE],

@@ -58,7 +58,7 @@ $options = array(
     ['Toutes les zones chaudes doivent contenir la requête ciblée', 'question8', 'strategie-seo', 'free', FALSE],
     ['Le contenu de l\'URL doit utiliser les mots attendus par Google', 'question8', 'strategie-seo', 'free', TRUE],
 
-    ['rel="Sponsored" permet d’indiquer à Google que ce lien à été sponsorisé / acheté', 'question9', 'strategie-seo', 'free', TRUE],
+    ['rel="Sponsored" permet d’indiquer à Google que ce lien a été sponsorisé / acheté', 'question9', 'strategie-seo', 'free', TRUE],
     ['rel="Nofollow" permet d’interdire à Google de transmettre du PageRank', 'question9', 'strategie-seo', 'free', FALSE],
     ['rel="UGC" permet d’indiquer à Google qui est l\'auteur du contenu', 'question9', 'strategie-seo', 'free', FALSE],
 
