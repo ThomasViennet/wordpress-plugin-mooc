@@ -62,8 +62,11 @@ class Controller_Init
         if (in_array('subscriber', (array) $user->roles)) {
             global $wp_admin_bar;
             $wp_admin_bar->remove_menu('wp-logo');
-            $wp_admin_bar->remove_node('site-name');
             $wp_admin_bar->remove_node('dashboard');
+
+            if (!is_admin()) {
+                $wp_admin_bar->remove_node('site-name');
+            }
         }
     }
 
@@ -87,16 +90,8 @@ class Controller_Init
                 'href'   => esc_url(admin_url('admin.php?page=dashboard')),
                 'meta'   => false
             );
-        } else {
-            $args = array(
-                'parent' => false,
-                'id'     => 'retour-site',
-                'title'  => 'Retour au site',
-                'href'   => esc_url(get_home_url('/')),
-                'meta'   => false
-            );
+            $admin_bar->add_node($args);
         }
-        $admin_bar->add_node($args);
     }
 
     public static function styleAdmin()
