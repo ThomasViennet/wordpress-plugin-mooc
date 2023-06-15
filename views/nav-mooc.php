@@ -402,5 +402,5 @@
 
 <?php
 if (!is_admin()) {
-    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Menu de la formation</span>';
+    echo '<span class="is-style-wide buttonNavMooc" onclick="openNav()">Voir la formation</span>';
 }

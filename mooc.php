@@ -39,7 +39,7 @@ function registration()
         } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in
             return 
             '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
-            <div class="wp-block-button wp-block-button-important"><a class="wp-block-button__link has-background-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard" style="border-radius:100px;background-color:#cd2653">Continuer la formation</a></div>
+            <div class="wp-block-button wp-block-button-important"><a class="wp-block-button__link has-background-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard">Continuer la formation</a></div>
             </div>';
         }
     }
