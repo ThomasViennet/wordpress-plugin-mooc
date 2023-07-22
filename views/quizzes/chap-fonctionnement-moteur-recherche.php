@@ -69,7 +69,7 @@ $options = array(
 
     ['Le rang d\'une page dans les résultats de recherche', 'question10', 'fonctionnement-moteur-recherche', 'free', FALSE],
     ['Une formule qui mesure la "popularité" d\'une URL', 'question10', 'fonctionnement-moteur-recherche', 'free', TRUE],
-    ['Le rang d\'une page dans les résultats de recherche', 'question10', 'fonctionnement-moteur-recherche', 'free', FALSE],
+    ['Un indicateur de Majestic pour estimer l\'autorité d\une URL', 'question10', 'fonctionnement-moteur-recherche', 'free', FALSE],
 );
 
 $explanations = array(
