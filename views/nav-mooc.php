@@ -396,6 +396,16 @@
                 </li>
             </a>
             </h3>
+            <h3>
+            <a href="/formation-seo-gratuite/outils-seo-les-meilleurs-pour-debuter-en-referencement-naturel/">
+                <li class="
+                        <?php
+                        if (in_array("/formation-seo-gratuite/outils-seo-les-meilleurs-pour-debuter-en-referencement-naturel/", $lessons_slug, true))
+                            echo 'lessonCompleted';
+                        ?>">Comparatif des outils SEO
+                </li>
+            </a>
+            </h3>
         </ol>
     </div>
 </div>
