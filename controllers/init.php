@@ -123,8 +123,8 @@ class Controller_Init
     function newUserEmail($wp_new_user_notification_email, $user, $blogname)
     {
         $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
-        $message .= 'En complément de la formation, j\'ai pris le temps de comparer les meilleurs outils SEO du marché dans <a href="https://referencime.fr/formation-seo-gratuite/outils-seo-les-meilleurs-pour-debuter-en-referencement-naturel/">cet article</a>.' . "\r\n";
-        $message .= 'Répondez directement à cet email si vous souhaitez des conseils pour choisir les outils parfaitement adaptés à vos besoins. 👌' . "\r\n\r\n";
+        $message .= 'Voici le comparatif des meilleurs outils SEO du marché : https://referencime.fr/formation-seo-gratuite/outils-seo-les-meilleurs-pour-debuter-en-referencement-naturel/' . "\r\n";
+        $message .= 'Répondez à cet email si vous souhaitez des conseils personnalisés pour choisir les outils parfaitement adaptés à vos besoins. 👌' . "\r\n\r\n";
         $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
         $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
         $message .= "Bonne lecture," . "\r\n";
