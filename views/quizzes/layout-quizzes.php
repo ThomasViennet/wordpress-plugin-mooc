@@ -65,7 +65,7 @@ if (!$userAllowedToRespond) {
     if ($percentageCorrectAnswers >= $successIndicator) {
         $alert = 'Vous avez réussi ce quiz.';
     } else {
-        $alert = 'Vous n\'avez pas obtenu au moins ' . ($successIndicator * 100) . '% de la note maximale.';
+        $alert = 'Vous n\'avez pas obtenu au moins ' . ($successIndicator * 100) . '% de bonnes réponses.';
     }
 }
 
@@ -98,7 +98,7 @@ if ($percentageCorrectAnswers >= $successIndicator) { //$successIndicator is def
     <li>-1 point par mauvaise réponse</li>
     <li>Toutes les réponses peuvent être bonnes</li>
     <li>Toutes les réponses peuvent être mauvaises</li>
-    <li>Pour réussir le quiz, il faut obtenir au moins <?= $successIndicator * 100 ?>% de la note maximale.</li>
+    <li>Pour réussir le quiz, il faut obtenir au moins <?= $successIndicator * 100 ?>% de bonnes réponses.</li>
 </ul>
 
 
