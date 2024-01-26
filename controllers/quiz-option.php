@@ -3,16 +3,21 @@
 namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/quiz-option.php');
+require_once(dirname(__FILE__) . '/../models/quiz-question.php');
 
 use Mooc\Models\Model_Option;
+use Mooc\Models\Model_Question;
+
 
 class Controller_Option
 {
     private $model;
+    private $questionModel;
 
     public function __construct()
     {
         $this->model = new Model_Option();
+        $this->questionModel = new Model_Question();
     }
 
     // Gérer les requêtes POST et afficher les options
@@ -40,30 +45,30 @@ class Controller_Option
         $this->displayAllOptions();
     }
 
-    // Afficher toutes les options
     public function displayAllOptions()
     {
         $options = $this->model->getAllOptions();
-        include dirname(__FILE__) . '/../views/quiz-option.php'; // Assurez-vous que le chemin est correct
+        $questions = $this->questionModel->getAllQuestions();
+        include dirname(__FILE__) . '/../views/quiz-option.php';
     }
 
-    // Ajouter une nouvelle option
     public function addOption($postData)
     {
-        // Ici, vous devriez valider et nettoyer $postData
         $optionData = [
-            'question_id' => intval($postData['question_id']), // Assurez-vous que 'quiz_id' est envoyé depuis le formulaire
+            'question_id' => intval($postData['question_id']),
             'option_text' => sanitize_text_field($postData['option_text']),
+            'is_correct' => intval($postData['is_correct']),
         ];
 
-        // Appel au modèle pour insérer les données
         return $this->model->addOption($optionData);
     }
 
     public function updateOption($option_id, $postData)
     {
         $optionData = [
-            'option_text' => sanitize_text_field($postData['option_text'])
+            'question_id' => intval($postData['question_id']),
+            'option_text' => sanitize_text_field($postData['option_text']),
+            'is_correct' => intval($postData['is_correct']),
         ];
 
         $this->model->updateOption($option_id, $optionData);
@@ -73,6 +78,4 @@ class Controller_Option
     {
         return $this->model->deleteOption($option_id);
     }
-
-    // Vous pouvez ajouter d'autres méthodes si nécessaire
 }

@@ -6,21 +6,20 @@ class Model_Option
 {
     private $wpdb;
     private $table_options;
+    private $table_questions;
 
     public function __construct()
     {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->table_options = $wpdb->prefix . 'mooc_quizzes_options';
+        $this->table_questions = $wpdb->prefix . 'mooc_quizzes_questions';
     }
 
     public function addOption($data)
     {
         $data = $this->sanitizeData($data);
-
-        // Code de débogage
-        echo 'Tentative d\'ajout d\'option avec question_id: ' . $data['question_id'];
-
+        var_dump($data);
         $this->wpdb->insert($this->table_options, $data);
         return $this->wpdb->insert_id;
     }
@@ -33,8 +32,11 @@ class Model_Option
 
     public function getAllOptions()
     {
-        return $this->wpdb->get_results("SELECT * FROM {$this->table_options}");
+        $query = "SELECT o.*, q.question_text FROM {$this->table_options} o 
+                  JOIN {$this->table_questions} q ON o.question_id = q.id";
+        return $this->wpdb->get_results($query);
     }
+
 
     public function updateOption($option_id, $data)
     {
