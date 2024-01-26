@@ -15,46 +15,61 @@ class QuizController
         $this->model = new QuizModel();
     }
 
-    public function displayAllQuestions()
+    // Gérer les requêtes POST et afficher les questions
+    public function handleRequest()
     {
-        // Récupérer les questions depuis le modèle
-        $questions = $this->model->getAllQuestions();
 
-        // Définir le chemin du fichier de vue
-        $viewPath = dirname(__FILE__) . '/../views/quizv2.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            check_admin_referer('manage_quiz_action', 'manage_quiz_nonce');
 
-        // S'assurer que le fichier existe
-        if (file_exists($viewPath)) {
-            include($viewPath);
-        } else {
-            return 'Vue non trouvée';
+            if (isset($_POST['action'])) {
+                switch ($_POST['action']) {
+                    case 'edit':
+                        $this->updateQuestion($_POST['id'], $_POST);
+                        break;
+                    case 'add':
+                        $this->addQuestion($_POST);
+                        break;
+                    case 'delete':
+                        $this->deleteQuestion($_POST['id']);
+                        break;
+                }
+            }
         }
+
+        $this->displayAllQuestions();
     }
 
-    // Ajouter une question avec options
-    public function addQuestionWithOptions($questionData, $optionsData)
+    // Afficher toutes les questions
+    public function displayAllQuestions()
     {
-        // Valider les données ici
-        $question_id = $this->model->addQuestion($questionData);
-        foreach ($optionsData as $option) {
-            $option['question_id'] = $question_id;
-            // Valider chaque option ici
-            $this->model->addOption($option);
-        }
+        $questions = $this->model->getAllQuestions();
+        include dirname(__FILE__) . '/../views/quizv2.php'; // Assurez-vous que le chemin est correct
+    }
+
+    // Ajouter une nouvelle question
+    public function addQuestion($postData)
+    {
+        // Ici, vous devriez valider et nettoyer $postData
+        $questionData = [
+            'quiz_id' => intval($postData['quiz_id']), // Assurez-vous que 'quiz_id' est envoyé depuis le formulaire
+            'user_id' => get_current_user_id(), // Obtient l'ID de l'utilisateur actuellement connecté
+            'question_text' => sanitize_text_field($postData['question_text']),
+            'status_update_date' => current_time('mysql') // Utilisez la date et l'heure actuelles
+        ];
+
+        // Appel au modèle pour insérer les données
+        return $this->model->addQuestion($questionData);
     }
 
     // Mettre à jour une question
-    public function updateQuestion($question_id, $data)
+    public function updateQuestion($question_id, $postData)
     {
-        // Valider les données ici
-        return $this->model->updateQuestion($question_id, $data);
-    }
+        $questionData = [
+            'question_text' => sanitize_text_field($postData['question_text'])
+        ];
 
-    // Mettre à jour une option
-    public function updateOption($option_id, $data)
-    {
-        // Valider les données ici
-        return $this->model->updateOption($option_id, $data);
+        $this->model->updateQuestion($question_id, $questionData);
     }
 
     // Supprimer une question
@@ -63,12 +78,5 @@ class QuizController
         return $this->model->deleteQuestion($question_id);
     }
 
-    // Supprimer une option
-    public function deleteOption($option_id)
-    {
-        return $this->model->deleteOption($option_id);
-    }
-
-    // Autres méthodes pour gérer les opérations CRUD
-    // ...
+    // Vous pouvez ajouter d'autres méthodes si nécessaire
 }

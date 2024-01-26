@@ -58,8 +58,8 @@ class Model_Init
 
             $sql_quizzes_questions = "CREATE TABLE $table_quizzes_questions (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
-            id_quiz bigint(20) NOT NULL,
-            id_user bigint(20) NOT NULL,
+            quiz_id bigint(20) NOT NULL,
+            user_id bigint(20) NOT NULL,
             question_text text NOT NULL,
             status_update_date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
             PRIMARY KEY  (id)

@@ -71,7 +71,7 @@ class Controller_Init
 
     public static function manageQuiz()
     {
-        return (new QuizController)->displayAllQuestions();
+        return (new QuizController)->handleRequest();
     }
     
     //Displaying the navigation of the mooc taking into account the lessons completed by the user

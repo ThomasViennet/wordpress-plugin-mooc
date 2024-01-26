@@ -30,6 +30,7 @@ use Mooc\Controllers\Lesson\Controller_Lesson;
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
 
+
 //Shortcodes
 add_shortcode('registration', 'registration');
 function registration()
