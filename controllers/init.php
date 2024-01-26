@@ -4,7 +4,7 @@
  * When the plugin is activated, this class adds the necessary tables and custom templates.
  */
 
-// namespace Mooc\Controllers\Init;
+namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
 require_once(dirname(__FILE__) . '/nav-mooc.php');
@@ -28,13 +28,13 @@ class Controller_Init
     {
         self::$initiated = true;
 
-        add_action('wp_before_admin_bar_render', array('Controller_Init', 'adminBar'));
-        add_action('admin_bar_menu', array('Controller_Init', 'addLinkAdminBar'));
-        add_action('admin_enqueue_scripts', array('Controller_Init', 'styleAdmin'));
-        add_action('wp_enqueue_scripts',  array('Controller_Init', 'styleFront'));
-        add_action('admin_menu', array('Controller_Init', 'hideElements'));
-        add_action('admin_menu', array('Controller_Init', 'addElements'));
-        add_action('wp_login', array('Controller_Init', 'wpLogin'), 10, 2);
+        add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
+        add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
+        add_action('admin_enqueue_scripts', array(__NAMESPACE__ . '\Controller_Init', 'styleAdmin'));
+        add_action('wp_enqueue_scripts',  array(__NAMESPACE__ . '\Controller_Init', 'styleFront'));
+        add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
+        add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
+        add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
 
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
     }
@@ -47,7 +47,24 @@ class Controller_Init
     public static function addElements()
     {
         remove_menu_page('index.php');
-        add_menu_page('Mooc', 'Formation SEO', 'read', 'dashboard', array('Controller_Init', 'mooc'), 'dashicons-welcome-learn-more', 6);
+        add_menu_page(
+            'Mooc',// Titre de la page
+            'Formation SEO',// Titre du menu
+            'read',// Capacité requise
+            //slug de devait être 'mooc'
+            'dashboard',// Slug du menu
+            array(__NAMESPACE__ . '\Controller_Init', 'mooc'), // Fonction de rappel
+            'dashicons-welcome-learn-more',// Icône
+            6);// Position
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Quiz', // Titre de la page
+            'Gérer quiz', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-quiz', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Quiz', 'my_spots') // Fonction de rappel pour le contenu du sous-menu
+        );
     }
 
     //Displaying the navigation of the mooc taking into account the lessons completed by the user
@@ -56,7 +73,7 @@ class Controller_Init
         return (new Controller_NavMooc)->display();
     }
 
-    public static function adminBar()
+    public static function adminBar() //should be part of the theme and not this plugin
     {
         $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
@@ -70,7 +87,7 @@ class Controller_Init
         }
     }
 
-    public static function hideElements()
+    public static function hideElements() //should be part of the theme and not this plugin
     {
         $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
@@ -109,7 +126,7 @@ class Controller_Init
         <script type="text/javascript" src="' . plugins_url('/../assets/js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
-    public static function wpLogin($user_login, WP_User $user)
+    public static function wpLogin($user_login, \WP_User $user)
     {
         if (in_array('subscriber', (array) $user->roles)) {
             wp_safe_redirect('wp-admin/admin.php?page=dashboard');
