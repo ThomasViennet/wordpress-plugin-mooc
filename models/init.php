@@ -56,7 +56,6 @@ class Model_Init
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $table_quizzes_questions = $wpdb->prefix . 'mooc_quiz_questions';
             $sql_quizzes_questions = "CREATE TABLE $table_quizzes_questions (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             id_quiz bigint(20) NOT NULL,
