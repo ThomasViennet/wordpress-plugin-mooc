@@ -12,8 +12,8 @@
                         <button type="button" onclick="openEditForm(<?php echo $question->id; ?>)">Éditer</button>
 
                         <!-- Formulaire de suppression -->
-                        <form action="admin.php?page=manage-quiz" method="post" style="display: inline;">
-                            <?php wp_nonce_field('manage_quiz_action', 'manage_quiz_nonce'); ?>
+                        <form action="admin.php?page=manage-question" method="post" style="display: inline;">
+                            <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="<?php echo $question->id; ?>">
                             <button type="submit">Supprimer</button>
@@ -23,10 +23,11 @@
                 <!-- Formulaire d'édition caché -->
                 <tr id="edit-form-<?php echo $question->id; ?>" style="display:none;">
                     <td colspan="2">
-                        <form action="admin.php?page=manage-quiz" method="post">
-                            <?php wp_nonce_field('manage_quiz_action', 'manage_quiz_nonce'); ?>
+                        <form action="admin.php?page=manage-question" method="post">
+                            <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
                             <input type="hidden" name="action" value="edit">
                             <input type="hidden" name="id" value="<?php echo $question->id; ?>">
+                            <!-- Il faudra un CRUD pour les quiz et les afficher ici dynamiquement -->
                             <input type="text" name="question_text" value="<?php echo esc_attr($question->question_text); ?>">
                             <button type="submit">Sauvegarder</button>
                         </form>
@@ -40,12 +41,17 @@
 <?php else : ?>
     <p>Aucune question trouvée.</p>
 <?php endif; ?>
-<form action="admin.php?page=manage-quiz" method="post">
-    <?php wp_nonce_field('manage_quiz_action', 'manage_quiz_nonce'); ?>
-    <input type="hidden" name="quiz_id" value="2">
+<form action="admin.php?page=manage-question" method="post">
+    <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
     <input type="hidden" name="action" value="add">
     <input type="text" name="question_text">
-    <!-- Add other fields for adding a question -->
+    <label for="select-quiz">Quiz:</label>
+
+    <!-- Il faudra un CRUD pour les quiz et les afficher ici dynamiquement -->
+    <select name="quiz_id" id="quiz_id">
+        <!-- <option value="">--Choisir un quiz--</option> -->
+        <option value="1">Certification</option>
+    </select>
     <button type="submit">Ajouter une question</button>
 </form>
 <script>

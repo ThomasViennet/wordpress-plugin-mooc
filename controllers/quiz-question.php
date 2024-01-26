@@ -2,17 +2,17 @@
 
 namespace Mooc\Controllers;
 
-require_once(dirname(__FILE__) . '/../models/quizv2.php');
+require_once(dirname(__FILE__) . '/../models/quiz-question.php');
 
-use Mooc\Models\QuizModel;
+use Mooc\Models\Model_Question;
 
-class QuizController
+class Controller_Question
 {
     private $model;
 
     public function __construct()
     {
-        $this->model = new QuizModel();
+        $this->model = new Model_Question();
     }
 
     // Gérer les requêtes POST et afficher les questions
@@ -20,7 +20,7 @@ class QuizController
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            check_admin_referer('manage_quiz_action', 'manage_quiz_nonce');
+            check_admin_referer('manage_question_action', 'manage_question_nonce');
 
             if (isset($_POST['action'])) {
                 switch ($_POST['action']) {
@@ -44,7 +44,7 @@ class QuizController
     public function displayAllQuestions()
     {
         $questions = $this->model->getAllQuestions();
-        include dirname(__FILE__) . '/../views/quizv2.php'; // Assurez-vous que le chemin est correct
+        include dirname(__FILE__) . '/../views/quiz-question.php'; // Assurez-vous que le chemin est correct
     }
 
     // Ajouter une nouvelle question
@@ -53,9 +53,7 @@ class QuizController
         // Ici, vous devriez valider et nettoyer $postData
         $questionData = [
             'quiz_id' => intval($postData['quiz_id']), // Assurez-vous que 'quiz_id' est envoyé depuis le formulaire
-            'user_id' => get_current_user_id(), // Obtient l'ID de l'utilisateur actuellement connecté
             'question_text' => sanitize_text_field($postData['question_text']),
-            'status_update_date' => current_time('mysql') // Utilisez la date et l'heure actuelles
         ];
 
         // Appel au modèle pour insérer les données

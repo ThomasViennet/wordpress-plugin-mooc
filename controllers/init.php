@@ -8,12 +8,14 @@ namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
 require_once(dirname(__FILE__) . '/nav-mooc.php');
-require_once (dirname(__FILE__) . '/quizv2.php');
+require_once (dirname(__FILE__) . '/quiz-question.php');
+require_once (dirname(__FILE__) . '/quiz-option.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
 use Mooc\Models\Init\Model_Init;
 use Mooc\Controllers\NavMooc\Controller_NavMooc;
-use Mooc\Controllers\QuizController;
+use Mooc\Controllers\Controller_Question;
+use Mooc\Controllers\Controller_Option;
 
 class Controller_Init
 {
@@ -61,17 +63,31 @@ class Controller_Init
 
         add_submenu_page(
             'dashboard', // Slug du menu parent
-            'Quiz', // Titre de la page
-            'Gérer quiz', // Titre du sous-menu
+            'Questions', // Titre de la page
+            'Gérer questions', // Titre du sous-menu
             'manage_options', // Capacité requise
-            'manage-quiz', // Slug du sous-menu
-            array(__NAMESPACE__ . '\Controller_Init', 'manageQuiz') // Fonction de rappel pour le contenu du sous-menu
+            'manage-question', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageQuestion') // Fonction de rappel pour le contenu du sous-menu
+        );
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Options', // Titre de la page
+            'Gérer options', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-option', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageOption') // Fonction de rappel pour le contenu du sous-menu
         );
     }
 
-    public static function manageQuiz()
+    public static function manageQuestion()
     {
-        return (new QuizController)->handleRequest();
+        return (new Controller_Question)->handleRequest();
+    }
+
+    public static function manageOption()
+    {
+        return (new Controller_Option)->handleRequest();
     }
     
     //Displaying the navigation of the mooc taking into account the lessons completed by the user

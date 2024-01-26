@@ -59,9 +59,7 @@ class Model_Init
             $sql_quizzes_questions = "CREATE TABLE $table_quizzes_questions (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             quiz_id bigint(20) NOT NULL,
-            user_id bigint(20) NOT NULL,
             question_text text NOT NULL,
-            status_update_date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
             PRIMARY KEY  (id)
             ) $charset_collate;";
             dbDelta($sql_quizzes_questions);
