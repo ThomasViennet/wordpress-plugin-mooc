@@ -34,6 +34,10 @@ class QuizModel {
         return $this->wpdb->get_row($query);
     }
 
+    public function getAllQuestions() {
+        return $this->wpdb->get_results("SELECT * FROM {$this->table_questions}");
+    }
+
     // Lire toutes les options pour une question spécifique
     public function getOptions($question_id) {
         $query = $this->wpdb->prepare("SELECT * FROM {$this->table_options} WHERE question_id = %d", $question_id);

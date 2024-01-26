@@ -8,10 +8,12 @@ namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
 require_once(dirname(__FILE__) . '/nav-mooc.php');
+require_once (dirname(__FILE__) . '/quizv2.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
 use Mooc\Models\Init\Model_Init;
 use Mooc\Controllers\NavMooc\Controller_NavMooc;
+use Mooc\Controllers\QuizController;
 
 class Controller_Init
 {
@@ -63,10 +65,15 @@ class Controller_Init
             'Gérer quiz', // Titre du sous-menu
             'manage_options', // Capacité requise
             'manage-quiz', // Slug du sous-menu
-            array(__NAMESPACE__ . '\Controller_Quiz', 'my_spots') // Fonction de rappel pour le contenu du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageQuiz') // Fonction de rappel pour le contenu du sous-menu
         );
     }
 
+    public static function manageQuiz()
+    {
+        return (new QuizController)->displayAllQuestions();
+    }
+    
     //Displaying the navigation of the mooc taking into account the lessons completed by the user
     public static function mooc()
     {

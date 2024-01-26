@@ -17,12 +17,15 @@ require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
+// require_once ('controllers/QuizController.php');
 
-use Mooc\Controllers\Init\Controller_Init; //to put in Mooc.php
+
+use Mooc\Controllers\Init\Controller_Init;
 use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Mooc\Controller_Mooc;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
+// use Mooc\Controllers\QuizController;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
