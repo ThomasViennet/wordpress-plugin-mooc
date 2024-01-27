@@ -14,6 +14,7 @@ class Model_Init
 
         $table_quizzes = $wpdb->prefix . 'quizzes';
         $table_lessons = $wpdb->prefix . 'lessons';
+        $table_quizzes_forms = $wpdb->prefix . 'mooc_quizzes_forms';
         $table_quizzes_questions = $wpdb->prefix . 'mooc_quizzes_questions';
         $table_quizzes_options = $wpdb->prefix . 'mooc_quizzes_options';
         $table_quizzes_answers = $wpdb->prefix . 'mooc_quizzes_answers';
@@ -23,7 +24,7 @@ class Model_Init
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $sql = "CREATE TABLE $table_quizzes (
+            $sql_quizzes = "CREATE TABLE $table_quizzes (
             id bigint(20) NOT NULL AUTO_INCREMENT,
             user_id bigint(20) NOT NULL,
             quiz_id bigint(20) NOT NULL,
@@ -33,7 +34,7 @@ class Model_Init
             creation_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
             PRIMARY KEY  (id)
             ) $charset_collate;";
-            dbDelta($sql);
+            dbDelta($sql_quizzes);
         }
 
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_lessons'") != $table_lessons) {
@@ -41,7 +42,7 @@ class Model_Init
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $sql = "CREATE TABLE $table_lessons (
+            $sql_lessons = "CREATE TABLE $table_lessons (
             id bigint(20) NOT NULL AUTO_INCREMENT,
             user_id bigint(20) NOT NULL,
             lesson_id bigint(20) NOT NULL,
@@ -49,7 +50,20 @@ class Model_Init
             creation_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
             PRIMARY KEY  (id)
             ) $charset_collate;";
-            dbDelta($sql);
+            dbDelta($sql_lessons);
+        }
+
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes_forms'") != $table_quizzes_forms) {
+
+            $charset_collate = $wpdb->get_charset_collate();
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+            $sql_forms = "CREATE TABLE $table_quizzes_forms (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            form_name text NOT NULL,
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+            dbDelta($sql_forms);
         }
 
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes_questions'") != $table_quizzes_questions) {
@@ -57,20 +71,21 @@ class Model_Init
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $sql_quizzes_questions = "CREATE TABLE $table_quizzes_questions (
+            $sql_questions = "CREATE TABLE $table_quizzes_questions (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
-            quiz_id bigint(20) NOT NULL,
+            form_id mediumint(9) NOT NULL,
             question_text text NOT NULL,
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (id),
+            FOREIGN KEY (form_id) REFERENCES $table_quizzes_forms(id) ON DELETE CASCADE
             ) $charset_collate;";
-            dbDelta($sql_quizzes_questions);
+            dbDelta($sql_questions);
         }
 
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes_options'") != $table_quizzes_options) {
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $sql_quizzes_options = "CREATE TABLE $table_quizzes_options (
+            $sql_options = "CREATE TABLE $table_quizzes_options (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             question_id mediumint(9) NOT NULL,
             option_text text NOT NULL,
@@ -78,7 +93,7 @@ class Model_Init
             PRIMARY KEY  (id),
             FOREIGN KEY (question_id) REFERENCES $table_quizzes_questions(id) ON DELETE CASCADE
             ) $charset_collate;";
-            dbDelta($sql_quizzes_options);
+            dbDelta($sql_options);
         }
 
 
@@ -86,15 +101,15 @@ class Model_Init
             $charset_collate = $wpdb->get_charset_collate();
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            $sql = "CREATE TABLE $table_quizzes_answers (
+            $sql_answers = "CREATE TABLE $table_quizzes_answers (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             user_id mediumint(9) NOT NULL,
-            quiz_id mediumint(9) NOT NULL,
+            form_id mediumint(9) NOT NULL,
             answers text NOT NULL,
-            quiz_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            form_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
             PRIMARY KEY  (id)
         ) $charset_collate;";
-            dbDelta($sql);
+            dbDelta($sql_answers);
         }
     }
 }

@@ -49,7 +49,7 @@ class Model_Option
         return $this->wpdb->delete($this->table_options, array('id' => $option_id));
     }
 
-    // Fonctions de validation et de nettoyage des données
+    // Data validation and cleansing functions
     private function sanitizeData($data)
     {
         foreach ($data as $key => $value) {

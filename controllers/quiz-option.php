@@ -20,7 +20,6 @@ class Controller_Option
         $this->questionModel = new Model_Question();
     }
 
-    // Gérer les requêtes POST et afficher les options
     public function handleRequest()
     {
 

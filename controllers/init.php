@@ -8,12 +8,14 @@ namespace Mooc\Controllers\Init;
 
 require_once(dirname(__FILE__) . '/../models/init.php');
 require_once(dirname(__FILE__) . '/nav-mooc.php');
-require_once (dirname(__FILE__) . '/quiz-question.php');
-require_once (dirname(__FILE__) . '/quiz-option.php');
+require_once(dirname(__FILE__) . '/quiz-form.php');
+require_once(dirname(__FILE__) . '/quiz-question.php');
+require_once(dirname(__FILE__) . '/quiz-option.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
 use Mooc\Models\Init\Model_Init;
 use Mooc\Controllers\NavMooc\Controller_NavMooc;
+use Mooc\Controllers\Controller_Form;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
 
@@ -52,14 +54,24 @@ class Controller_Init
     {
         remove_menu_page('index.php');
         add_menu_page(
-            'Mooc',// Titre de la page
-            'Formation SEO',// Titre du menu
-            'read',// Capacité requise
+            'Mooc', // Titre de la page
+            'Formation SEO', // Titre du menu
+            'read', // Capacité requise
             //slug de devait être 'mooc'
-            'dashboard',// Slug du menu
+            'dashboard', // Slug du menu
             array(__NAMESPACE__ . '\Controller_Init', 'mooc'), // Fonction de rappel
-            'dashicons-welcome-learn-more',// Icône
-            6);// Position
+            'dashicons-welcome-learn-more', // Icône
+            6
+        ); // Position
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Forms', // Titre de la page
+            'Gérer forms', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-form', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageForm') // Fonction de rappel pour le contenu du sous-menu
+        );
 
         add_submenu_page(
             'dashboard', // Slug du menu parent
@@ -80,6 +92,11 @@ class Controller_Init
         );
     }
 
+    public static function manageForm()
+    {
+        return (new Controller_Form)->handleRequest();
+    }
+
     public static function manageQuestion()
     {
         return (new Controller_Question)->handleRequest();
@@ -89,7 +106,7 @@ class Controller_Init
     {
         return (new Controller_Option)->handleRequest();
     }
-    
+
     //Displaying the navigation of the mooc taking into account the lessons completed by the user
     public static function mooc()
     {

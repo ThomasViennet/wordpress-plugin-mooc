@@ -39,7 +39,7 @@ class Model_Question {
         return $this->wpdb->delete($this->table_questions, array('id' => $question_id));
     }
 
-    // Fonctions de validation et de nettoyage des données
+    // Data validation and cleansing functions
     private function sanitizeData($data) {
         foreach ($data as $key => $value) {
             if (is_int($value)) {

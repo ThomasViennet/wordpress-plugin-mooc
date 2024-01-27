@@ -15,7 +15,6 @@ class Controller_Question
         $this->model = new Model_Question();
     }
 
-    // Gérer les requêtes POST et afficher les questions
     public function handleRequest()
     {
 
@@ -40,27 +39,22 @@ class Controller_Question
         $this->displayAllQuestions();
     }
 
-    // Afficher toutes les questions
     public function displayAllQuestions()
     {
         $questions = $this->model->getAllQuestions();
-        include dirname(__FILE__) . '/../views/quiz-question.php'; // Assurez-vous que le chemin est correct
+        include dirname(__FILE__) . '/../views/quiz-question.php';
     }
 
-    // Ajouter une nouvelle question
     public function addQuestion($postData)
     {
-        // Ici, vous devriez valider et nettoyer $postData
         $questionData = [
-            'quiz_id' => intval($postData['quiz_id']), // Assurez-vous que 'quiz_id' est envoyé depuis le formulaire
+            'quiz_id' => intval($postData['quiz_id']),
             'question_text' => sanitize_text_field($postData['question_text']),
         ];
 
-        // Appel au modèle pour insérer les données
         return $this->model->addQuestion($questionData);
     }
 
-    // Mettre à jour une question
     public function updateQuestion($question_id, $postData)
     {
         $questionData = [
@@ -70,11 +64,8 @@ class Controller_Question
         $this->model->updateQuestion($question_id, $questionData);
     }
 
-    // Supprimer une question
     public function deleteQuestion($question_id)
     {
         return $this->model->deleteQuestion($question_id);
     }
-
-    // Vous pouvez ajouter d'autres méthodes si nécessaire
 }
