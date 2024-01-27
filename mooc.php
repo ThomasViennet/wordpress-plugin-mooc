@@ -17,6 +17,7 @@ require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
+require_once('controllers/quiz-form.php');
 require_once('controllers/quiz-question.php');
 require_once('controllers/quiz-option.php');
 
@@ -26,6 +27,7 @@ use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Mooc\Controller_Mooc;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
+use Mooc\Controllers\Controller_Form;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
 
@@ -89,24 +91,32 @@ function lessonButton()
 }
 
 add_shortcode('mon_quiz', 'generate_quiz_shortcode');
-function generate_quiz_shortcode()
+function generate_quiz_shortcode($atts)
 {
-    // (Assurez-vous que les contrôleurs sont correctement inclus et instanciés)
-    $questionController = new Controller_Question();
-    $optionController = new Controller_Option();
+    $attributes = shortcode_atts(array(
+        'form_name' => '', // Default value if no name is provided
+    ), $atts);
 
-    $questions = $questionController->model->getAllQuestions();
-    $options = $optionController->model->getAllOptions();
+    $formController = new Mooc\Controllers\Controller_Form();
+    $questionController = new Mooc\Controllers\Controller_Question();
+    $optionController = new Mooc\Controllers\Controller_Option();
+
+    $form_id = $formController->model->getFormIdByName($attributes['form_name']);
+    if (!$form_id) {
+        return "Formulaire introuvable.";
+    }
+
+    $questions = $questionController->model->getQuestionsByFormId($form_id);
+    $options = $optionController->model->getOptionsByFormId($form_id);
 
     $user_id = get_current_user_id();
-    $quiz_id = 1; // Obtenez l'ID de quiz approprié ici
 
-    $nonce_field = wp_nonce_field('submit_quiz_' . $quiz_id, '_wpnonce', true, false);
+    $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
 
     $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
     $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
     $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
-    $quizHtml .= "<input type='hidden' name='quiz_id' value='" . esc_attr($quiz_id) . "'>";
+    $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
     $quizHtml .= $nonce_field;
 
     foreach ($questions as $question) {
@@ -129,12 +139,12 @@ function generate_quiz_shortcode()
 function handle_quiz_submission()
 {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_quiz_answers') {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'submit_quiz_' . $_POST['quiz_id'])) {
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'submit_quiz_' . $_POST['form_id'])) {
             wp_die('La vérification de sécurité a échoué.');
         }
 
         $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
-        $quiz_id = isset($_POST['quiz_id']) ? intval($_POST['quiz_id']) : 0;
+        $form_id = isset($_POST['form_id']) ? intval($_POST['form_id']) : 0;
         $answers = [];
 
         foreach ($_POST as $key => $value) {
@@ -143,31 +153,29 @@ function handle_quiz_submission()
             }
         }
 
-        // Ici, insérez les réponses dans la base de données
         global $wpdb;
         $table_name = $wpdb->prefix . 'mooc_quizzes_answers';
 
-        $answers_serialized = maybe_serialize($answers); // Sérialisez le tableau des réponses
+        $answers_serialized = maybe_serialize($answers);
 
         $data = array(
             'user_id' => $user_id,
-            'quiz_id' => $quiz_id,
+            'form_id' => $form_id,
             'answers' => $answers_serialized
         );
 
-        $format = array('%d', '%d', '%s'); // Les formats de vos colonnes : %d pour les nombres et %s pour les chaînes
+        $format = array('%d', '%d', '%s'); 
 
         $wpdb->insert($table_name, $data, $format);
 
         $redirect_url = wp_get_referer();
-        $redirect_url = $redirect_url ? $redirect_url : home_url(); // Fallback à la page d'accueil si aucun referer
+        $redirect_url = $redirect_url ? $redirect_url : home_url();
         wp_redirect($redirect_url);
         exit;
     }
 }
 add_action('admin_post_submit_quiz_answers', 'handle_quiz_submission');
 add_action('admin_post_nopriv_submit_quiz_answers', 'handle_quiz_submission');
-
 
 //WIP
 add_shortcode('quiz', 'quiz');
