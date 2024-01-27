@@ -7,7 +7,7 @@
             </tr>
             <?php foreach ($forms as $form) : ?>
                 <tr>
-                    <td><?php echo esc_html($form->form_name); ?></td>
+                    <td><?php echo esc_html(stripslashes($form->form_name)); ?></td>
                     <td>
                         <button type="button" onclick="openEditForm(<?php echo $form->id; ?>)">Éditer</button>
 
@@ -28,7 +28,7 @@
                             <input type="hidden" name="action" value="edit">
                             <input type="hidden" name="id" value="<?php echo $form->id; ?>">
                             <!-- Il faudra un CRUD pour les quiz et les afficher ici dynamiquement -->
-                            <input type="text" name="form_name" value="<?php echo esc_attr($form->form_name); ?>">
+                            <input type="text" name="form_name" value="<?php echo esc_attr(stripslashes($form->form_name)); ?>">
                             <button type="submit">Sauvegarder</button>
                         </form>
                     </td>

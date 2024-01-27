@@ -9,8 +9,8 @@
             </tr>
             <?php foreach ($options as $option) : ?>
                 <tr>
-                    <td><?php echo htmlspecialchars(esc_html($option->question_text)); ?></td>
-                    <td><?php echo htmlspecialchars(esc_html($option->option_text)); ?></td>
+                    <td><?php echo esc_html(stripslashes($option->question_text)); ?></td>
+                    <td><?php echo esc_html(stripslashes($option->option_text)); ?></td>
                     <td><?php echo $option->is_correct ? 'Vrai' : 'Faux'; ?></td>
                     <td>
                         <button type="button" onclick="openEditForm(<?php echo $option->id; ?>)">Éditer</button>
@@ -34,11 +34,11 @@
                             <select name="question_id" id="question_id">
                                 <?php foreach ($questions as $question) : ?>
                                     <option value="<?php echo $question->id; ?>" <?php echo $question->id == $option->question_id ? 'selected' : ''; ?>>
-                                        <?php echo esc_html($question->question_text); ?>
+                                        <?php echo esc_html(stripslashes($question->question_text)); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="text" name="option_text" value="<?php echo htmlspecialchars(esc_attr($option->option_text)); ?>">
+                            <input type="text" name="option_text" value="<?php echo esc_attr(stripslashes($option->option_text)); ?>">
                             <select name="is_correct" id="is_correct">
                                 <option value="">--Vrai / Faux--</option>
                                 <option value="1" <?php echo $option->is_correct ? 'selected' : ''; ?>>Vrai</option>
@@ -61,7 +61,7 @@
     <input type="hidden" name="action" value="add">
     <select name="question_id" id="question_id">
         <?php foreach ($questions as $question) : ?>
-            <option value="<?php echo $question->id; ?>"><?php echo esc_html($question->question_text); ?></option>
+            <option value="<?php echo $question->id; ?>"><?php echo esc_html(stripslashes($question->question_text)); ?></option>
         <?php endforeach; ?>
     </select>
     <input type="text" name="option_text">
