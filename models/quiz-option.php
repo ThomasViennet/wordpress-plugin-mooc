@@ -58,6 +58,17 @@ class Model_Option
         return $this->wpdb->delete($this->table_options, array('id' => $option_id));
     }
 
+    public function countCorrectAnswersByFormId($form_id)
+    {
+        $query = $this->wpdb->prepare(
+            "SELECT COUNT(*) FROM {$this->table_options} o 
+             JOIN {$this->table_questions} q ON o.question_id = q.id 
+             WHERE q.form_id = %d AND o.is_correct = 1",
+            $form_id
+        );
+        return $this->wpdb->get_var($query);
+    }
+
     // Data validation and cleansing functions
     private function sanitizeData($data)
     {

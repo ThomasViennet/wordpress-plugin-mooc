@@ -111,8 +111,10 @@ function generate_quiz_shortcode($atts)
 
     $user_id = get_current_user_id();
     if ($answerController->checkFormSubmission($user_id, $form_id)) {
-        $result = 'yes bg';
-        return $result;
+        $result = $answerController->evaluateUserAnswers($user_id, $form_id);
+        if ($result) {
+            var_dump($result = $answerController->evaluateUserAnswers($user_id, $form_id));
+        }
     } else {
         $questions = $questionController->model->getQuestionsByFormId($form_id);
         $options = $optionController->model->getOptionsByFormId($form_id);
