@@ -24,4 +24,14 @@ class Model_Answer
         $result = $this->wpdb->get_var($query);
         return $result ? unserialize($result) : false;
     }
+
+    public function deleteUserFormAnswers($user_id, $form_id)
+    {
+        $query = $this->wpdb->prepare(
+            "DELETE FROM {$this->table_answers} WHERE user_id = %d AND form_id = %d",
+            $user_id,
+            $form_id
+        );
+        $this->wpdb->query($query);
+    }
 }

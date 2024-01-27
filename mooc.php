@@ -95,55 +95,86 @@ function lessonButton()
 add_shortcode('mon_quiz', 'generate_quiz_shortcode');
 function generate_quiz_shortcode($atts)
 {
-    $attributes = shortcode_atts(array(
-        'form_name' => '', // Default value if no name is provided
-    ), $atts);
+    if (is_user_logged_in()) {
+        $attributes = shortcode_atts(array(
+            'form_name' => '', // Default value if no name is provided
+        ), $atts);
 
-    $formController = new Controller_Form();
-    $questionController = new Controller_Question();
-    $optionController = new Controller_Option();
-    $answerController = new Controller_Answer();
+        $formController = new Controller_Form();
+        $questionController = new Controller_Question();
+        $optionController = new Controller_Option();
+        $answerController = new Controller_Answer();
 
-    $form_id = $formController->model->getFormIdByName($attributes['form_name']);
-    if (!$form_id) {
-        return "Formulaire introuvable.";
-    }
-
-    $user_id = get_current_user_id();
-    if ($answerController->checkFormSubmission($user_id, $form_id)) {
-        $result = $answerController->evaluateUserAnswers($user_id, $form_id);
-        if ($result) {
-            var_dump($result = $answerController->evaluateUserAnswers($user_id, $form_id));
+        $form_id = $formController->model->getFormIdByName($attributes['form_name']);
+        if (!$form_id) {
+            return "Formulaire introuvable.";
         }
-    } else {
-        $questions = $questionController->model->getQuestionsByFormId($form_id);
-        $options = $optionController->model->getOptionsByFormId($form_id);
 
-        $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
+        $user_id = get_current_user_id();
+        if ($answerController->checkFormSubmission($user_id, $form_id)) {
+            if ($answerController->evaluateUserAnswers($user_id, $form_id)) {
+                echo 'Bravo';
+                // ini_set('display_errors', 1);
+                // error_reporting(E_ALL);
+                // $url = plugins_url('/lib/generate_diploma.php', __FILE__); // Ajustez selon l'emplacement du fichier
+                // return '<img src="' . esc_url($url) . '">';
+            } else {
+                echo 'Vous n\'avez pas obtenu au moins 80% de bonnes réponses.';
+                echo "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
+                echo "<input type='hidden' name='action' value='reset_quiz_answers'>";
+                echo "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
+                echo "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
+                echo "<input type='submit' value='Recommencer'>";
+                echo "</form>";
+            }
+        } else {
 
-        $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
-        $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
-        $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
-        $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
-        $quizHtml .= $nonce_field;
+            $questions = $questionController->model->getQuestionsByFormId($form_id);
+            $options = $optionController->model->getOptionsByFormId($form_id);
 
-        foreach ($questions as $question) {
-            $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
-            $quizHtml .= "<ul class='options'>";
-            foreach ($options as $option) {
-                if ($option->question_id == $question->id) {
-                    $quizHtml .= "<li><input type='radio' name='answer_" . esc_attr($question->id) . "' value='" . esc_attr($option->id) . "'>" . esc_html($option->option_text) . "</li>";
+            $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
+
+            $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
+            $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
+            $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
+            $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
+            $quizHtml .= $nonce_field;
+
+            foreach ($questions as $question) {
+                // <label for="' . htmlspecialchars($question[0]) . htmlspecialchars($option[0]) . '" class="'
+                $quizHtml .= '<h4>' . esc_html($question->question_text) . '</h4>';
+                // $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
+                foreach ($options as $option) {
+                    if ($option->question_id == $question->id) {
+                        $quizHtml .= '<label for="' . esc_attr($question->id) . esc_attr($option->id) . '"><input type="checkbox" name="answer_' . esc_attr($question->id) . '" value="' . esc_attr($option->id) . '" id="' . esc_attr($question->id) . esc_attr($option->id) . '">' . esc_html($option->option_text) . '</label>';
+                    }
                 }
             }
-            $quizHtml .= "</ul>";
+
+            $quizHtml .= "<input type='submit' value='Soumettre'>";
+            $quizHtml .= "</form>";
+
+            return $quizHtml;
         }
-
-        $quizHtml .= "<input type='submit' value='Soumettre'>";
-        $quizHtml .= "</form>";
-
-        return $quizHtml;
+    } else {
+        Controller_Mooc::displayRegistrationForm();
     }
 }
+add_action('admin_post_reset_quiz_answers', 'reset_quiz_answers_handler');
+function reset_quiz_answers_handler()
+{
+    $user_id = $_POST['user_id'];
+    $form_id = $_POST['form_id'];
+
+    $answerController = new Controller_Answer();
+    $answerController->resetUserAnswers($user_id, $form_id);
+
+    $redirect_url = wp_get_referer();
+    $redirect_url = $redirect_url ? $redirect_url : home_url();
+    wp_redirect($redirect_url);
+    exit;
+}
+
 
 function handle_quiz_submission()
 {

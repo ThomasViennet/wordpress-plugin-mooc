@@ -21,10 +21,11 @@ class Controller_Answer
 
     public function checkFormSubmission($user_id, $form_id)
     {
-        if ($this->answerModel->getUserFormAnswers($user_id, $form_id)) {
-            return TRUE;
-        } else {
-            return FALSE;
+        $userAnswers = $this->answerModel->getUserFormAnswers($user_id, $form_id);
+        if ($userAnswers === false) {//$userAnswers can be an array if it's not false
+            return false;
+        } else{
+            return true;
         }
     }
 
@@ -49,13 +50,15 @@ class Controller_Answer
         $totalCorrectAnswers = $this->optionModel->countCorrectAnswersByFormId($form_id);
         $minimumScore = 80;
         $note = ($correctAnswers * 100) / $totalCorrectAnswers;
-        echo 'note : ' . ($correctAnswers * 100) / $totalCorrectAnswers;
-        echo '<br>totalCorrectAnswers : ' . $totalCorrectAnswers;
-        echo '<br>correctAnswers : ' . $correctAnswers;
         if ($minimumScore <= $note) {
-            echo "<br>gg";
+            return TRUE;
         } else {
-            echo '<br>lol';
+            return FALSE;
         }
+    }
+
+    public function resetUserAnswers($user_id, $form_id)
+    {
+        $this->answerModel->deleteUserFormAnswers($user_id, $form_id);
     }
 }

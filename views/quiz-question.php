@@ -8,8 +8,8 @@
             </tr>
             <?php foreach ($questions as $question) : ?>
                 <tr>
-                    <td><?php echo esc_html($question->form_name); ?></td>
-                    <td><?php echo esc_html($question->question_text); ?></td>
+                    <td><?php echo esc_html(htmlspecialchars($question->form_name)); ?></td>
+                    <td><?php echo esc_html(htmlspecialchars($question->question_text)); ?></td>
                     <td>
                         <button type="button" onclick="openEditForm(<?php echo $question->id; ?>)">Éditer</button>
 
@@ -32,11 +32,11 @@
                             <select name="form_id" id="form_id">
                                 <?php foreach ($forms as $form) : ?>
                                     <option value="<?php echo $form->id; ?>" <?php echo $form->id == $question->form_id ? 'selected' : ''; ?>>
-                                        <?php echo esc_html($form->form_name); ?>
+                                        <?php echo esc_html(htmlspecialchars($form->form_name)); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="text" name="question_text" value="<?php echo esc_attr($question->question_text); ?>">
+                            <input type="text" name="question_text" value="<?php echo esc_attr(htmlspecialchars($question->question_text)); ?>">
                             <button type="submit">Sauvegarder</button>
                         </form>
                     </td>
@@ -57,7 +57,7 @@
 
     <select name="form_id" id="form_id">
         <?php foreach ($forms as $form) : ?>
-            <option value="<?php echo $form->id; ?>"><?php echo esc_html($form->form_name); ?></option>
+            <option value="<?php echo $form->id; ?>"><?php echo esc_html(htmlspecialchars($form->form_name)); ?></option>
         <?php endforeach; ?>
     </select>
     <button type="submit">Ajouter une question</button>

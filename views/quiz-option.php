@@ -9,8 +9,8 @@
             </tr>
             <?php foreach ($options as $option) : ?>
                 <tr>
-                    <td><?php echo esc_html($option->question_text); ?></td>
-                    <td><?php echo esc_html($option->option_text); ?></td>
+                    <td><?php echo htmlspecialchars(esc_html($option->question_text)); ?></td>
+                    <td><?php echo htmlspecialchars(esc_html($option->option_text)); ?></td>
                     <td><?php echo $option->is_correct ? 'Vrai' : 'Faux'; ?></td>
                     <td>
                         <button type="button" onclick="openEditForm(<?php echo $option->id; ?>)">Éditer</button>
@@ -38,7 +38,7 @@
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="text" name="option_text" value="<?php echo esc_attr($option->option_text); ?>">
+                            <input type="text" name="option_text" value="<?php echo htmlspecialchars(esc_attr($option->option_text)); ?>">
                             <select name="is_correct" id="is_correct">
                                 <option value="">--Vrai / Faux--</option>
                                 <option value="1" <?php echo $option->is_correct ? 'selected' : ''; ?>>Vrai</option>
