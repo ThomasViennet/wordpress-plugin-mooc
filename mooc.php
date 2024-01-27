@@ -20,6 +20,7 @@ require_once('controllers/mooc.php');
 require_once('controllers/quiz-form.php');
 require_once('controllers/quiz-question.php');
 require_once('controllers/quiz-option.php');
+require_once('controllers/quiz-answer.php');
 
 
 use Mooc\Controllers\Init\Controller_Init;
@@ -30,6 +31,7 @@ use Mooc\Controllers\Lesson\Controller_Lesson;
 use Mooc\Controllers\Controller_Form;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
+use Mooc\Controllers\Controller_Answer;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
@@ -97,43 +99,48 @@ function generate_quiz_shortcode($atts)
         'form_name' => '', // Default value if no name is provided
     ), $atts);
 
-    $formController = new Mooc\Controllers\Controller_Form();
-    $questionController = new Mooc\Controllers\Controller_Question();
-    $optionController = new Mooc\Controllers\Controller_Option();
+    $formController = new Controller_Form();
+    $questionController = new Controller_Question();
+    $optionController = new Controller_Option();
+    $answerController = new Controller_Answer();
 
     $form_id = $formController->model->getFormIdByName($attributes['form_name']);
     if (!$form_id) {
         return "Formulaire introuvable.";
     }
 
-    $questions = $questionController->model->getQuestionsByFormId($form_id);
-    $options = $optionController->model->getOptionsByFormId($form_id);
-
     $user_id = get_current_user_id();
+    if ($answerController->checkFormSubmission($user_id, $form_id)) {
+        $result = 'yes bg';
+        return $result;
+    } else {
+        $questions = $questionController->model->getQuestionsByFormId($form_id);
+        $options = $optionController->model->getOptionsByFormId($form_id);
 
-    $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
+        $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
 
-    $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
-    $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
-    $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
-    $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
-    $quizHtml .= $nonce_field;
+        $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
+        $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
+        $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
+        $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
+        $quizHtml .= $nonce_field;
 
-    foreach ($questions as $question) {
-        $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
-        $quizHtml .= "<ul class='options'>";
-        foreach ($options as $option) {
-            if ($option->question_id == $question->id) {
-                $quizHtml .= "<li><input type='radio' name='answer_" . esc_attr($question->id) . "' value='" . esc_attr($option->id) . "'>" . esc_html($option->option_text) . "</li>";
+        foreach ($questions as $question) {
+            $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
+            $quizHtml .= "<ul class='options'>";
+            foreach ($options as $option) {
+                if ($option->question_id == $question->id) {
+                    $quizHtml .= "<li><input type='radio' name='answer_" . esc_attr($question->id) . "' value='" . esc_attr($option->id) . "'>" . esc_html($option->option_text) . "</li>";
+                }
             }
+            $quizHtml .= "</ul>";
         }
-        $quizHtml .= "</ul>";
+
+        $quizHtml .= "<input type='submit' value='Soumettre'>";
+        $quizHtml .= "</form>";
+
+        return $quizHtml;
     }
-
-    $quizHtml .= "<input type='submit' value='Soumettre'>";
-    $quizHtml .= "</form>";
-
-    return $quizHtml;
 }
 
 function handle_quiz_submission()
@@ -164,7 +171,7 @@ function handle_quiz_submission()
             'answers' => $answers_serialized
         );
 
-        $format = array('%d', '%d', '%s'); 
+        $format = array('%d', '%d', '%s');
 
         $wpdb->insert($table_name, $data, $format);
 
