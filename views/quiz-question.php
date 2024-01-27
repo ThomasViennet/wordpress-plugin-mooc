@@ -2,11 +2,13 @@
     <div class="questions-container">
         <table>
             <tr>
+                <th>Form</th>
                 <th>Question</th>
                 <th>Actions</th>
             </tr>
             <?php foreach ($questions as $question) : ?>
                 <tr>
+                    <td><?php echo esc_html($question->form_name); ?></td>
                     <td><?php echo esc_html($question->question_text); ?></td>
                     <td>
                         <button type="button" onclick="openEditForm(<?php echo $question->id; ?>)">Éditer</button>
@@ -27,7 +29,13 @@
                             <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
                             <input type="hidden" name="action" value="edit">
                             <input type="hidden" name="id" value="<?php echo $question->id; ?>">
-                            <!-- Il faudra un CRUD pour les quiz et les afficher ici dynamiquement -->
+                            <select name="form_id" id="form_id">
+                                <?php foreach ($forms as $form) : ?>
+                                    <option value="<?php echo $form->id; ?>" <?php echo $form->id == $question->form_id ? 'selected' : ''; ?>>
+                                        <?php echo esc_html($form->form_name); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                             <input type="text" name="question_text" value="<?php echo esc_attr($question->question_text); ?>">
                             <button type="submit">Sauvegarder</button>
                         </form>
@@ -45,12 +53,12 @@
     <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
     <input type="hidden" name="action" value="add">
     <input type="text" name="question_text">
-    <label for="select-quiz">Quiz:</label>
+    <label for="form_id">Form:</label>
 
-    <!-- Il faudra un CRUD pour les quiz et les afficher ici dynamiquement -->
-    <select name="quiz_id" id="quiz_id">
-        <!-- <option value="">--Choisir un quiz--</option> -->
-        <option value="1">Certification</option>
+    <select name="form_id" id="form_id">
+        <?php foreach ($forms as $form) : ?>
+            <option value="<?php echo $form->id; ?>"><?php echo esc_html($form->form_name); ?></option>
+        <?php endforeach; ?>
     </select>
     <button type="submit">Ajouter une question</button>
 </form>

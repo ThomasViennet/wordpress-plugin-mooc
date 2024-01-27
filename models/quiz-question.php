@@ -4,12 +4,14 @@ namespace Mooc\Models;
 
 class Model_Question {
     private $wpdb;
+    private $table_forms;
     private $table_questions;
     private $table_options;
 
     public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
+        $this->table_forms = $wpdb->prefix . 'mooc_quizzes_forms';
         $this->table_questions = $wpdb->prefix . 'mooc_quizzes_questions';
         $this->table_options = $wpdb->prefix . 'mooc_quizzes_options';
     }
@@ -26,7 +28,9 @@ class Model_Question {
     }
 
     public function getAllQuestions() {
-        return $this->wpdb->get_results("SELECT * FROM {$this->table_questions}");
+        $query = "SELECT q.*, f.form_name FROM {$this->table_questions} q 
+                  JOIN {$this->table_forms} f ON q.form_id = f.id";
+        return $this->wpdb->get_results($query);
     }
 
     public function updateQuestion($question_id, $data) {

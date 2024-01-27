@@ -3,16 +3,21 @@
 namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/quiz-question.php');
+require_once(dirname(__FILE__) . '/../models/quiz-form.php');
 
+use Mooc\Models\Model_Form;
 use Mooc\Models\Model_Question;
 
 class Controller_Question
 {
+
     public $model;
+    private $formModel;
 
     public function __construct()
     {
         $this->model = new Model_Question();
+        $this->formModel = new Model_Form();
     }
 
     public function handleRequest()
@@ -42,13 +47,14 @@ class Controller_Question
     public function displayAllQuestions()
     {
         $questions = $this->model->getAllQuestions();
+        $forms = $this->formModel->getAllForms();
         include dirname(__FILE__) . '/../views/quiz-question.php';
     }
 
     public function addQuestion($postData)
     {
         $questionData = [
-            'quiz_id' => intval($postData['quiz_id']),
+            'form_id' => intval($postData['form_id']),
             'question_text' => sanitize_text_field($postData['question_text']),
         ];
 
@@ -58,6 +64,7 @@ class Controller_Question
     public function updateQuestion($question_id, $postData)
     {
         $questionData = [
+            'form_id' => intval($postData['form_id']),
             'question_text' => sanitize_text_field($postData['question_text'])
         ];
 
