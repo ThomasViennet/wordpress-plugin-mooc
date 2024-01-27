@@ -142,11 +142,11 @@ function generate_quiz_shortcode($atts)
 
             foreach ($questions as $question) {
                 // <label for="' . htmlspecialchars($question[0]) . htmlspecialchars($option[0]) . '" class="'
-                $quizHtml .= '<h4>' . esc_html($question->question_text) . '</h4>';
+                $quizHtml .= '<h4>' . esc_html(stripslashes($question->question_text)) . '</h4>';
                 // $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
                 foreach ($options as $option) {
                     if ($option->question_id == $question->id) {
-                        $quizHtml .= '<label for="' . esc_attr($question->id) . esc_attr($option->id) . '"><input type="checkbox" name="answer_' . esc_attr($question->id) . '" value="' . esc_attr($option->id) . '" id="' . esc_attr($question->id) . esc_attr($option->id) . '">' . esc_html($option->option_text) . '</label>';
+                        $quizHtml .= '<label for="' . esc_attr($question->id) . esc_attr($option->id) . '"><input type="checkbox" name="answer_' . esc_attr($question->id) . '" value="' . esc_attr($option->id) . '" id="' . esc_attr($question->id) . esc_attr($option->id) . '">' . esc_html(stripslashes($option->option_text)) . '</label>';
                     }
                 }
             }
