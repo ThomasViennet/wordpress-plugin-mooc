@@ -16,6 +16,7 @@ class Model_Init
         $table_lessons = $wpdb->prefix . 'lessons';
         $table_quizzes_questions = $wpdb->prefix . 'mooc_quizzes_questions';
         $table_quizzes_options = $wpdb->prefix . 'mooc_quizzes_options';
+        $table_quizzes_answers = $wpdb->prefix . 'mooc_quizzes_answers';
 
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes'") != $table_quizzes) {
 
@@ -78,6 +79,22 @@ class Model_Init
             FOREIGN KEY (question_id) REFERENCES $table_quizzes_questions(id) ON DELETE CASCADE
             ) $charset_collate;";
             dbDelta($sql_quizzes_options);
+        }
+
+
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_quizzes_answers'") != $table_quizzes_answers) {
+            $charset_collate = $wpdb->get_charset_collate();
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+            $sql = "CREATE TABLE $table_quizzes_answers (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            user_id mediumint(9) NOT NULL,
+            quiz_id mediumint(9) NOT NULL,
+            answers text NOT NULL,
+            quiz_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            PRIMARY KEY  (id)
+        ) $charset_collate;";
+            dbDelta($sql);
         }
     }
 }

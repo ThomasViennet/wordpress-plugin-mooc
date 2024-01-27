@@ -17,7 +17,8 @@ require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
-// require_once ('controllers/QuizController.php');
+require_once('controllers/quiz-question.php');
+require_once('controllers/quiz-option.php');
 
 
 use Mooc\Controllers\Init\Controller_Init;
@@ -25,7 +26,8 @@ use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Mooc\Controller_Mooc;
 use Mooc\Controllers\Quiz\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
-// use Mooc\Controllers\QuizController;
+use Mooc\Controllers\Controller_Question;
+use Mooc\Controllers\Controller_Option;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
@@ -41,8 +43,8 @@ function registration()
             Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
         } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in
-            return 
-            '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
+            return
+                '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
             <div class="wp-block-button wp-block-button-important"><a class="wp-block-button__link has-background-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard">Continuer la formation</a></div>
             </div>';
         }
@@ -73,7 +75,7 @@ function lessonButton()
                 if ($_GET['action'] == 'lesson_button') {
 
                     if ($_POST['lesson_status'] != "Completed") {
-                        Controller_Lesson::saveLessonCompleted($user->ID, $_POST['lesson_slug']);//Use $_POST['lesson_slug'] instead of basename(get_permalink()) to move to next lesson after submitting the form.
+                        Controller_Lesson::saveLessonCompleted($user->ID, $_POST['lesson_slug']); //Use $_POST['lesson_slug'] instead of basename(get_permalink()) to move to next lesson after submitting the form.
                     } else {
                         Controller_Lesson::deleteLessonCompleted($user->ID, basename(get_permalink()));
                     }
@@ -85,6 +87,87 @@ function lessonButton()
         }
     }
 }
+
+add_shortcode('mon_quiz', 'generate_quiz_shortcode');
+function generate_quiz_shortcode()
+{
+    // (Assurez-vous que les contrôleurs sont correctement inclus et instanciés)
+    $questionController = new Controller_Question();
+    $optionController = new Controller_Option();
+
+    $questions = $questionController->model->getAllQuestions();
+    $options = $optionController->model->getAllOptions();
+
+    $user_id = get_current_user_id();
+    $quiz_id = 1; // Obtenez l'ID de quiz approprié ici
+
+    $nonce_field = wp_nonce_field('submit_quiz_' . $quiz_id, '_wpnonce', true, false);
+
+    $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
+    $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
+    $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
+    $quizHtml .= "<input type='hidden' name='quiz_id' value='" . esc_attr($quiz_id) . "'>";
+    $quizHtml .= $nonce_field;
+
+    foreach ($questions as $question) {
+        $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
+        $quizHtml .= "<ul class='options'>";
+        foreach ($options as $option) {
+            if ($option->question_id == $question->id) {
+                $quizHtml .= "<li><input type='radio' name='answer_" . esc_attr($question->id) . "' value='" . esc_attr($option->id) . "'>" . esc_html($option->option_text) . "</li>";
+            }
+        }
+        $quizHtml .= "</ul>";
+    }
+
+    $quizHtml .= "<input type='submit' value='Soumettre'>";
+    $quizHtml .= "</form>";
+
+    return $quizHtml;
+}
+
+function handle_quiz_submission()
+{
+    if (isset($_POST['action']) && $_POST['action'] == 'submit_quiz_answers') {
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'submit_quiz_' . $_POST['quiz_id'])) {
+            wp_die('La vérification de sécurité a échoué.');
+        }
+
+        $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
+        $quiz_id = isset($_POST['quiz_id']) ? intval($_POST['quiz_id']) : 0;
+        $answers = [];
+
+        foreach ($_POST as $key => $value) {
+            if (strpos($key, 'answer_') === 0 && !empty($value)) {
+                $answers[str_replace('answer_', '', $key)] = intval($value);
+            }
+        }
+
+        // Ici, insérez les réponses dans la base de données
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'mooc_quizzes_answers';
+
+        $answers_serialized = maybe_serialize($answers); // Sérialisez le tableau des réponses
+
+        $data = array(
+            'user_id' => $user_id,
+            'quiz_id' => $quiz_id,
+            'answers' => $answers_serialized
+        );
+
+        $format = array('%d', '%d', '%s'); // Les formats de vos colonnes : %d pour les nombres et %s pour les chaînes
+
+        $wpdb->insert($table_name, $data, $format);
+
+        $redirect_url = wp_get_referer();
+        $redirect_url = $redirect_url ? $redirect_url : home_url(); // Fallback à la page d'accueil si aucun referer
+        wp_redirect($redirect_url);
+        exit;
+    }
+}
+add_action('admin_post_submit_quiz_answers', 'handle_quiz_submission');
+add_action('admin_post_nopriv_submit_quiz_answers', 'handle_quiz_submission');
+
 
 //WIP
 add_shortcode('quiz', 'quiz');

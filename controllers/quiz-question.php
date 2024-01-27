@@ -8,7 +8,7 @@ use Mooc\Models\Model_Question;
 
 class Controller_Question
 {
-    private $model;
+    public $model;
 
     public function __construct()
     {

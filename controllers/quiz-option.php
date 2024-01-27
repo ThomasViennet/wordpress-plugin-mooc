@@ -11,7 +11,7 @@ use Mooc\Models\Model_Question;
 
 class Controller_Option
 {
-    private $model;
+    public $model;
     private $questionModel;
 
     public function __construct()
