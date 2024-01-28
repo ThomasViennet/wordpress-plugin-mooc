@@ -157,6 +157,7 @@ function generate_quiz_shortcode($atts)
             return $quizHtml;
         }
     } else {
+        require_once(dirname(__FILE__) . '/views/certification-presentation.php');
         Controller_Mooc::displayRegistrationForm();
     }
 }
