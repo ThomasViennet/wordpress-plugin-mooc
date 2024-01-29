@@ -63,7 +63,7 @@ class Controller_Certificate
 
         if ($this->evaluateUserAnswers($user_id, $form_id)) {
             $font = plugin_dir_path(__FILE__) . '../lib/certificate/Roboto/Roboto-Light.ttf';
-            $fontBold = plugin_dir_path(__FILE__) . '../lib/certificate/Roboto/Roboto-Regular.ttf';
+            $fontBold = plugin_dir_path(__FILE__) . '../lib/certificate/Roboto/Roboto-Bold.ttf';
 
             $image = imagecreatefromjpeg(plugin_dir_path(__FILE__) . '../lib/certificate/certification-SEO-referencime.jpg');
             $color = imagecolorallocate($image, 34, 46, 90);
@@ -86,7 +86,7 @@ class Controller_Certificate
 
             imagettftext($image, 150, 0, 100, 600, $color, $font, $title1);
             imagettftext($image, 150, 0, 100, 800, $color, $font, $title2);
-            imagettftext($image, 100, 0, 100, 1100, $color, $font, $name);
+            imagettftext($image, 100, 0, 100, 1100, $color, $fontBold, $name);
             imagettftext($image, 70, 0, 100, 1300, $color, $font, $description1);
             imagettftext($image, 70, 0, 100, 1400, $color, $fontBold, $description2);
             imagettftext($image, 30, 0, 100, 1700, $color, $font, 'Certificate n° ' . $numCertificate);
