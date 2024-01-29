@@ -11,6 +11,7 @@ require_once(dirname(__FILE__) . '/nav-mooc.php');
 require_once(dirname(__FILE__) . '/quiz-form.php');
 require_once(dirname(__FILE__) . '/quiz-question.php');
 require_once(dirname(__FILE__) . '/quiz-option.php');
+require_once(dirname(__FILE__) . '/quiz-certificate.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
 use Mooc\Models\Init\Model_Init;
@@ -18,6 +19,7 @@ use Mooc\Controllers\NavMooc\Controller_NavMooc;
 use Mooc\Controllers\Controller_Form;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
+use Mooc\Controllers\Controller_Certificate;
 
 class Controller_Init
 {
@@ -41,6 +43,7 @@ class Controller_Init
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
         add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
+        // add_action('init', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
 
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
     }
@@ -192,5 +195,19 @@ class Controller_Init
         $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
 
         return $wp_new_user_notification_email;
+    }
+
+    public static function generate_certificate()
+    {
+        if (isset($_GET['action'], $_GET['user_id'], $_GET['nonce']) && $_GET['action'] == 'generate_certificate') {
+            if (!wp_verify_nonce($_GET['nonce'], 'generate_certificate_nonce')) {
+                wp_die('Action non autorisée.');
+            }
+
+            $user_id = intval($_GET['user_id']);
+            $controller = new Controller_Certificate();
+            $controller->generateCertificate($user_id, 6);
+            exit;
+        }
     }
 }

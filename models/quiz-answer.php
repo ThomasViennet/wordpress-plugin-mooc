@@ -17,12 +17,12 @@ class Model_Answer
     public function getUserFormAnswers($user_id, $form_id)
     {
         $query = $this->wpdb->prepare(
-            "SELECT answers FROM {$this->table_answers} WHERE user_id = %d AND form_id = %d",
+            "SELECT answers, form_submitted FROM {$this->table_answers} WHERE user_id = %d AND form_id = %d",
             $user_id,
             $form_id
         );
-        $result = $this->wpdb->get_var($query);
-        return $result ? unserialize($result) : false;
+        $row = $this->wpdb->get_row($query);
+        return $row ? array('answers' => unserialize($row->answers), 'submitted' => $row->form_submitted) : false;
     }
 
     public function deleteUserFormAnswers($user_id, $form_id)

@@ -21,8 +21,10 @@ require_once('controllers/quiz-form.php');
 require_once('controllers/quiz-question.php');
 require_once('controllers/quiz-option.php');
 require_once('controllers/quiz-answer.php');
+require_once('controllers/quiz-certificate.php');
+require_once('controllers/user.php');
 
-
+use Mooc\Controllers\Controller_User;
 use Mooc\Controllers\Init\Controller_Init;
 use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Mooc\Controller_Mooc;
@@ -32,9 +34,11 @@ use Mooc\Controllers\Controller_Form;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
 use Mooc\Controllers\Controller_Answer;
+use Mooc\Controllers\Controller_Certificate;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
+add_action('init', array(new Controller_Init(), 'generate_certificate'));
 
 
 //Shortcodes
@@ -104,6 +108,7 @@ function generate_quiz_shortcode($atts)
         $questionController = new Controller_Question();
         $optionController = new Controller_Option();
         $answerController = new Controller_Answer();
+        $certificateController = new Controller_Certificate();
 
         $form_id = $formController->model->getFormIdByName($attributes['form_name']);
         if (!$form_id) {
@@ -112,12 +117,8 @@ function generate_quiz_shortcode($atts)
 
         $user_id = get_current_user_id();
         if ($answerController->checkFormSubmission($user_id, $form_id)) {
-            if ($answerController->evaluateUserAnswers($user_id, $form_id)) {
-                echo 'Bravo';
-                // ini_set('display_errors', 1);
-                // error_reporting(E_ALL);
-                // $url = plugins_url('/lib/generate_diploma.php', __FILE__); // Ajustez selon l'emplacement du fichier
-                // return '<img src="' . esc_url($url) . '">';
+            if ($certificateController->evaluateUserAnswers($user_id, $form_id)) {
+                include(dirname(__FILE__) . '/views/certificate-congratulations.php');
             } else {
                 echo 'Vous n\'avez pas obtenu au moins 80% de bonnes réponses.';
                 echo "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
@@ -218,6 +219,20 @@ function handle_quiz_submission()
 add_action('admin_post_submit_quiz_answers', 'handle_quiz_submission');
 add_action('admin_post_nopriv_submit_quiz_answers', 'handle_quiz_submission');
 
+
+add_shortcode('user_profile', 'displayUserProfile');
+function displayUserProfile()
+{
+    if (!empty($_GET['user_id'])) {
+        $user_id = $_GET['user_id'];
+        $userProfileController = new Controller_User();
+        ob_start();
+        $userProfileController->displayUserProfile($user_id);
+        return ob_get_clean();
+    }
+}
+
+
 //WIP
 add_shortcode('quiz', 'quiz');
 function quiz()
@@ -253,3 +268,5 @@ function quiz()
         Controller_Mooc::displayRegistrationForm();
     }
 }
+
+

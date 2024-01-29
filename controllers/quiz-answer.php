@@ -29,34 +29,6 @@ class Controller_Answer
         }
     }
 
-    public function evaluateUserAnswers($user_id, $form_id)
-    {
-        $userAnswers = $this->answerModel->getUserFormAnswers($user_id, $form_id);
-        if (!$userAnswers) {
-            return false; // No answers found
-        }
-
-        $correctAnswers = 0;
-        foreach ($userAnswers as $questionId => $userAnswerId) {
-            $options = $this->optionModel->getOptions($questionId);
-            foreach ($options as $option) {
-                if ($option->id == $userAnswerId && $option->is_correct) {
-                    $correctAnswers++;
-                    break;
-                }
-            }
-        }
-
-        $totalCorrectAnswers = $this->optionModel->countCorrectAnswersByFormId($form_id);
-        $minimumScore = 80;
-        $note = ($correctAnswers * 100) / $totalCorrectAnswers;
-        if ($minimumScore <= $note) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
     public function resetUserAnswers($user_id, $form_id)
     {
         $this->answerModel->deleteUserFormAnswers($user_id, $form_id);
