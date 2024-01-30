@@ -18,34 +18,19 @@ require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
 require_once('controllers/user.php');
-require_once('controllers/quiz-form.php');
-require_once('models/quiz-form.php');
-require_once('models/quiz-question.php');
-require_once('models/quiz-option.php');
-require_once('models/quiz-answer.php');
 
-use Mooc\Controllers\Init\Controller_Init;
+use Mooc\Controllers\Controller_Init;
 use Mooc\Controllers\Controller_User;
-use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
-use Mooc\Controllers\Mooc\Controller_Mooc;
+use Mooc\Controllers\Controller_NavMooc; //to put in Mooc.php
+use Mooc\Controllers\Controller_Mooc;
 use Mooc\Controllers\Controller_Quiz;
-use Mooc\Controllers\Lesson\Controller_Lesson;
-use Mooc\Controllers\Controller_Form;
-
-$formModel = new Mooc\Models\Model_Form();
-$questionModel = new Mooc\Models\Model_Question();
-$optionModel = new Mooc\Models\Model_Option();
-$answerModel = new Mooc\Models\Model_Answer();
-$formController = new Controller_Form($formModel, $questionModel, $optionModel, $answerModel);
+use Mooc\Controllers\Controller_Lesson;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
 add_action('init', array(new Controller_Init(), 'generate_certificate'));// faire autrement ?
-add_action('admin_post_submit_quiz_answers', array($formController, 'handleQuizSubmission'));//mettre dans init
-add_action('admin_post_nopriv_submit_quiz_answers', array($formController, 'handleQuizSubmission'));//mettre dans init
-add_action('admin_post_reset_quiz_answers', array($formController, 'resetUserAnswers'));//mettre dans init
-add_shortcode('mon_quiz', array($formController, 'displayQuiz'));
 
+// Merge shortcodes into controllers/init.php
 //Shortcodes
 add_shortcode('registration', 'registration');
 function registration()

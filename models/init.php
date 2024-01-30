@@ -4,7 +4,7 @@
  * Create a table in the database to record student progress
  */
 
-namespace Mooc\Models\Init;
+namespace Mooc\Models;
 
 class Model_Init
 {

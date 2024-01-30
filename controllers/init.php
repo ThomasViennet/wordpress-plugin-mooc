@@ -4,30 +4,45 @@
  * When the plugin is activated, this class adds the necessary tables and custom templates.
  */
 
-namespace Mooc\Controllers\Init;
+namespace Mooc\Controllers;
 
+require_once(ABSPATH . 'wp-includes/pluggable.php');
+
+//Models
 require_once(dirname(__FILE__) . '/../models/init.php');
+require_once(dirname(__FILE__) . '/../models/quiz-form.php');
+require_once(dirname(__FILE__) . '/../models/quiz-question.php');
+require_once(dirname(__FILE__) . '/../models/quiz-option.php');
+require_once(dirname(__FILE__) . '/../models/quiz-answer.php');
+
+use Mooc\Models\Model_Init;
+use Mooc\Models\Model_Form;
+use Mooc\Models\Model_Question;
+use Mooc\Models\Model_Option;
+use Mooc\Models\Model_Answer;
+
+//Controllers
 require_once(dirname(__FILE__) . '/nav-mooc.php');
 require_once(dirname(__FILE__) . '/quiz-form.php');
 require_once(dirname(__FILE__) . '/quiz-question.php');
 require_once(dirname(__FILE__) . '/quiz-option.php');
 require_once(dirname(__FILE__) . '/quiz-certificate.php');
-require_once(ABSPATH . 'wp-includes/pluggable.php');
 
-use Mooc\Models\Init\Model_Init;
-use Mooc\Controllers\NavMooc\Controller_NavMooc;
-use Mooc\Controllers\Controller_Form;
+use Mooc\Controllers\Controller_NavMooc;
 use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Option;
 use Mooc\Controllers\Controller_Certificate;
+use Mooc\Controllers\Controller_Form;
 
 class Controller_Init
 {
     private static $initiated = false;
+    private static $formController;
 
     public static function init()
     {
         if (!self::$initiated) {
+            self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
             self::initHooks();
         }
     }
@@ -36,6 +51,7 @@ class Controller_Init
     {
         self::$initiated = true;
 
+        //Actions
         add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
         add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
         add_action('admin_enqueue_scripts', array(__NAMESPACE__ . '\Controller_Init', 'styleAdmin'));
@@ -44,8 +60,15 @@ class Controller_Init
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
         add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
         // add_action('init', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
+        add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
+        add_action('admin_post_nopriv_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
+        add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
 
+        //Filters
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
+
+        //Shortcodes
+        add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
     }
 
     public static function createTables()
@@ -97,7 +120,7 @@ class Controller_Init
 
     public static function manageForm()
     {
-        return (new Controller_Form)->handleRequest();
+        return self::$formController->handleRequest();
     }
 
     public static function manageQuestion()

@@ -4,7 +4,7 @@
  * Mooc
  */
 
-namespace Mooc\Controllers\Mooc;
+namespace Mooc\Controllers;
 
 class Controller_Mooc
 {

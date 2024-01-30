@@ -4,13 +4,13 @@
  * Dashboard of a mooc student
  */
 
-namespace Mooc\Controllers\NavMooc;
+namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/lesson.php');
 require_once(dirname(__FILE__) . '/../models/quiz.php');
 
-use Mooc\Models\Lesson\Model_Lesson;
-use Mooc\Models\Quiz\Model_Quiz;
+use Mooc\Models\Model_Lesson;
+use Mooc\Models\Model_Quiz;
 
 class Controller_NavMooc
 {

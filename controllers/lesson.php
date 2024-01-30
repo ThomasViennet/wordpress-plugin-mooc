@@ -4,11 +4,11 @@
  * Action of the button to complete a lesson
  */
 
-namespace Mooc\Controllers\Lesson;
+namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/lesson.php');
 
-use Mooc\Models\Lesson\Model_Lesson;
+use Mooc\Models\Model_Lesson;
 
 class Controller_Lesson
 {

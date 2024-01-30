@@ -1,6 +1,6 @@
 <?php
 
-namespace Mooc\Models\Lesson;
+namespace Mooc\Models;
 
 class Model_Lesson
 {
