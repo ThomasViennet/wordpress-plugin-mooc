@@ -134,7 +134,7 @@ class Controller_Form
             $quizHtml .= '<h4>' . esc_html($question->question_text) . '</h4>';
             foreach ($options as $option) {
                 if ($option->question_id == $question->id) {
-                    $quizHtml .= '<label><input type="checkbox" name="answer_' . esc_attr($question->id) . '" value="' . esc_attr($option->id) . '">' . esc_html($option->option_text) . '</label><br>';
+                    $quizHtml .= '<label><input type="checkbox" name="answer_' . esc_attr($question->id) . '[]" value="' . esc_attr($option->id) . '">' . esc_html($option->option_text) . '</label><br>';
                     //lorsqu'un utilisateur choisi plusieurs case à cocher ça n'enregistre pas tous les coix
                 }
             }
@@ -159,10 +159,12 @@ class Controller_Form
             $answers = [];
 
             foreach ($_POST as $key => $value) {
-                if (strpos($key, 'answer_') === 0 && !empty($value)) {
+                if (strpos($key, 'answer_') === 0 && is_array($value)) {
                     $question_id = str_replace('answer_', '', $key);
-                    $answer_id = intval($value);
-                    $answers[$question_id] = $answer_id;
+                    foreach ($value as $answer_id) {
+                        $answer_id = intval($answer_id);
+                        $answers[$question_id][] = $answer_id;
+                    }
                 }
             }
 

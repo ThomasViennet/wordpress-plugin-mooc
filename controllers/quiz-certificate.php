@@ -28,41 +28,40 @@ class Controller_Certificate
             return false;
         }
 
-        $userAnswers = $userAnswersData['answers']; // Utilisez la clé 'answers' pour obtenir les réponses
+        $userAnswers = $userAnswersData['answers'];
         $correctAnswers = 0;
-        foreach ($userAnswers as $questionId => $userAnswerId) {
+
+        foreach ($userAnswers as $questionId => $userAnswersArray) {
             $options = $this->optionModel->getOptions($questionId);
             foreach ($options as $option) {
-                echo '$option->id : ' . $option->id . '<br>
-                $userAnswerId :' . $userAnswerId . '<br>
-                $option->is_correct :' . $option->is_correct . '<br>';
-                if ($option->id == $userAnswerId && $option->is_correct) {
-                    $correctAnswers++;
-                    echo '$correctAnswers : ' . $correctAnswers . '<br>';
-                    // break;
+                if (in_array($option->id, $userAnswersArray)) {
+                    if ($option->is_correct) {
+                        $correctAnswers++; // Bonne réponse
+                    } else {
+                        $correctAnswers--; // Mauvaise réponse
+                    }
                 }
-                echo '$correctAnswers : ' . $correctAnswers . '<br>';
             }
         }
 
         $totalCorrectAnswers = $this->optionModel->countCorrectAnswersByFormId($form_id);
-        $minimumScore = 50;
+        $minimumScore = 80;
         $note = ($correctAnswers * 100) / $totalCorrectAnswers;
         if ($minimumScore <= $note) {
-            echo '
-            $totalCorrectAnswers : ' . $totalCorrectAnswers . '<br>
-            $correctAnswers : ' . $correctAnswers . '<br>
-            $minimumScore : ' . $minimumScore . '<br>
-            $note : ' . $note . '<br>
-            ';
+            // echo '
+            // $totalCorrectAnswers : ' . $totalCorrectAnswers . '<br>
+            // $correctAnswers : ' . $correctAnswers . '<br>
+            // $minimumScore : ' . $minimumScore . '<br>
+            // $note : ' . $note . '<br>
+            // ';
             return true;
         } else {
-            echo '
-            $totalCorrectAnswers : ' . $totalCorrectAnswers . '<br>
-            $correctAnswers : ' . $correctAnswers . '<br>
-            $minimumScore : ' . $minimumScore . '<br>
-            $note : ' . $note . '<br>
-            ';
+            // echo '
+            // $totalCorrectAnswers : ' . $totalCorrectAnswers . '<br>
+            // $correctAnswers : ' . $correctAnswers . '<br>
+            // $minimumScore : ' . $minimumScore . '<br>
+            // $note : ' . $note . '<br>
+            // ';
             return false;
         }
     }

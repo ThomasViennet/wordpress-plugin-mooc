@@ -42,8 +42,8 @@ class Controller_Init
     public static function init()
     {
         if (!self::$initiated) {
-            self::initHooks();
             self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
+            self::initHooks();
         }
     }
 
