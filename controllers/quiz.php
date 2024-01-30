@@ -5,12 +5,13 @@
  * Use quiz_id when CRUD for quizzes will be ready
  */
 
-namespace Mooc\Controllers\Quiz;
+namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/quiz.php');
 require_once(dirname(__FILE__) . '/../lib/quiz.php');
 
-use Mooc\Models\Quiz\Model_Quiz;
+
+use Mooc\Models\Model_Quiz;
 use Mooc\Lib\Quiz\Lib_Quiz;
 
 class Controller_Quiz
@@ -30,17 +31,17 @@ class Controller_Quiz
                 $userAllowedToRespond = TRUE;
                 $answers = ['null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null'];
             }
-            require(dirname(__FILE__) . '/../views/quizzes/chap-' . $quiz_name . '.php');
-            require(dirname(__FILE__) . '/../views/quizzes/layout-quizzes.php'); //move to each views
+            require(dirname(__FILE__) . '/../views/front/quizzes/chap-' . $quiz_name . '.php');
+            require(dirname(__FILE__) . '/../views/front/quizzes/layout-quizzes.php'); //move to each views
         } else {
-            require_once(dirname(__FILE__) . '/../views/registration.php');
+            require_once(dirname(__FILE__) . '/../views/front/registration.php');
         }
     }
 
     //WIP
     public static function saveAnswers(int $user_id, int $quiz_id, string $quiz_name, array $quiz_answers)
     {
-        require(dirname(__FILE__) . '/../views/quizzes/chap-' . $quiz_name . '.php'); //Need data like this until CRUD Quiz has done
+        require(dirname(__FILE__) . '/../views/front/quizzes/chap-' . $quiz_name . '.php'); //Need data like this until CRUD Quiz has done
 
         $lib_quiz = new Lib_Quiz();
         $note = 0;
@@ -57,7 +58,7 @@ class Controller_Quiz
                     } elseif (!$lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) && $lib_quiz->isChecked($option, $quiz_answers[$key])) {
                         $note--;
                     }
-        
+
                     //Count the number of correct answers
                     if ($option[4]) {
                         $totalPoints++;

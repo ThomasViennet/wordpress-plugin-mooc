@@ -17,15 +17,19 @@ require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
+require_once('controllers/user.php');
 
-use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
-use Mooc\Controllers\Mooc\Controller_Mooc;
-use Mooc\Controllers\Quiz\Controller_Quiz;
-use Mooc\Controllers\Lesson\Controller_Lesson;
+use Mooc\Controllers\Controller_Init;
+use Mooc\Controllers\Controller_User;
+use Mooc\Controllers\Controller_NavMooc; //to put in Mooc.php
+use Mooc\Controllers\Controller_Mooc;
+use Mooc\Controllers\Controller_Quiz;
+use Mooc\Controllers\Controller_Lesson;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
-add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
+add_action('init', array(new Controller_Init(), 'init')); //Contains filters actions and shortcodes
 
+// Merge shortcodes into controllers/init.php
 //Shortcodes
 add_shortcode('registration', 'registration');
 function registration()
@@ -33,11 +37,12 @@ function registration()
     if (!is_admin()) {
         if (!is_user_logged_in()) {
             ob_start();
+            echo "lol";
             Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
         } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in
-            return 
-            '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
+            return
+                '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
             <div class="wp-block-button wp-block-button-important"><a class="wp-block-button__link has-background-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard">Continuer la formation</a></div>
             </div>';
         }
@@ -68,7 +73,7 @@ function lessonButton()
                 if ($_GET['action'] == 'lesson_button') {
 
                     if ($_POST['lesson_status'] != "Completed") {
-                        Controller_Lesson::saveLessonCompleted($user->ID, $_POST['lesson_slug']);//Use $_POST['lesson_slug'] instead of basename(get_permalink()) to move to next lesson after submitting the form.
+                        Controller_Lesson::saveLessonCompleted($user->ID, $_POST['lesson_slug']); //Use $_POST['lesson_slug'] instead of basename(get_permalink()) to move to next lesson after submitting the form.
                     } else {
                         Controller_Lesson::deleteLessonCompleted($user->ID, basename(get_permalink()));
                     }
@@ -80,6 +85,19 @@ function lessonButton()
         }
     }
 }
+
+add_shortcode('user_profile', 'displayUserProfile');
+function displayUserProfile()
+{
+    if (!empty($_GET['user_id'])) {
+        $user_id = $_GET['user_id'];
+        $userProfileController = new Controller_User();
+        ob_start();
+        $userProfileController->displayUserProfile($user_id);
+        return ob_get_clean();
+    }
+}
+
 
 //WIP
 add_shortcode('quiz', 'quiz');

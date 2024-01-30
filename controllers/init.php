@@ -4,22 +4,45 @@
  * When the plugin is activated, this class adds the necessary tables and custom templates.
  */
 
-// namespace Mooc\Controllers\Init;
+namespace Mooc\Controllers;
 
-require_once(dirname(__FILE__) . '/../models/init.php');
-require_once(dirname(__FILE__) . '/nav-mooc.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 
-use Mooc\Models\Init\Model_Init;
-use Mooc\Controllers\NavMooc\Controller_NavMooc;
+//Models
+require_once(dirname(__FILE__) . '/../models/init.php');
+require_once(dirname(__FILE__) . '/../models/quiz-form.php');
+require_once(dirname(__FILE__) . '/../models/quiz-question.php');
+require_once(dirname(__FILE__) . '/../models/quiz-option.php');
+require_once(dirname(__FILE__) . '/../models/quiz-answer.php');
+
+use Mooc\Models\Model_Init;
+use Mooc\Models\Model_Form;
+use Mooc\Models\Model_Question;
+use Mooc\Models\Model_Option;
+use Mooc\Models\Model_Answer;
+
+//Controllers
+require_once(dirname(__FILE__) . '/nav-mooc.php');
+require_once(dirname(__FILE__) . '/quiz-form.php');
+require_once(dirname(__FILE__) . '/quiz-question.php');
+require_once(dirname(__FILE__) . '/quiz-option.php');
+require_once(dirname(__FILE__) . '/quiz-certificate.php');
+
+use Mooc\Controllers\Controller_NavMooc;
+use Mooc\Controllers\Controller_Question;
+use Mooc\Controllers\Controller_Option;
+use Mooc\Controllers\Controller_Certificate;
+use Mooc\Controllers\Controller_Form;
 
 class Controller_Init
 {
     private static $initiated = false;
+    private static $formController;
 
     public static function init()
     {
         if (!self::$initiated) {
+            self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
             self::initHooks();
         }
     }
@@ -27,16 +50,26 @@ class Controller_Init
     private static function initHooks()
     {
         self::$initiated = true;
+        
+        //Actions
+        add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
+        add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
+        add_action('admin_enqueue_scripts', array(__NAMESPACE__ . '\Controller_Init', 'styleAdmin'));
+        add_action('wp_enqueue_scripts',  array(__NAMESPACE__ . '\Controller_Init', 'styleFront'));
+        add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
+        add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
+        add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
+        add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
+        add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
+        add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
+        add_action('admin_post_nopriv_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
+        add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
 
-        add_action('wp_before_admin_bar_render', array('Controller_Init', 'adminBar'));
-        add_action('admin_bar_menu', array('Controller_Init', 'addLinkAdminBar'));
-        add_action('admin_enqueue_scripts', array('Controller_Init', 'styleAdmin'));
-        add_action('wp_enqueue_scripts',  array('Controller_Init', 'styleFront'));
-        add_action('admin_menu', array('Controller_Init', 'hideElements'));
-        add_action('admin_menu', array('Controller_Init', 'addElements'));
-        add_action('wp_login', array('Controller_Init', 'wpLogin'), 10, 2);
-
+        //Filters
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
+
+        //Shortcodes
+        add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
     }
 
     public static function createTables()
@@ -47,7 +80,58 @@ class Controller_Init
     public static function addElements()
     {
         remove_menu_page('index.php');
-        add_menu_page('Mooc', 'Formation SEO', 'read', 'dashboard', array('Controller_Init', 'mooc'), 'dashicons-welcome-learn-more', 6);
+        add_menu_page(
+            'Mooc', // Titre de la page
+            'Formation SEO', // Titre du menu
+            'read', // Capacité requise
+            //slug de devait être 'mooc'
+            'dashboard', // Slug du menu
+            array(__NAMESPACE__ . '\Controller_Init', 'mooc'), // Fonction de rappel
+            'dashicons-welcome-learn-more', // Icône
+            6
+        ); // Position
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Forms', // Titre de la page
+            'Gérer forms', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-form', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageForm') // Fonction de rappel pour le contenu du sous-menu
+        );
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Questions', // Titre de la page
+            'Gérer questions', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-question', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageQuestion') // Fonction de rappel pour le contenu du sous-menu
+        );
+
+        add_submenu_page(
+            'dashboard', // Slug du menu parent
+            'Options', // Titre de la page
+            'Gérer options', // Titre du sous-menu
+            'manage_options', // Capacité requise
+            'manage-option', // Slug du sous-menu
+            array(__NAMESPACE__ . '\Controller_Init', 'manageOption') // Fonction de rappel pour le contenu du sous-menu
+        );
+    }
+
+    public static function manageForm()
+    {
+        return self::$formController->handleRequest();
+    }
+
+    public static function manageQuestion()
+    {
+        return (new Controller_Question)->handleRequest();
+    }
+
+    public static function manageOption()
+    {
+        return (new Controller_Option)->handleRequest();
     }
 
     //Displaying the navigation of the mooc taking into account the lessons completed by the user
@@ -56,7 +140,7 @@ class Controller_Init
         return (new Controller_NavMooc)->display();
     }
 
-    public static function adminBar()
+    public static function adminBar() //should be part of the theme and not this plugin
     {
         $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
@@ -70,7 +154,7 @@ class Controller_Init
         }
     }
 
-    public static function hideElements()
+    public static function hideElements() //should be part of the theme and not this plugin
     {
         $user = wp_get_current_user();
         if (in_array('subscriber', (array) $user->roles)) {
@@ -109,7 +193,7 @@ class Controller_Init
         <script type="text/javascript" src="' . plugins_url('/../assets/js/nav-mooc.js', __FILE__) . '"></script>';
     }
 
-    public static function wpLogin($user_login, WP_User $user)
+    public static function wpLogin($user_login, \WP_User $user)
     {
         if (in_array('subscriber', (array) $user->roles)) {
             wp_safe_redirect('wp-admin/admin.php?page=dashboard');
@@ -135,5 +219,18 @@ class Controller_Init
         $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
 
         return $wp_new_user_notification_email;
+    }
+
+    public static function generate_certificate()
+    {
+        if (isset($_POST['user_id'], $_POST['form_id'], $_POST['certificate_nonce_field']) && wp_verify_nonce($_POST['certificate_nonce_field'], 'generate_certificate_nonce')) {
+            $user_id = intval($_POST['user_id']);
+            $form_id = intval($_POST['form_id']);
+            $controller = new Controller_Certificate();
+            $controller->generateCertificate($user_id, $form_id);
+            exit;
+        } else {
+            wp_die('Vérification de sécurité échouée.');
+        }
     }
 }

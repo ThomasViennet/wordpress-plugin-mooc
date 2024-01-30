@@ -1,6 +1,8 @@
 <?php
-
-namespace Mooc\Models\Quiz;
+/**
+ * useful for the old way of working, to be deleted after refactoring the quizzes in the chapters
+ */
+namespace Mooc\Models;
 
 class Model_Quiz
 {

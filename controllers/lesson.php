@@ -4,11 +4,11 @@
  * Action of the button to complete a lesson
  */
 
-namespace Mooc\Controllers\Lesson;
+namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/lesson.php');
 
-use Mooc\Models\Lesson\Model_Lesson;
+use Mooc\Models\Model_Lesson;
 
 class Controller_Lesson
 {
@@ -24,8 +24,7 @@ class Controller_Lesson
 
         //add the slug of next lesson to the target of the button
         // $nextLesson_slug = (new Model_Lesson())->getNextLessonSlug($lesson_slug);
-        
-        require_once(dirname(__FILE__) . '/../views/button-lesson.php');
+        require_once(dirname(__FILE__) . '/../views/front/button-lesson.php');
     }
 
     public static function saveLessonCompleted(int $user_id, string $lesson_slug)
