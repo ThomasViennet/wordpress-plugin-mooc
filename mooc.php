@@ -17,29 +17,34 @@ require_once('controllers/quiz.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
-require_once('controllers/quiz-form.php');
-require_once('controllers/quiz-question.php');
-require_once('controllers/quiz-option.php');
-require_once('controllers/quiz-answer.php');
-require_once('controllers/quiz-certificate.php');
 require_once('controllers/user.php');
+require_once('controllers/quiz-form.php');
+require_once('models/quiz-form.php');
+require_once('models/quiz-question.php');
+require_once('models/quiz-option.php');
+require_once('models/quiz-answer.php');
 
-use Mooc\Controllers\Controller_User;
 use Mooc\Controllers\Init\Controller_Init;
+use Mooc\Controllers\Controller_User;
 use Mooc\Controllers\NavMooc\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Mooc\Controller_Mooc;
-use Mooc\Controllers\Quiz\Controller_Quiz;
+use Mooc\Controllers\Controller_Quiz;
 use Mooc\Controllers\Lesson\Controller_Lesson;
 use Mooc\Controllers\Controller_Form;
-use Mooc\Controllers\Controller_Question;
-use Mooc\Controllers\Controller_Option;
-use Mooc\Controllers\Controller_Answer;
-use Mooc\Controllers\Controller_Certificate;
+
+$formModel = new Mooc\Models\Model_Form();
+$questionModel = new Mooc\Models\Model_Question();
+$optionModel = new Mooc\Models\Model_Option();
+$answerModel = new Mooc\Models\Model_Answer();
+$formController = new Controller_Form($formModel, $questionModel, $optionModel, $answerModel);
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
 add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
-add_action('init', array(new Controller_Init(), 'generate_certificate'));
-
+add_action('init', array(new Controller_Init(), 'generate_certificate'));// faire autrement ?
+add_action('admin_post_submit_quiz_answers', array($formController, 'handleQuizSubmission'));//mettre dans init
+add_action('admin_post_nopriv_submit_quiz_answers', array($formController, 'handleQuizSubmission'));//mettre dans init
+add_action('admin_post_reset_quiz_answers', array($formController, 'resetUserAnswers'));//mettre dans init
+add_shortcode('mon_quiz', array($formController, 'displayQuiz'));
 
 //Shortcodes
 add_shortcode('registration', 'registration');
@@ -96,130 +101,6 @@ function lessonButton()
     }
 }
 
-add_shortcode('mon_quiz', 'generate_quiz_shortcode');
-function generate_quiz_shortcode($atts)
-{
-    if (is_user_logged_in()) {
-        $attributes = shortcode_atts(array(
-            'form_name' => '', // Default value if no name is provided
-        ), $atts);
-
-        $formController = new Controller_Form();
-        $questionController = new Controller_Question();
-        $optionController = new Controller_Option();
-        $answerController = new Controller_Answer();
-        $certificateController = new Controller_Certificate();
-
-        $form_id = $formController->model->getFormIdByName($attributes['form_name']);
-        if (!$form_id) {
-            return "Formulaire introuvable.";
-        }
-
-        $user_id = get_current_user_id();
-        if ($answerController->checkFormSubmission($user_id, $form_id)) {
-            if ($certificateController->evaluateUserAnswers($user_id, $form_id)) {
-                include(dirname(__FILE__) . '/views/certificate-congratulations.php');
-            } else {
-                echo 'Vous n\'avez pas obtenu au moins 80% de bonnes réponses.';
-                echo "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
-                echo "<input type='hidden' name='action' value='reset_quiz_answers'>";
-                echo "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
-                echo "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
-                echo "<input type='submit' value='Recommencer'>";
-                echo "</form>";
-            }
-        } else {
-
-            $questions = $questionController->model->getQuestionsByFormId($form_id);
-            $options = $optionController->model->getOptionsByFormId($form_id);
-
-            $nonce_field = wp_nonce_field('submit_quiz_' . $form_id, '_wpnonce', true, false);
-
-            $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
-            $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
-            $quizHtml .= "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
-            $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
-            $quizHtml .= $nonce_field;
-
-            foreach ($questions as $question) {
-                // <label for="' . htmlspecialchars($question[0]) . htmlspecialchars($option[0]) . '" class="'
-                $quizHtml .= '<h4>' . esc_html(stripslashes($question->question_text)) . '</h4>';
-                // $quizHtml .= "<div class='question'>" . esc_html($question->question_text) . "</div>";
-                foreach ($options as $option) {
-                    if ($option->question_id == $question->id) {
-                        $quizHtml .= '<label for="' . esc_attr($question->id) . esc_attr($option->id) . '"><input type="checkbox" name="answer_' . esc_attr($question->id) . '" value="' . esc_attr($option->id) . '" id="' . esc_attr($question->id) . esc_attr($option->id) . '">' . esc_html(stripslashes($option->option_text)) . '</label>';
-                    }
-                }
-            }
-
-            $quizHtml .= "<input type='submit' value='Soumettre'>";
-            $quizHtml .= "</form>";
-
-            return $quizHtml;
-        }
-    } else {
-        require_once(dirname(__FILE__) . '/views/certification-presentation.php');
-        Controller_Mooc::displayRegistrationForm();
-    }
-}
-add_action('admin_post_reset_quiz_answers', 'reset_quiz_answers_handler');
-function reset_quiz_answers_handler()
-{
-    $user_id = $_POST['user_id'];
-    $form_id = $_POST['form_id'];
-
-    $answerController = new Controller_Answer();
-    $answerController->resetUserAnswers($user_id, $form_id);
-
-    $redirect_url = wp_get_referer();
-    $redirect_url = $redirect_url ? $redirect_url : home_url();
-    wp_redirect($redirect_url);
-    exit;
-}
-
-
-function handle_quiz_submission()
-{
-    if (isset($_POST['action']) && $_POST['action'] == 'submit_quiz_answers') {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'submit_quiz_' . $_POST['form_id'])) {
-            wp_die('La vérification de sécurité a échoué.');
-        }
-
-        $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
-        $form_id = isset($_POST['form_id']) ? intval($_POST['form_id']) : 0;
-        $answers = [];
-
-        foreach ($_POST as $key => $value) {
-            if (strpos($key, 'answer_') === 0 && !empty($value)) {
-                $answers[str_replace('answer_', '', $key)] = intval($value);
-            }
-        }
-
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'mooc_quizzes_answers';
-
-        $answers_serialized = maybe_serialize($answers);
-
-        $data = array(
-            'user_id' => $user_id,
-            'form_id' => $form_id,
-            'answers' => $answers_serialized
-        );
-
-        $format = array('%d', '%d', '%s');
-
-        $wpdb->insert($table_name, $data, $format);
-
-        $redirect_url = wp_get_referer();
-        $redirect_url = $redirect_url ? $redirect_url : home_url();
-        wp_redirect($redirect_url);
-        exit;
-    }
-}
-add_action('admin_post_submit_quiz_answers', 'handle_quiz_submission');
-add_action('admin_post_nopriv_submit_quiz_answers', 'handle_quiz_submission');
-
-
 add_shortcode('user_profile', 'displayUserProfile');
 function displayUserProfile()
 {
@@ -268,5 +149,3 @@ function quiz()
         Controller_Mooc::displayRegistrationForm();
     }
 }
-
-

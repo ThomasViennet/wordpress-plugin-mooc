@@ -25,6 +25,21 @@ class Model_Answer
         return $row ? array('answers' => unserialize($row->answers), 'submitted' => $row->form_submitted) : false;
     }
 
+    public function saveAnswers($user_id, $form_id, $answers)
+    {
+        $answers_serialized = maybe_serialize($answers);
+
+        $data = [
+            'user_id' => $user_id,
+            'form_id' => $form_id,
+            'answers' => $answers_serialized
+        ];
+
+        $format = ['%d', '%d', '%s'];
+
+        $this->wpdb->replace($this->table_answers, $data, $format);
+    }
+
     public function deleteUserFormAnswers($user_id, $form_id)
     {
         $query = $this->wpdb->prepare(

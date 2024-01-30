@@ -5,17 +5,17 @@
  * Use quiz_id when CRUD for quizzes will be ready
  */
 
-namespace Mooc\Controllers\Quiz;
+namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/quiz.php');
 require_once(dirname(__FILE__) . '/../lib/quiz.php');
 
-use Mooc\Models\Quiz\Model_Quiz;
+
+use Mooc\Models\Model_Quiz;
 use Mooc\Lib\Quiz\Lib_Quiz;
 
 class Controller_Quiz
 {
-    //START -Quizzes within chapters currently work. These quizzes will have to be migrated to use CRUD.
     public static function viewQuiz(int $user_id, string $quiz_name)
     {
         if (!empty($user_id)) {
@@ -58,7 +58,7 @@ class Controller_Quiz
                     } elseif (!$lib_quiz->isCorrectAnswer($option, $quiz_answers[$key]) && $lib_quiz->isChecked($option, $quiz_answers[$key])) {
                         $note--;
                     }
-        
+
                     //Count the number of correct answers
                     if ($option[4]) {
                         $totalPoints++;
@@ -83,6 +83,4 @@ class Controller_Quiz
     {
         // require_once(dirname(__FILE__) . '/../views/dashboard.php');//useless ?
     }
-
-    //END -Quizzes within chapters currently work. These quizzes will have to be migrated to use CRUD.
 }
