@@ -16,10 +16,15 @@ if (!empty($alert)) {
     <div class="user-certificate">
         <h2>Certification</h2>
         <!-- Utilisation d'une boucle pour afficher tous les noms de formulaires -->
-        Connaissances théoriques avancées en référencement naturel -  <a href="<?php echo esc_url(add_query_arg(['action' => 'generate_certificate', 'user_id' => $user_id, 'nonce' => wp_create_nonce('generate_certificate_nonce')])); ?>">
-            Générer le certificat
-        </a>
-      
+        Connaissances théoriques avancées en référencement naturel
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+            <input type="hidden" name="action" value="generate_certificate">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            <input type="hidden" name="form_id" value="6">
+            <?php wp_nonce_field('generate_certificate_nonce', 'certificate_nonce_field'); ?>
+            <input type="submit" value="Générer le certificat">
+        </form>
+
     </div>
 <?php else : ?>
     <p>Données de l'utilisateur non disponibles.</p>

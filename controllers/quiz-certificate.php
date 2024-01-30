@@ -46,7 +46,7 @@ class Controller_Certificate
         }
 
         $totalCorrectAnswers = $this->optionModel->countCorrectAnswersByFormId($form_id);
-        $minimumScore = 80;
+        $minimumScore = 50;
         $note = ($correctAnswers * 100) / $totalCorrectAnswers;
         if ($minimumScore <= $note) {
             echo '
@@ -55,7 +55,7 @@ class Controller_Certificate
             $minimumScore : ' . $minimumScore . '<br>
             $note : ' . $note . '<br>
             ';
-            // return true;
+            return true;
         } else {
             echo '
             $totalCorrectAnswers : ' . $totalCorrectAnswers . '<br>
@@ -63,7 +63,7 @@ class Controller_Certificate
             $minimumScore : ' . $minimumScore . '<br>
             $note : ' . $note . '<br>
             ';
-            // return false;
+            return false;
         }
     }
 

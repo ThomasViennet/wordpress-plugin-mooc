@@ -27,8 +27,7 @@ use Mooc\Controllers\Controller_Quiz;
 use Mooc\Controllers\Controller_Lesson;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
-add_action('init', array(new Controller_Init(), 'init')); //Contains the filters and actions hooks
-add_action('init', array(new Controller_Init(), 'generate_certificate'));// faire autrement ?
+add_action('init', array(new Controller_Init(), 'init')); //Contains filters actions and shortcodes
 
 // Merge shortcodes into controllers/init.php
 //Shortcodes

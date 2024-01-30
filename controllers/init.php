@@ -42,15 +42,13 @@ class Controller_Init
     public static function init()
     {
         if (!self::$initiated) {
-            self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
             self::initHooks();
+            self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
         }
     }
 
     private static function initHooks()
     {
-        self::$initiated = true;
-
         //Actions
         add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
         add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
@@ -59,16 +57,19 @@ class Controller_Init
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
         add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
-        // add_action('init', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
         add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_nopriv_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
+        add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
+        add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
 
         //Filters
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
 
         //Shortcodes
         add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
+
+        self::$initiated = true;
     }
 
     public static function createTables()
@@ -222,15 +223,14 @@ class Controller_Init
 
     public static function generate_certificate()
     {
-        if (isset($_GET['action'], $_GET['user_id'], $_GET['nonce']) && $_GET['action'] == 'generate_certificate') {
-            if (!wp_verify_nonce($_GET['nonce'], 'generate_certificate_nonce')) {
-                wp_die('Action non autorisée.');
-            }
-
-            $user_id = intval($_GET['user_id']);
+        if (isset($_POST['user_id'], $_POST['form_id'], $_POST['certificate_nonce_field']) && wp_verify_nonce($_POST['certificate_nonce_field'], 'generate_certificate_nonce')) {
+            $user_id = intval($_POST['user_id']);
+            $form_id = intval($_POST['form_id']);
             $controller = new Controller_Certificate();
-            $controller->generateCertificate($user_id, 6);
+            $controller->generateCertificate($user_id, $form_id);
             exit;
+        } else {
+            wp_die('Vérification de sécurité échouée.');
         }
     }
 }
