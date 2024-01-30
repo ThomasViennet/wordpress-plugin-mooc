@@ -15,6 +15,7 @@ use Mooc\Lib\Quiz\Lib_Quiz;
 
 class Controller_Quiz
 {
+    //START -Quizzes within chapters currently work. These quizzes will have to be migrated to use CRUD.
     public static function viewQuiz(int $user_id, string $quiz_name)
     {
         if (!empty($user_id)) {
@@ -82,4 +83,6 @@ class Controller_Quiz
     {
         // require_once(dirname(__FILE__) . '/../views/dashboard.php');//useless ?
     }
+
+    //END -Quizzes within chapters currently work. These quizzes will have to be migrated to use CRUD.
 }

@@ -102,13 +102,14 @@ class Model_Init
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
             $sql_answers = "CREATE TABLE $table_quizzes_answers (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            user_id mediumint(9) NOT NULL,
-            form_id mediumint(9) NOT NULL,
-            answers text NOT NULL,
-            form_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            PRIMARY KEY  (id)
-        ) $charset_collate;";
+                id mediumint(9) NOT NULL AUTO_INCREMENT,
+                user_id mediumint(9) NOT NULL,
+                form_id mediumint(9) NOT NULL,
+                answers text NOT NULL,
+                form_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                certificate_number VARCHAR(255) NOT NULL,  // Ajout du nouveau champ
+                PRIMARY KEY  (id)
+            ) $charset_collate;";
             dbDelta($sql_answers);
         }
     }
