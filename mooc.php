@@ -37,6 +37,7 @@ function registration()
     if (!is_admin()) {
         if (!is_user_logged_in()) {
             ob_start();
+            echo "lol";
             Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
         } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in

@@ -48,7 +48,7 @@ class Controller_Option
     {
         $options = $this->model->getAllOptions();
         $questions = $this->questionModel->getAllQuestions();
-        include dirname(__FILE__) . '/../views/quiz-option.php';
+        include dirname(__FILE__) . '/../views/back/quiz-option.php';
     }
 
     public function addOption($postData)

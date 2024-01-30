@@ -59,7 +59,7 @@ class Controller_Form
     public function displayAllForms()
     {
         $forms = $this->formModel->getAllForms();
-        include dirname(__FILE__) . '/../views/quiz-form.php';
+        include dirname(__FILE__) . '/../views/back/quiz-form.php';
     }
 
     public function addForm($postData)
@@ -90,8 +90,8 @@ class Controller_Form
     public function displayQuiz($atts)
     {
         if (!is_user_logged_in()) {
-            require_once(dirname(__FILE__) . '/../views/certification-presentation.php');
-            require_once(dirname(__FILE__) . '/../views/registration.php');
+            require_once(dirname(__FILE__) . '/../views/front/certification-presentation.php');
+            require_once(dirname(__FILE__) . '/../views/front/registration.php');
         } else {
             $attributes = shortcode_atts(['form_name' => ''], $atts);
             $form_name = $attributes['form_name'];
@@ -105,7 +105,7 @@ class Controller_Form
 
             if ($this->checkFormSubmission($user_id, $form_id)) {
                 if ($this->certificateController->evaluateUserAnswers($user_id, $form_id)) {
-                    include(dirname(__FILE__) . '/../views/certificate-congratulations.php');
+                    include(dirname(__FILE__) . '/../views/front/certificate-congratulations.php');
                 } else {
                     echo 'Vous n\'avez pas obtenu au moins 80% de bonnes réponses.';
                     echo "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";

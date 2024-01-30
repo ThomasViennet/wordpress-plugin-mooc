@@ -49,6 +49,8 @@ class Controller_Init
 
     private static function initHooks()
     {
+        self::$initiated = true;
+        
         //Actions
         add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
         add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
@@ -57,19 +59,17 @@ class Controller_Init
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
         add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
+        add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
+        add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
         add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_nopriv_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
-        add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
-        add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
 
         //Filters
         add_filter('wp_new_user_notification_email', array('Controller_Init', 'newUserEmail'), 10, 3);
 
         //Shortcodes
         add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
-
-        self::$initiated = true;
     }
 
     public static function createTables()

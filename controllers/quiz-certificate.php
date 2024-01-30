@@ -36,9 +36,9 @@ class Controller_Certificate
             foreach ($options as $option) {
                 if (in_array($option->id, $userAnswersArray)) {
                     if ($option->is_correct) {
-                        $correctAnswers++; // Bonne réponse
+                        $correctAnswers++; 
                     } else {
-                        $correctAnswers--; // Mauvaise réponse
+                        $correctAnswers--;
                     }
                 }
             }
@@ -66,6 +66,11 @@ class Controller_Certificate
         }
     }
 
+    public function hasUserPassed($user_id, $form_id)
+    {
+        return $this->evaluateUserAnswers($user_id, $form_id);
+    }
+
 
     public function generateCertificate($user_id, $form_id)
     {
@@ -88,7 +93,6 @@ class Controller_Certificate
             $title1 = 'Certificat';
             $title2 = 'de réussite';
 
-            // Récupération des données de l'utilisateur
             $user_data = get_userdata($user_id);
             $first_name = $user_data->first_name;
             $last_name = $user_data->last_name;
@@ -97,8 +101,7 @@ class Controller_Certificate
             $description1 = 'a validé et obtenu le certificat : ';
             $description2 = 'Connaissances théoriques avancées en référencement naturel.';
 
-            // Numéro de certificat basé sur l'ID de l'utilisateur et le timestamp
-            $numCertificate = $user_id . time();
+            $numCertificate = $userAnswersData['certificate_number'];
             $dateObtention = date("d F Y", strtotime($userAnswersData['submitted']));
 
             imagettftext($image, 150, 0, 100, 600, $color, $font, $title1);
@@ -109,19 +112,16 @@ class Controller_Certificate
             imagettftext($image, 30, 0, 100, 1700, $color, $font, 'Certificate n° ' . $numCertificate);
             imagettftext($image, 30, 0, 100, 1750, $color, $font, 'Délivré le ' . $dateObtention);
 
-            // Création de l'image en mémoire, sans l'enregistrer
             ob_start();
             imagejpeg($image);
             $image_data = ob_get_clean();
             imagedestroy($image);
 
-            // Création du PDF
             $pdf = new \PDF_MemImage();
             $pdf->AddPage('L', 'A5');
-            $pdf->MemImage($image_data, 0, 0, 210, 148); // Utilisez MemImage au lieu de Image
+            $pdf->MemImage($image_data, 0, 0, 210, 148);
 
-            // Affichage du PDF dans le navigateur
-            ob_end_clean(); // Nettoyer (et désactiver) le tampon de sortie
+            ob_end_clean();
             $pdf->Output('I', 'certificate SEO referencime.pdf');
         } else {
             echo "L'utilisateur n'a pas réussi le test pour le certificat.";

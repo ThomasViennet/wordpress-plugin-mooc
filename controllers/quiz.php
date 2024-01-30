@@ -31,17 +31,17 @@ class Controller_Quiz
                 $userAllowedToRespond = TRUE;
                 $answers = ['null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null'];
             }
-            require(dirname(__FILE__) . '/../views/quizzes/chap-' . $quiz_name . '.php');
-            require(dirname(__FILE__) . '/../views/quizzes/layout-quizzes.php'); //move to each views
+            require(dirname(__FILE__) . '/../views/front/quizzes/chap-' . $quiz_name . '.php');
+            require(dirname(__FILE__) . '/../views/front/quizzes/layout-quizzes.php'); //move to each views
         } else {
-            require_once(dirname(__FILE__) . '/../views/registration.php');
+            require_once(dirname(__FILE__) . '/../views/front/registration.php');
         }
     }
 
     //WIP
     public static function saveAnswers(int $user_id, int $quiz_id, string $quiz_name, array $quiz_answers)
     {
-        require(dirname(__FILE__) . '/../views/quizzes/chap-' . $quiz_name . '.php'); //Need data like this until CRUD Quiz has done
+        require(dirname(__FILE__) . '/../views/front/quizzes/chap-' . $quiz_name . '.php'); //Need data like this until CRUD Quiz has done
 
         $lib_quiz = new Lib_Quiz();
         $note = 0;

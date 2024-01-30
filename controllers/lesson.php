@@ -24,8 +24,7 @@ class Controller_Lesson
 
         //add the slug of next lesson to the target of the button
         // $nextLesson_slug = (new Model_Lesson())->getNextLessonSlug($lesson_slug);
-        
-        require_once(dirname(__FILE__) . '/../views/button-lesson.php');
+        require_once(dirname(__FILE__) . '/../views/front/button-lesson.php');
     }
 
     public static function saveLessonCompleted(int $user_id, string $lesson_slug)

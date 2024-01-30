@@ -48,7 +48,7 @@ class Controller_Question
     {
         $questions = $this->model->getAllQuestions();
         $forms = $this->formModel->getAllForms();
-        include dirname(__FILE__) . '/../views/quiz-question.php';
+        include dirname(__FILE__) . '/../views/back/quiz-question.php';
     }
 
     public function addQuestion($postData)

@@ -23,8 +23,8 @@ class Controller_User
     {
         $userData = $this->userModel->getUserData($user_id);
         if ($userData) {
-            $hasCertificate = $this->certificateController->evaluateUserAnswers($user_id,1);//to be improved to use a loop that checks all the forms
-            include(dirname(__FILE__) . '/../views/user.php');
+            $certificateController = new Controller_Certificate();//to be improved to use a loop that checks all the forms
+            include(dirname(__FILE__) . '/../views/front/user.php');
         } else {
             echo "<p>Profil utilisateur non trouvé.</p>";
         }

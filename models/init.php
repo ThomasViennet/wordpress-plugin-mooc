@@ -107,7 +107,7 @@ class Model_Init
                 form_id mediumint(9) NOT NULL,
                 answers text NOT NULL,
                 form_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                certificate_number VARCHAR(255) NOT NULL,  // Ajout du nouveau champ
+                certificate_number VARCHAR(255) NOT NULL,
                 PRIMARY KEY  (id)
             ) $charset_collate;";
             dbDelta($sql_answers);
