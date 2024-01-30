@@ -5,6 +5,7 @@ namespace Mooc\Controllers;
 require_once(dirname(__FILE__) . '/../models/quiz-answer.php');
 require_once(dirname(__FILE__) . '/../models/quiz-option.php');
 require_once(dirname(__FILE__) . '/../lib/certificate/fpdf/fpdf.php');
+require_once(dirname(__FILE__) . '/../lib/certificate/mem_image/mem_image.php');
 
 use Mooc\Models\Model_Answer;
 use Mooc\Models\Model_Option;
@@ -92,15 +93,20 @@ class Controller_Certificate
             imagettftext($image, 30, 0, 100, 1700, $color, $font, 'Certificate n° ' . $numCertificate);
             imagettftext($image, 30, 0, 100, 1750, $color, $font, 'Délivré le ' . $dateObtention);
 
-            imagejpeg($image, dirname(__FILE__) . '/../lib/certificate/certificates/' . $numCertificate . '.jpg');
+            // Création de l'image en mémoire, sans l'enregistrer
+            ob_start();
+            imagejpeg($image);
+            $image_data = ob_get_clean();
             imagedestroy($image);
 
-            $pdf = new \FPDF();
+            // Création du PDF
+            $pdf = new \PDF_MemImage();
             $pdf->AddPage('L', 'A5');
-            $pdfOutputPath = plugin_dir_path(__FILE__) . '../lib/certificate/certificates/' . $numCertificate . '.jpg';
-            $pdf->Image($pdfOutputPath, 0, 0, 210, 148);
-            ob_end_clean();
-            $pdf->Output();
+            $pdf->MemImage($image_data, 0, 0, 210, 148); // Utilisez MemImage au lieu de Image
+
+            // Affichage du PDF dans le navigateur
+            ob_end_clean(); // Nettoyer (et désactiver) le tampon de sortie
+            $pdf->Output('I', 'certificate.pdf');
         } else {
             echo "L'utilisateur n'a pas réussi le test pour le certificat.";
         }
