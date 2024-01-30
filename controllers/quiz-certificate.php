@@ -4,8 +4,8 @@ namespace Mooc\Controllers;
 
 require_once(dirname(__FILE__) . '/../models/quiz-answer.php');
 require_once(dirname(__FILE__) . '/../models/quiz-option.php');
-require_once(dirname(__FILE__) . '/../lib/certificate/fpdf/fpdf.php');
-require_once(dirname(__FILE__) . '/../lib/certificate/mem_image/mem_image.php');
+require_once(dirname(__FILE__) . '/../lib/fpdf/fpdf.php');
+require_once(dirname(__FILE__) . '/../lib/mem_image/mem_image.php');
 
 use Mooc\Models\Model_Answer;
 use Mooc\Models\Model_Option;
@@ -63,10 +63,10 @@ class Controller_Certificate
         }
 
         if ($this->evaluateUserAnswers($user_id, $form_id)) {
-            $font = plugin_dir_path(__FILE__) . '../lib/certificate/Roboto/Roboto-Light.ttf';
-            $fontBold = plugin_dir_path(__FILE__) . '../lib/certificate/Roboto/Roboto-Bold.ttf';
+            $font = plugin_dir_path(__FILE__) . '../assets/font/Roboto/Roboto-Light.ttf';
+            $fontBold = plugin_dir_path(__FILE__) . '../assets/font/Roboto/Roboto-Bold.ttf';
 
-            $image = imagecreatefromjpeg(plugin_dir_path(__FILE__) . '../lib/certificate/certification-SEO-referencime.jpg');
+            $image = imagecreatefromjpeg(plugin_dir_path(__FILE__) . '../assets/img/certification-SEO-referencime.jpg');
             $color = imagecolorallocate($image, 34, 46, 90);
 
             $title1 = 'Certificat';
@@ -106,7 +106,7 @@ class Controller_Certificate
 
             // Affichage du PDF dans le navigateur
             ob_end_clean(); // Nettoyer (et désactiver) le tampon de sortie
-            $pdf->Output('I', 'certificate.pdf');
+            $pdf->Output('I', 'certificate SEO referencime.pdf');
         } else {
             echo "L'utilisateur n'a pas réussi le test pour le certificat.";
         }
