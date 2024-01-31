@@ -204,22 +204,28 @@ class Controller_Init
         }
     }
 
-    function newUserEmail($wp_new_user_notification_email, $user, $blogname)
-    {
-        $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
-        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
-        $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
+    public static function newUserEmail($wp_new_user_notification_email)
+{
+    // Accès à l'objet utilisateur et au nom du blog via les propriétés globales ou une autre méthode, si nécessaire
+    $user = isset($wp_new_user_notification_email['user']) ? $wp_new_user_notification_email['user'] : null;
+    $blogname = isset($wp_new_user_notification_email['blogname']) ? $wp_new_user_notification_email['blogname'] : get_option('blogname');
+
+    $message = sprintf(__('Bienvenue %s !', 'text-domain'), $user ? $user->user_login : '') . "\r\n\r\n";
+    $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
+    $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
+    if ($user) {
         $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
         $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
-        $message .= "Bonne lecture," . "\r\n";
-        $message .= "Thomas Viennet" . "\r\n";
-
-        $wp_new_user_notification_email['message'] = $message;
-        $wp_new_user_notification_email['subject'] = 'Inscription formation SEO';
-        $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
-
-        return $wp_new_user_notification_email;
     }
+    $message .= "Bonne lecture," . "\r\n";
+    $message .= "Thomas Viennet" . "\r\n";
+
+    $wp_new_user_notification_email['message'] = $message;
+    $wp_new_user_notification_email['subject'] = sprintf(__('Inscription formation SEO - %s', 'text-domain'), $blogname);
+    $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
+
+    return $wp_new_user_notification_email;
+}
 
     public static function generate_certificate()
     {
