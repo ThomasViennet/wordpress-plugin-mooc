@@ -66,7 +66,7 @@ class Controller_Init
         add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
 
         //Filters
-        add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . 'Controller_Init', 'newUserEmail'));
+        add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'));
 
         //Shortcodes
         add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
