@@ -80,7 +80,6 @@ class Controller_Init
 
     public static function addElements()
     {
-        remove_menu_page('index.php');
         add_menu_page(
             'Mooc', // Titre de la page
             'Formation SEO', // Titre du menu
@@ -162,6 +161,8 @@ class Controller_Init
             remove_action('admin_notices', 'update_nag', 3);
             add_filter('admin_footer_text', '__return_empty_string', 11);
             add_filter('update_footer',     '__return_empty_string', 11);
+            remove_menu_page('index.php');
+            remove_menu_page('kk-star-ratings');
         }
     }
 
@@ -239,7 +240,7 @@ class Controller_Init
     public static function remove_kk_star_ratings_menu_for_read_users()
     {
         if (current_user_can('read') && !current_user_can('manage_options')) {
-            remove_menu_page('toplevel_page_kk-star-ratings');
+            
         }
     }
 }
