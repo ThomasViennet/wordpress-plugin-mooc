@@ -24,7 +24,7 @@
                 </tr>
                 <!-- Formulaire d'édition caché -->
                 <tr id="edit-form-<?php echo $question->id; ?>" style="display:none;">
-                    <td colspan="2">
+                    <td colspan="3">
                         <form action="admin.php?page=manage-question" method="post">
                             <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
                             <input type="hidden" name="action" value="edit">
@@ -37,13 +37,12 @@
                                 <?php endforeach; ?>
                             </select>
                             <input type="text" name="question_text" value="<?php echo esc_attr(stripslashes($question->question_text)); ?>">
+                            <input type="text" name="source_question" value="<?php echo esc_attr(stripslashes($question->source_question ?? '')); ?>" placeholder="Source de la question"> <!-- Champ modifié pour inclure la source -->
                             <button type="submit">Sauvegarder</button>
                         </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
-
-
         </table>
     </div>
 <?php else : ?>
@@ -52,9 +51,9 @@
 <form action="admin.php?page=manage-question" method="post">
     <?php wp_nonce_field('manage_question_action', 'manage_question_nonce'); ?>
     <input type="hidden" name="action" value="add">
-    <input type="text" name="question_text">
+    <input type="text" name="question_text" placeholder="Question">
+    <input type="text" name="source_question" placeholder="Source de la question">
     <label for="form_id">Form:</label>
-
     <select name="form_id" id="form_id">
         <?php foreach ($forms as $form) : ?>
             <option value="<?php echo $form->id; ?>"><?php echo esc_html(stripslashes($form->form_name)); ?></option>
@@ -62,6 +61,7 @@
     </select>
     <button type="submit">Ajouter une question</button>
 </form>
+
 <script>
     function openEditForm(questionId) {
         var form = document.getElementById('edit-form-' + questionId);

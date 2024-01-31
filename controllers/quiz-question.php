@@ -56,6 +56,7 @@ class Controller_Question
         $questionData = [
             'form_id' => intval($postData['form_id']),
             'question_text' => sanitize_text_field($postData['question_text']),
+            'source_question' => sanitize_text_field($postData['source_question']),
         ];
 
         return $this->model->addQuestion($questionData);
@@ -65,12 +66,12 @@ class Controller_Question
     {
         $questionData = [
             'form_id' => intval($postData['form_id']),
-            'question_text' => sanitize_text_field($postData['question_text'])
+            'question_text' => sanitize_text_field($postData['question_text']),
+            'source_question' => sanitize_text_field($postData['source_question']),
         ];
 
         $this->model->updateQuestion($question_id, $questionData);
     }
-
     public function deleteQuestion($question_id)
     {
         return $this->model->deleteQuestion($question_id);

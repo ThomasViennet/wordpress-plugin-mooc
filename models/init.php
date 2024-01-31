@@ -75,6 +75,7 @@ class Model_Init
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             form_id mediumint(9) NOT NULL,
             question_text text NOT NULL,
+            source_question text DEFAULT NULL, // Ajout du nouveau champ ici
             PRIMARY KEY  (id),
             FOREIGN KEY (form_id) REFERENCES $table_quizzes_forms(id) ON DELETE CASCADE
             ) $charset_collate;";
