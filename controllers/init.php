@@ -64,7 +64,6 @@ class Controller_Init
         add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_nopriv_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
         add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
-        add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'remove_kk_star_ratings_menu_for_read_users'));
 
         //Filters
         add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'), 10, 3);
@@ -234,13 +233,6 @@ class Controller_Init
             exit;
         } else {
             wp_die('Vérification de sécurité échouée.');
-        }
-    }
-
-    public static function remove_kk_star_ratings_menu_for_read_users()
-    {
-        if (current_user_can('read') && !current_user_can('manage_options')) {
-            
         }
     }
 }
