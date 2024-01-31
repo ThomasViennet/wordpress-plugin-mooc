@@ -58,7 +58,7 @@ class Controller_Init
         add_action('wp_enqueue_scripts',  array(__NAMESPACE__ . '\Controller_Init', 'styleFront'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
-        add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'));
+        add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
         add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
         add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
         add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
