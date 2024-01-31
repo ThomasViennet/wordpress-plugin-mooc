@@ -236,7 +236,7 @@ class Controller_Init
         }
     }
 
-    function remove_kk_star_ratings_menu_for_read_users()
+    public static function remove_kk_star_ratings_menu_for_read_users()
     {
         if (current_user_can('read') && !current_user_can('manage_options')) {
             remove_menu_page('toplevel_page_kk-star-ratings');
