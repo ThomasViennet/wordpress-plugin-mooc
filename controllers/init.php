@@ -50,7 +50,7 @@ class Controller_Init
     private static function initHooks()
     {
         self::$initiated = true;
-        
+
         //Actions
         add_action('wp_before_admin_bar_render', array(__NAMESPACE__ . '\Controller_Init', 'adminBar'));
         add_action('admin_bar_menu', array(__NAMESPACE__ . '\Controller_Init', 'addLinkAdminBar'));
@@ -66,7 +66,7 @@ class Controller_Init
         add_action('admin_post_reset_quiz_answers', array(self::$formController, 'resetUserAnswers'));
 
         //Filters
-        add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'));
+        add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'), 10, 3);
 
         //Shortcodes
         add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
@@ -204,28 +204,23 @@ class Controller_Init
         }
     }
 
-    public static function newUserEmail($wp_new_user_notification_email)
-{
-    // Accès à l'objet utilisateur et au nom du blog via les propriétés globales ou une autre méthode, si nécessaire
-    $user = isset($wp_new_user_notification_email['user']) ? $wp_new_user_notification_email['user'] : null;
-    $blogname = isset($wp_new_user_notification_email['blogname']) ? $wp_new_user_notification_email['blogname'] : get_option('blogname');
-
-    $message = sprintf(__('Bienvenue %s !', 'text-domain'), $user ? $user->user_login : '') . "\r\n\r\n";
-    $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
-    $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
-    if ($user) {
+    public static function newUserEmail($wp_new_user_notification_email, $user, $blogname)
+    {
+        $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
+        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
+        $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
         $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
         $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
+        $message .= "Bonne lecture," . "\r\n";
+        $message .= "Thomas Viennet" . "\r\n";
+
+        $wp_new_user_notification_email['message'] = $message;
+        $wp_new_user_notification_email['subject'] = 'Inscription formation SEO';
+        $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
+
+        return $wp_new_user_notification_email;
     }
-    $message .= "Bonne lecture," . "\r\n";
-    $message .= "Thomas Viennet" . "\r\n";
 
-    $wp_new_user_notification_email['message'] = $message;
-    $wp_new_user_notification_email['subject'] = sprintf(__('Inscription formation SEO - %s', 'text-domain'), $blogname);
-    $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
-
-    return $wp_new_user_notification_email;
-}
 
     public static function generate_certificate()
     {
