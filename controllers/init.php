@@ -70,7 +70,7 @@ class Controller_Init
         add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'), 10, 3);
 
         //Shortcodes
-        add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
+        add_shortcode('quiz', array(self::$formController, 'displayQuiz'));
     }
 
     //Start use self::x
