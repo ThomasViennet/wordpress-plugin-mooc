@@ -43,6 +43,7 @@ class Controller_Init
     {
         if (!self::$initiated) {
             self::$formController = new Controller_Form(new Model_Form(), new Model_Question(), new Model_Option(), new Model_Answer());
+
             self::initHooks();
         }
     }
@@ -72,10 +73,76 @@ class Controller_Init
         add_shortcode('mon_quiz', array(self::$formController, 'displayQuiz'));
     }
 
+    //Start use self::x
     public static function createTables()
     {
         (new Model_Init)->createTables();
     }
+
+    public static function manageForm()
+    {
+        return self::$formController->handleRequest();
+    }
+
+    public static function manageQuestion()
+    {
+        return (new Controller_Question)->handleRequest();
+    }
+
+    public static function manageOption()
+    {
+        return (new Controller_Option)->handleRequest();
+    }
+
+    //Displaying the navigation of the mooc taking into account the lessons completed by the user
+    public static function mooc()
+    {
+        return (new Controller_NavMooc)->display();
+    }
+
+    //move into controllers/quiz-certificate
+    public static function generate_certificate()
+    {
+        if (isset($_POST['user_id'], $_POST['form_id'], $_POST['certificate_nonce_field']) && wp_verify_nonce($_POST['certificate_nonce_field'], 'generate_certificate_nonce')) {
+            $user_id = intval($_POST['user_id']);
+            $form_id = intval($_POST['form_id']);
+            $controller = new Controller_Certificate();
+            $controller->generateCertificate($user_id, $form_id);
+            exit;
+        } else {
+            wp_die('Vérification de sécurité échouée.');
+        }
+    }
+
+    public static function wpLogin($user_login, \WP_User $user)
+    {
+        if (in_array('subscriber', (array) $user->roles)) {
+            wp_safe_redirect('wp-admin/admin.php?page=dashboard');
+            exit;
+        } else {
+            wp_safe_redirect('wp-admin');
+            exit;
+        }
+    }
+
+    public static function newUserEmail($wp_new_user_notification_email, $user, $blogname)
+    {
+        $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
+        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
+        $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
+        $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
+        $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
+        $message .= "Bonne lecture," . "\r\n";
+        $message .= "Thomas Viennet" . "\r\n";
+
+        $wp_new_user_notification_email['message'] = $message;
+        $wp_new_user_notification_email['subject'] = 'Inscription formation SEO';
+        $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
+
+        return $wp_new_user_notification_email;
+    }
+
+    //end use self::x
 
     public static function addElements()
     {
@@ -118,41 +185,6 @@ class Controller_Init
         );
     }
 
-    public static function manageForm()
-    {
-        return self::$formController->handleRequest();
-    }
-
-    public static function manageQuestion()
-    {
-        return (new Controller_Question)->handleRequest();
-    }
-
-    public static function manageOption()
-    {
-        return (new Controller_Option)->handleRequest();
-    }
-
-    //Displaying the navigation of the mooc taking into account the lessons completed by the user
-    public static function mooc()
-    {
-        return (new Controller_NavMooc)->display();
-    }
-
-    public static function adminBar() //should be part of the theme and not this plugin
-    {
-        $user = wp_get_current_user();
-        if (in_array('subscriber', (array) $user->roles)) {
-            global $wp_admin_bar;
-            $wp_admin_bar->remove_menu('wp-logo');
-            $wp_admin_bar->remove_node('dashboard');
-
-            if (!is_admin()) {
-                $wp_admin_bar->remove_node('site-name');
-            }
-        }
-    }
-
     public static function hideElements() //should be part of the theme and not this plugin
     {
         $user = wp_get_current_user();
@@ -179,6 +211,20 @@ class Controller_Init
         }
     }
 
+    public static function adminBar() //should be part of the theme and not this plugin
+    {
+        $user = wp_get_current_user();
+        if (in_array('subscriber', (array) $user->roles)) {
+            global $wp_admin_bar;
+            $wp_admin_bar->remove_menu('wp-logo');
+            $wp_admin_bar->remove_node('dashboard');
+
+            if (!is_admin()) {
+                $wp_admin_bar->remove_node('site-name');
+            }
+        }
+    }
+
     public static function styleAdmin()
     {
         echo '<link rel="stylesheet" href="' . plugins_url('/../assets/css/admin-nav-mooc.css', __FILE__) . '" type="text/css" media="all" />';
@@ -192,47 +238,5 @@ class Controller_Init
         <link rel="stylesheet" href="' . plugins_url('/../assets/css/lesson.css', __FILE__) . '" type="text/css" media="all" />
         <link rel="stylesheet" href="' . plugins_url('/../assets/css/button-lesson.css', __FILE__) . '" type="text/css" media="all" />
         <script type="text/javascript" src="' . plugins_url('/../assets/js/nav-mooc.js', __FILE__) . '"></script>';
-    }
-
-    public static function wpLogin($user_login, \WP_User $user)
-    {
-        if (in_array('subscriber', (array) $user->roles)) {
-            wp_safe_redirect('wp-admin/admin.php?page=dashboard');
-            exit;
-        } else {
-            wp_safe_redirect('wp-admin');
-            exit;
-        }
-    }
-
-    public static function newUserEmail($wp_new_user_notification_email, $user, $blogname)
-    {
-        $message = sprintf(__('Bienvenue ' . $user->user_login . ' !')) . "\r\n\r\n";
-        $message .= 'J’ai créé cette formation pour aider ceux qui souhaitent s’initier au SEO gratuitement.' . "\r\n";
-        $message .= 'Pour me donner un coup de pouce, ajouter en 1 seconde votre avis en cliquant sur ce lien https://g.page/r/CaBcALRtf65YEB0/review 🫶' . "\r\n\r\n";
-        $message .= 'Pour configurer votre mot de passe, rendez-vous à l’adresse suivante :' . "\r\n";
-        $message .= network_site_url("wp-login.php?action=rp&key=" . get_password_reset_key($user) . "&login=" . rawurlencode($user->user_login), 'login') . "\r\n\r\n";
-        $message .= "Bonne lecture," . "\r\n";
-        $message .= "Thomas Viennet" . "\r\n";
-
-        $wp_new_user_notification_email['message'] = $message;
-        $wp_new_user_notification_email['subject'] = 'Inscription formation SEO';
-        $wp_new_user_notification_email['headers'] = 'From: Référencime<contact@referencime.fr>';
-
-        return $wp_new_user_notification_email;
-    }
-
-
-    public static function generate_certificate()
-    {
-        if (isset($_POST['user_id'], $_POST['form_id'], $_POST['certificate_nonce_field']) && wp_verify_nonce($_POST['certificate_nonce_field'], 'generate_certificate_nonce')) {
-            $user_id = intval($_POST['user_id']);
-            $form_id = intval($_POST['form_id']);
-            $controller = new Controller_Certificate();
-            $controller->generateCertificate($user_id, $form_id);
-            exit;
-        } else {
-            wp_die('Vérification de sécurité échouée.');
-        }
     }
 }
