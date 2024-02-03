@@ -99,7 +99,7 @@ function displayUserProfile()
 
 
 //WIP
-add_shortcode('quiz', 'quiz');
+add_shortcode('quizOld', 'quiz');
 function quiz()
 {
     if (!is_admin() && is_user_logged_in() && isset($_GET['quiz_name'])) {
