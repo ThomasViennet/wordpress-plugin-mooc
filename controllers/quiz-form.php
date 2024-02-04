@@ -91,7 +91,7 @@ class Controller_Form
     {
         if (!is_user_logged_in()) {
             require_once(dirname(__FILE__) . '/../views/front/certification-presentation.php');
-            // require_once(dirname(__FILE__) . '/../views/front/registration.php');
+            require_once(dirname(__FILE__) . '/../views/front/registration.php');
         } else {
             $attributes = shortcode_atts(['form_name' => ''], $atts);
             $form_name = $attributes['form_name'];
