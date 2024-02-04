@@ -1,11 +1,14 @@
-<p>Cette certification SEO gratuite a pour objectif de vous aider à légitimer votre niveau de connaissance en référencement naturel.</p>
+<p>Cette certification SEO gratuite a pour objectif de vous aider à <strong>légitimer votre niveau de connaissance en référencement naturel</strong>.</p>
 
 <h2 class="wp-block-heading">Prérequis pour obtenir la certification</h2>
 
 <p>
-    Vous pouvez passer la certification gratuitement quand vous le souhaitez.<br>
-    Si vous avez suivi la <a href="https://referencime.fr/formation-seo-gratuite/">formation SEO en ligne gratuite</a>, vous devriez être en mesure de répondre à toutes les questions.
+    Vous pouvez passer la certification gratuitement quand vous le souhaitez.
 </p>
+<blockquote class="wp-block-quote">
+    <p>Si vous avez suivi la <a href="https://referencime.fr/formation-seo-gratuite/">formation SEO en ligne gratuite</a>, vous devriez être en mesure de répondre à toutes les questions.</p>
+</blockquote>
+
 
 <h2 class="wp-block-heading">Connaissance évaluées</h2>
 
@@ -22,7 +25,7 @@
 <h2 class="wp-block-heading">Comment obtenir la certification ?</h2>
 
 <ol>
-    <li><a href="#inscription_formation">Créer un compte gratuitement</a></li>
+    <li><a href="#inscription-formation">Créer un compte gratuitement</a></li>
     <li>Répondre aux 40 questions à choix multiples</li>
     <li>Obtenir un score de 80% de réussite</li>
 </ol>
@@ -54,20 +57,20 @@
     </div>
     <div class="schema-faq-section" id="faq-question-2">
         <strong class="schema-faq-question">Comment se préparer l'examen ?</strong>
-        <p class="schema-faq-answer">Je recommande vivement de parcourir attentivement les différentes leçons proposées dans notre formation SEO gratuite pour une préparation optimale.</p>
+        <p class="schema-faq-answer">Les cours de la <a href="https://referencime.fr/formation-seo-gratuite/">formation SEO gratuite</a> sont parfait pour se préparer à cette certification.</p>
     </div>
     <div class="schema-faq-section" id="faq-question-3">
         <strong class="schema-faq-question">Quelle est la durée de validité de la certification ?</strong>
-        <p class="schema-faq-answer">Votre certification restera valide indéfiniment. Cependant, il est important de noter que le domaine du SEO est en constante évolution. Ainsi, les connaissances acquises peuvent devenir obsolètes après quelques années.</p>
+        <p class="schema-faq-answer">Votre certification restera valide indéfiniment. Cependant, il est important de noter que le domaine du SEO est en constante évolution. Ainsi, les connaissances acquises peuvent devenir obsolètes.</p>
     </div>
     <div class="schema-faq-section" id="faq-question-4">
         <strong class="schema-faq-question">Comment puis-je obtenir de l'aide si j'ai des questions supplémentaires ?</strong>
-        <p class="schema-faq-answer">Pour toute question complémentaire, n'hésitez pas à me contacter par email à l'adresse suivante : <a href="mailto:contact@referencime.fr">contact@referencime.fr</a>.</p>
+        <p class="schema-faq-answer">Vous pouvez me contacter par email à l'adresse suivante : <a href="mailto:contact@referencime.fr">contact@referencime.fr</a>.</p>
     </div>
 </div>
 
 
-<h2 class="wp-block-heading">Principales ressources complémentaires</h2>
+<h2 class="wp-block-heading">Principales ressources pour obtenir la certification SEO</h2>
 
 <!-- wp:media-text {"mediaId":6544,"mediaLink":"https://referencime.fr/consultant-seo-freelance/attachment/choisir-un-consultant-seo-freelance/","mediaType":"image","mediaWidth":30,"imageFill":true,"className":"box-shadow border-radius"} -->
 <div class="wp-block-media-text alignwide is-stacked-on-mobile is-image-fill box-shadow border-radius" style="grid-template-columns:30% auto">
@@ -135,9 +138,8 @@
         <div class="wp-block-media-text alignwide is-stacked-on-mobile no-margin-top no-margin-bottom img-width-50-align-center" style="grid-template-columns:15% auto">
             <figure class="wp-block-media-text__media"><img decoding="async" src="https://referencime.fr/wp-content/uploads/2023/07/Thomas-Viennet-arrondi.jpg" alt="Thomas Viennet" class="wp-image-7836 size-full"></figure>
             <div class="wp-block-media-text__content">
-                <p>Je m’appelle Thomas Viennet et après avoir travaillé plusieurs années dans le domaine du marketing digital, je me suis spécialisé pour devenir <a href="https://referencime.fr/consultant-seo-freelance/">freelance SEO</a>.</p>
-                <p>J’ai créé cette certification SEO gratuite pour aider les personnes qui souhaitent débuter dans le SEO et légitimer les connaissances théoriques qu’elles ont acquise en référencement naturel.</p>
-                <p>J’espère que cette certification pourra aider ceux qui souhaitent commencer une carrière dans le SEO ou simplement développer l’éventail de leurs compétences.</p>
+                <p>Je m’appelle Thomas Viennet et après avoir travaillé <strong>plusieurs années dans le domaine du marketing digital</strong>, je me suis spécialisé pour devenir <strong><a href="https://referencime.fr/consultant-seo-freelance/">freelance SEO</a></strong>.</p>
+                <p>J’ai créé cette certification SEO gratuite pour <strong>aider les personnes qui souhaitent débuter dans le SEO</strong> et légitimer les connaissances théoriques qu’elles ont acquise en référencement naturel.</p>
             </div>
         </div>
     </div>
