@@ -130,7 +130,7 @@
 
 
 
-<div class="wp-block-group alignwide is-layout-constrained">
+<!-- <div class="wp-block-group alignwide is-layout-constrained">
     <div class="wp-block-group__inner-container">
 
         <h2 class="wp-block-heading has-primary-color has-text-color" id="presentation-du-formateur">Présentation du formateur</h2>
@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="wp-block-media-text alignwide is-stacked-on-mobile background-animation border-radius img-width-50-align-center" style="grid-template-columns:15% auto">
     <figure class="wp-block-media-text__media">
