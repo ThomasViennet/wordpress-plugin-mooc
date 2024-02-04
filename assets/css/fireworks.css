@@ -1,0 +1,28 @@
+.relative {
+    position: relative;
+}
+
+.-top-6 {
+    top: -6rem;
+}
+
+.emitter {
+    position: relative;
+}
+
+.emitter div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background: var(--particle-color);
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}

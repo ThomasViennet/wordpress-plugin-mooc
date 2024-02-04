@@ -58,6 +58,11 @@ class Model_Option
         return $this->wpdb->delete($this->table_options, array('id' => $option_id));
     }
 
+    public function deleteOptionsByQuestionId($question_id)
+    {
+        return $this->wpdb->delete($this->table_options, ['question_id' => $question_id], ['%d']);
+    }
+
     public function countCorrectAnswersByFormId($form_id)
     {
         $query = $this->wpdb->prepare(

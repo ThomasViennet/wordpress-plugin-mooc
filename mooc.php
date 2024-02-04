@@ -14,6 +14,7 @@
 
 require_once('controllers/init.php');
 require_once('controllers/quiz.php');
+require_once('controllers/quiz-question.php');
 require_once('controllers/nav-mooc.php');
 require_once('controllers/lesson.php');
 require_once('controllers/mooc.php');
@@ -24,6 +25,7 @@ use Mooc\Controllers\Controller_User;
 use Mooc\Controllers\Controller_NavMooc; //to put in Mooc.php
 use Mooc\Controllers\Controller_Mooc;
 use Mooc\Controllers\Controller_Quiz;
+use Mooc\Controllers\Controller_Question;
 use Mooc\Controllers\Controller_Lesson;
 
 register_activation_hook(__FILE__, array(new Controller_Init(), 'createTables'));
@@ -133,3 +135,9 @@ function quiz()
         Controller_Mooc::displayRegistrationForm();
     }
 }
+
+add_action('wp_ajax_add_question_with_options', array(new Controller_Question(), 'handleAjaxAddQuestionWithOptions'));
+add_action('wp_ajax_nopriv_add_question_with_options', array(new Controller_Question(), 'handleAjaxAddQuestionWithOptions')); // Utilisez cette ligne si vous voulez que l'action soit accessible aux utilisateurs non connectés
+
+
+

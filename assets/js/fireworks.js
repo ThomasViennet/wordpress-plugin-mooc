@@ -1,45 +1,3 @@
-<style>
-    .relative {
-        position: relative;
-    }
-
-    .-top-6 {
-        top: -6rem;
-    }
-
-    .emitter {
-        position: relative;
-    }
-
-    .emitter div {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 4px;
-        background: var(--particle-color);
-    }
-
-    .flex {
-        display: flex;
-    }
-
-    .justify-between {
-        justify-content: space-between;
-    }
-</style>
-
-<div class="flex justify-between">
-    <div class="emitter order-1"></div>
-    <div class="emitter order-3"></div>
-    <div class="emitter order-2 -top-6"></div>
-</div>
-<p>Bravo le certificat a été ajouté à votre profil public !</p>
-<p><a href="profil?user_id=<?= $user_id ?>">Voir mon profil</a></p>
-<!-- <button class="mt-4 btn btn-primary" onclick="start();">Again</button> -->
-</div>
-
-<script>
 
 /*!
  * Physics2DPlugin 3.12.3
@@ -139,4 +97,3 @@
     };
 
     start();
-</script>
