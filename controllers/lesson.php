@@ -30,6 +30,10 @@ class Controller_Lesson
     public static function saveLessonCompleted(int $user_id, string $lesson_slug)
     {
         (new Model_Lesson())->save($user_id, $lesson_slug);
+
+        $url_redirect = site_url('/wp-admin/admin.php?page=dashboard');
+        wp_redirect($url_redirect);
+        exit;
     }
 
     public static function deleteLessonCompleted(int $user_id, string $lesson_slug)
