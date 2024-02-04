@@ -16,7 +16,7 @@ if (!empty($alert)) {
     <div class="user-certificate">
         <h2>Cours suivis</h2>
         <?php
-        $hasPassed = $certificateController->hasUserPassed($user_id, 6); // '6' est l'ID du formulaire
+        $hasPassed = $certificateController->hasUserPassed($user_id, 1); // '6' est l'ID du formulaire
         if ($hasPassed) :
         ?>
             <table>
@@ -30,7 +30,7 @@ if (!empty($alert)) {
                         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                             <input type="hidden" name="action" value="generate_certificate">
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-                            <input type="hidden" name="form_id" value="6">
+                            <input type="hidden" name="form_id" value="1">
                             <?php wp_nonce_field('generate_certificate_nonce', 'certificate_nonce_field'); ?>
                             <input type="submit" value="Obtenir le certificat">
                         </form>

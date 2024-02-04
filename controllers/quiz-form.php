@@ -149,7 +149,6 @@ class Controller_Form
     public function handleQuizSubmission()
     {
         if (isset($_POST['action']) && $_POST['action'] == 'submit_quiz_answers') {
-            echo 'lol';
             if (!wp_verify_nonce($_POST['_wpnonce'], 'submit_quiz_' . $_POST['form_id'])) {
                 wp_die('La vérification de sécurité a échoué.');
             }
@@ -174,6 +173,8 @@ class Controller_Form
             $redirect_url = $redirect_url ? $redirect_url : home_url();
             wp_redirect($redirect_url);
             exit;
+        } else {
+            wp_die('Une erreur s\'est produite.');
         }
     }
 
