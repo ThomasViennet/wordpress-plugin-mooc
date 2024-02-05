@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* Couleur de fond */
+}
+
+h1 {
+    color: #222e5a; /* Couleur principale */
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    color: #222e5a; /* Couleur secondaire */
+}
+
+form input[type="text"],
+form input[type="url"],
+form input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form input[type="submit"],
+button {
+    background-color: #222e5a; /* Couleur principale */
+    border: none;
+    color: white; /* Couleur tertiaire */
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+button:hover {
+    background-color: darken(#222e5a, 10%); /* Assombrir la couleur principale */
+}
+
+textarea {
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #cd2753; /* Couleur secondaire */
+    color: white; /* Couleur tertiaire */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

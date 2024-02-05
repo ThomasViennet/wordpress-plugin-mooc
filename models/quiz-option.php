@@ -26,7 +26,8 @@ class Model_Option
     public function getOptions($question_id)
     {
         $query = $this->wpdb->prepare("SELECT * FROM {$this->table_options} WHERE question_id = %d", $question_id);
-        return $this->wpdb->get_results($query);
+        $results = $this->wpdb->get_results($query);
+        return $results ?: [];
     }
 
     public function getAllOptions()

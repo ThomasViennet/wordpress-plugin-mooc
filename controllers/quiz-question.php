@@ -54,6 +54,12 @@ class Controller_Question
     public function displayAllQuestions()
     {
         $questions = $this->model->getAllQuestions();
+
+        foreach ($questions as $question) {
+            $options = $this->optionModel->getOptions($question->id);
+            $question->options = $options;
+        }
+
         $forms = $this->formModel->getAllForms();
         include dirname(__FILE__) . '/../views/back/quiz-question.php';
     }
@@ -82,6 +88,33 @@ class Controller_Question
         }
     }
 
+    // public function updateQuestion($question_id, $postData)
+    // {
+    //     $questionData = [
+    //         'form_id' => intval($postData['form_id']),
+    //         'question_text' => sanitize_text_field($postData['question_text']),
+    //         'source_question' => sanitize_text_field($postData['source_question']),
+    //     ];
+
+    //     $this->model->updateQuestion(intval($question_id), $questionData);
+
+    //     $this->optionModel->deleteOptionsByQuestionId(intval($question_id));
+
+    //     if (isset($postData['options']) && is_array($postData['options'])) {
+    //         foreach ($postData['options'] as $option) {
+    //             if (is_array($option)) { // Assurez-vous que chaque $option est bien un tableau
+    //                 $this->optionModel->addOption([
+    //                     'question_id' => $question_id,
+    //                     'option_text' => sanitize_text_field($option['option_text']),
+    //                     'is_correct' => intval($option['is_correct']),
+    //                 ]);
+    //             } else {
+    //                 echo 'pas un arr';
+    //             }
+    //         }
+    //     }
+    // }
+
     public function updateQuestion($question_id, $postData)
     {
         $questionData = [
@@ -90,24 +123,30 @@ class Controller_Question
             'source_question' => sanitize_text_field($postData['source_question']),
         ];
 
+        // Mise à jour de la question
         $this->model->updateQuestion(intval($question_id), $questionData);
 
+        // Suppression des options existantes pour la question
         $this->optionModel->deleteOptionsByQuestionId(intval($question_id));
 
+        // Ajout des nouvelles options fournies dans la requête
         if (isset($postData['options']) && is_array($postData['options'])) {
             foreach ($postData['options'] as $option) {
-                if (is_array($option)) { // Assurez-vous que chaque $option est bien un tableau
+                if (!empty($option['option_text'])) { // Assurez-vous que l'option contient du texte
+                    $option_text = sanitize_text_field($option['option_text']);
+                    $is_correct = isset($option['is_correct']) ? intval($option['is_correct']) : 0;
+
+                    // Ajout de la nouvelle option
                     $this->optionModel->addOption([
                         'question_id' => $question_id,
-                        'option_text' => sanitize_text_field($option['option_text']),
-                        'is_correct' => intval($option['is_correct']),
+                        'option_text' => $option_text,
+                        'is_correct' => $is_correct,
                     ]);
-                } else {
-                    echo 'pas un arr';
                 }
             }
         }
     }
+
 
     public function deleteQuestion($question_id)
     {
@@ -149,7 +188,7 @@ class Controller_Question
             if (!empty($option['option_text'])) {
                 $option_text = sanitize_text_field($option['option_text']);
                 $is_correct = isset($option['is_correct']) ? intval($option['is_correct']) : 0;
-                
+
                 $option_data = [
                     'question_id' => $question_id,
                     'option_text' => $option_text,
