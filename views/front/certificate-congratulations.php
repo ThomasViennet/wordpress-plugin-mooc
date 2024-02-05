@@ -107,9 +107,9 @@
         --color2: #cd2753;
         --color3: #222e5a;
         --finalSize: 40vmin;
-        left: 30%;
+        left: 35%;
         top: 40%;
-        animation-delay: -0.25s;
+        animation-delay: -0.5s;
     }
 
     .firework:nth-child(3) {
@@ -126,7 +126,7 @@
         --finalSize: 35vmin;
         left: 70%;
         top: 60%;
-        animation-delay: -0.4s;
+        animation-delay: -1s;
     }
 
     .firework:nth-child(4) {
@@ -141,9 +141,9 @@
         --color2: #cd2753;
         --color3: #222e5a;
         --finalSize: 35vmin;
-        left: 60%;
-        top: 65%;
-        animation-delay: -0.7s;
+        left: 40%;
+        top: 55%;
+        animation-delay: -1.5s;
     }
 
     .firework:nth-child(5) {
@@ -158,13 +158,13 @@
         --color2: #cd2753;
         --color3: #222e5a;
         --finalSize: 35vmin;
-        left: 40%;
-        top: 70%;
-        animation-delay: -0.9s;
+        left: 70%;
+        top: 50%;
+        animation-delay: -1.8s;
     }
 
 
-    .firework:nth-child(6) {
+    /* .firework:nth-child(6) {
         --x: -30vmin;
         --y: -50vmin;
     }
@@ -176,9 +176,9 @@
         --color2: #cd2753;
         --color3: #222e5a;
         --finalSize: 35vmin;
-        left: 10%;
-        top: 70%;
-        animation-delay: -1.1s;
+        left: 40%;
+        top: 50%;
+        animation-delay: -1.9s;
     }
 
     .firework:nth-child(7) {
@@ -193,7 +193,7 @@
         --color2: #cd2753;
         --color3: #222e5a;
         --finalSize: 35vmin;
-        left: 90%;
+        left: 80%;
         top: 60%;
         animation-delay: -1.3s;
     }
@@ -247,20 +247,18 @@
         left: 45%;
         top: 45%;
         animation-delay: -2s;
-    }
+    } */
 
     
 </style>
+
 <div class="firework"></div>
 <div class="firework"></div>
 <div class="firework"></div>
 <div class="firework"></div>
 <div class="firework"></div>
-<div class="firework"></div>
-<div class="firework"></div>
-<div class="firework"></div>
-<div class="firework"></div>
-<div class="firework"></div>
+
+
 
 
 <div id="congratulations">
