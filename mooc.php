@@ -42,8 +42,8 @@ function registration()
             Controller_Mooc::displayRegistrationForm();
             return ob_get_clean();
         } else { //As this short code is only used on the presentation page of the course. A "continue training" button is displayed if the user is logged in
-            return
-                '<div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
+            return '
+            <div class="is-content-justification-center is-layout-flex wp-container-2 wp-block-buttons">
             <div class="wp-block-button wp-block-button-important"><a class="wp-block-button__link has-background-color has-text-color has-background wp-element-button" href="/wp-admin/admin.php?page=dashboard">Continuer la formation</a></div>
             </div>';
         }

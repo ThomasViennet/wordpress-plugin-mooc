@@ -64,7 +64,7 @@
         <?php endforeach; ?>
     </select>
     <div id="options-container">
-        <!-- Les champs d'option seront ajoutés ici dynamiquement -->
+        <!-- Option fields are added here dynamically -->
     </div>
     <button type="button" onclick="addOptionField()">Ajouter Option</button>
     <button type="submit">Ajouter une question</button>
@@ -78,10 +78,12 @@
 
     function addOptionField() {
         var container = document.getElementById('options-container');
+        var index = container.children.length;
+
         var newOptionDiv = document.createElement('div');
         newOptionDiv.innerHTML = `
-        <input type="text" name="options[][option_text]" placeholder="Texte de l'option">
-        <select name="options[][is_correct]">
+        <input type="text" name="options[${index}][option_text]" placeholder="Texte de l'option">
+        <select name="options[${index}][is_correct]">
             <option value="1">Vrai</option>
             <option value="0">Faux</option>
         </select>
@@ -101,20 +103,24 @@
         $('#form-add-question').submit(function(e) {
             e.preventDefault();
 
-            var formData = new FormData(this); // Utilisez FormData pour gérer correctement les tableaux
+            var formData = new FormData(this);
 
-            formData.append('action', 'add_question_with_options'); // Assurez-vous que cette action correspond à celle attendue par le serveur
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
+
+            formData.append('action', 'add_question_with_options');
             formData.append('_ajax_nonce', '<?php echo wp_create_nonce("manage_question_action"); ?>');
 
             $.ajax({
                 url: ajaxurl,
                 type: 'POST',
-                processData: false, // Nécessaire pour l'envoi de FormData
-                contentType: false, // Nécessaire pour l'envoi de FormData
+                processData: false,
+                contentType: false,
                 data: formData,
                 success: function(response) {
-                    alert(response.data.message); // Affiche un message de succès
-                    location.reload(); // Optionnel: recharge la page pour voir les nouvelles données
+                    alert(response.data.message);
+                    location.reload();
                 },
                 error: function() {
                     alert('Erreur lors de l\'ajout de la question et des options.');

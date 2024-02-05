@@ -29,7 +29,7 @@
     }
 </style>
 
-<div class="flex justify-between">
+<div class="flex justify-between has-text-align-center background-animation">
     <div class="emitter order-1"></div>
     <div class="emitter order-3"></div>
     <div class="emitter order-2 -top-6"></div>

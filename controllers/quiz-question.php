@@ -13,7 +13,7 @@ use Mooc\Models\Model_Option;
 
 class Controller_Question
 {
-    private $model; //était public
+    private $model;
     private $formModel;
     private $optionModel;
 
@@ -66,13 +66,12 @@ class Controller_Question
             'source_question' => sanitize_text_field($postData['source_question']),
         ];
 
-        // return $this->model->addQuestion($questionData);
         $question_id = $this->model->addQuestion($questionData);
 
         if (isset($postData['options']) && is_array($postData['options'])) {
 
             foreach ($postData['options'] as $option) {
-                if (is_array($option)) { // Assurez-vous que chaque $option est bien un tableau
+                if (is_array($option)) {
                     $this->optionModel->addOption([
                         'question_id' => $question_id,
                         'option_text' => sanitize_text_field($option['option_text']),
@@ -117,6 +116,8 @@ class Controller_Question
 
     public function handleAjaxAddQuestionWithOptions()
     {
+        // error_log(print_r($_POST, true));
+
         if (!check_ajax_referer('manage_question_action', '_ajax_nonce', false)) {
             wp_send_json_error(['message' => 'Vérification de nonce échouée.']);
             return;
@@ -147,12 +148,12 @@ class Controller_Question
         foreach ($options as $option) {
             if (!empty($option['option_text'])) {
                 $option_text = sanitize_text_field($option['option_text']);
-                $is_correct = intval($option['is_correct']);
+                $is_correct = isset($option['is_correct']) ? intval($option['is_correct']) : 0;
                 
                 $option_data = [
                     'question_id' => $question_id,
                     'option_text' => $option_text,
-                    'is_correct' => $is_correct,//erreur null
+                    'is_correct' => $is_correct,
                 ];
 
                 $option_id = $this->optionModel->addOption($option_data);
