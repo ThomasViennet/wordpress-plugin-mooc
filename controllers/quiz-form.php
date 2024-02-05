@@ -107,8 +107,8 @@ class Controller_Form
                 if ($this->certificateController->evaluateUserAnswers($user_id, $form_id)) {
                     include(dirname(__FILE__) . '/../views/front/certificate-congratulations.php');
                 } else {
-                    echo 'Vous n\'avez pas obtenu au moins 80% de bonnes réponses.';
                     echo "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
+                    echo '<p>Vous n\'avez pas obtenu au moins 80% de bonnes réponses.<p>';
                     echo "<input type='hidden' name='action' value='reset_quiz_answers'>";
                     echo "<input type='hidden' name='user_id' value='" . esc_attr($user_id) . "'>";
                     echo "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";

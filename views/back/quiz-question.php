@@ -26,7 +26,7 @@
                                 <ul>
                                     <?php foreach ($question->options as $option) : ?>
                                         <li>
-                                            <?php echo esc_html($option->option_text); ?> -
+                                            <?php echo esc_html(stripslashes($option->option_text)); ?> -
                                             <?php echo $option->is_correct ? 'Vrai' : 'Faux'; ?>
                                         </li>
                                     <?php endforeach; ?>
@@ -66,7 +66,7 @@
                                 <div id="options-container-<?php echo $question->id; ?>">
                                     <?php foreach ($question->options as $index => $option) : ?>
                                         <div class="option-item">
-                                            <input type="text" name="options[<?php echo $index; ?>][option_text]" value="<?php echo esc_attr($option->option_text); ?>" placeholder="Texte de l'option">
+                                            <input type="text" name="options[<?php echo $index; ?>][option_text]" value="<?php echo esc_html(stripslashes($option->option_text)); ?>" placeholder="Texte de l'option">
                                             <input type="hidden" name="options[<?php echo $index; ?>][is_correct]" value="0">
                                             <input type="checkbox" name="options[<?php echo $index; ?>][is_correct]" value="1" <?php echo ($option->is_correct == '1' ? 'checked' : ''); ?>> Vrai
                                             <button type="button" onclick="removeOptionField(this)">Supprimer</button>

@@ -88,33 +88,6 @@ class Controller_Question
         }
     }
 
-    // public function updateQuestion($question_id, $postData)
-    // {
-    //     $questionData = [
-    //         'form_id' => intval($postData['form_id']),
-    //         'question_text' => sanitize_text_field($postData['question_text']),
-    //         'source_question' => sanitize_text_field($postData['source_question']),
-    //     ];
-
-    //     $this->model->updateQuestion(intval($question_id), $questionData);
-
-    //     $this->optionModel->deleteOptionsByQuestionId(intval($question_id));
-
-    //     if (isset($postData['options']) && is_array($postData['options'])) {
-    //         foreach ($postData['options'] as $option) {
-    //             if (is_array($option)) { // Assurez-vous que chaque $option est bien un tableau
-    //                 $this->optionModel->addOption([
-    //                     'question_id' => $question_id,
-    //                     'option_text' => sanitize_text_field($option['option_text']),
-    //                     'is_correct' => intval($option['is_correct']),
-    //                 ]);
-    //             } else {
-    //                 echo 'pas un arr';
-    //             }
-    //         }
-    //     }
-    // }
-
     public function updateQuestion($question_id, $postData)
     {
         $questionData = [
