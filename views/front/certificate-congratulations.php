@@ -257,8 +257,9 @@
 <div class="firework"></div>
 <div class="firework"></div>
 
-<div id="congratulations">
-    <p>Bravo le certificat a été ajouté à votre profil public !</p>
-    <p><a href="profil?user_id=<?= $user_id ?>">Voir mon profil</a></p>
-
+<div class="has-text-align-center background-animation box-shadow padding border-radius">
+    <h3>Félicitations 🥳</h3>
+    <!-- <h4>Vous avez obtenu la certification</h4> -->
+    <p>Votre certificat est disponible depuis votre profil public</p>
+    <button onclick="window.location.href='profil?user_id=<?= $user_id ?>'">Voir mon profil</button>
 </div>
