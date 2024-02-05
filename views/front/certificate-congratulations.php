@@ -30,7 +30,7 @@
         --x: -50%;
         --initialY: 60vmin;
         content: "";
-        animation: firework 2s infinite;
+        animation: firework 4s infinite;
         position: absolute;
         top: 40%;
         left: 50%;
@@ -108,13 +108,12 @@
         --color3: #222e5a;
         --finalSize: 40vmin;
         left: 35%;
-        top: 40%;
+        top: 50%;
         animation-delay: -0.5s;
     }
 
     .firework:nth-child(3) {
         --x: -30vmin;
-        --y: -50vmin;
     }
 
     .firework:nth-child(3),
@@ -160,7 +159,7 @@
         --finalSize: 35vmin;
         left: 70%;
         top: 50%;
-        animation-delay: -1.8s;
+        animation-delay: -2s;
     }
 
 
@@ -257,9 +256,6 @@
 <div class="firework"></div>
 <div class="firework"></div>
 <div class="firework"></div>
-
-
-
 
 <div id="congratulations">
     <p>Bravo le certificat a été ajouté à votre profil public !</p>
