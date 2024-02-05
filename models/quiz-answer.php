@@ -29,22 +29,45 @@ class Model_Answer
         ) : false;
     }
 
+    // public function saveAnswers($user_id, $form_id, $answers)
+    // {
+    //     $answers_serialized = maybe_serialize($answers);
+    //     $certificate_number = $user_id . time();
+
+    //     $data = [
+    //         'user_id' => $user_id,
+    //         'form_id' => $form_id,
+    //         'answers' => $answers_serialized,
+    //         'certificate_number' => $certificate_number
+    //     ];
+
+    //     $format = ['%d', '%d', '%s', '%s'];
+
+    //     $this->wpdb->replace($this->table_answers, $data, $format);
+    // }
+
     public function saveAnswers($user_id, $form_id, $answers)
     {
         $answers_serialized = maybe_serialize($answers);
         $certificate_number = $user_id . time();
 
+        // Récupérer le nombre actuel de tentatives
+        $currentRetryCount = $this->getRetryCount($user_id, $form_id);
+        $newRetryCount = $currentRetryCount + 1;
+
         $data = [
             'user_id' => $user_id,
             'form_id' => $form_id,
             'answers' => $answers_serialized,
-            'certificate_number' => $certificate_number
+            'certificate_number' => $certificate_number,
+            'retry' => $newRetryCount
         ];
 
-        $format = ['%d', '%d', '%s', '%s'];
+        $format = ['%d', '%d', '%s', '%s', '%d']; 
 
         $this->wpdb->replace($this->table_answers, $data, $format);
     }
+
 
     public function deleteUserFormAnswers($user_id, $form_id)
     {
@@ -54,5 +77,16 @@ class Model_Answer
             $form_id
         );
         $this->wpdb->query($query);
+    }
+
+    public function getRetryCount($user_id, $form_id)
+    {
+        $query = $this->wpdb->prepare(
+            "SELECT retry FROM {$this->table_answers} WHERE user_id = %d AND form_id = %d ORDER BY form_submitted DESC LIMIT 1",
+            $user_id,
+            $form_id
+        );
+        $retry = $this->wpdb->get_var($query);
+        return $retry !== null ? intval($retry) : 0;
     }
 }

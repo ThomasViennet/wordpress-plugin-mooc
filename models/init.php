@@ -109,6 +109,7 @@ class Model_Init
                 answers text NOT NULL,
                 form_submitted datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 certificate_number VARCHAR(255) NOT NULL,
+                retry INT DEFAULT 0 NOT NULL, 
                 PRIMARY KEY  (id)
             ) $charset_collate;";
             dbDelta($sql_answers);

@@ -125,6 +125,7 @@ class Controller_Form
 
     public function prepareQuizHtml($questions, $options, $form_id)
     {
+        //ajouter description du systme de notation
         $quizHtml = "<form method='post' action='" . esc_url(admin_url('admin-post.php')) . "'>";
         $quizHtml .= "<input type='hidden' name='action' value='submit_quiz_answers'>";
         $quizHtml .= "<input type='hidden' name='form_id' value='" . esc_attr($form_id) . "'>";
@@ -135,7 +136,7 @@ class Controller_Form
             foreach ($options as $option) {
                 if ($option->question_id == $question->id) {
                     $quizHtml .= '<label><input type="checkbox" name="answer_' . esc_attr($question->id) . '[]" value="' . esc_attr($option->id) . '">' . esc_html($option->option_text) . '</label><br>';
-                    //lorsqu'un utilisateur choisi plusieurs case à cocher ça n'enregistre pas tous les coix
+                    //lorsqu'un utilisateur choisi plusieurs case à cocher ça n'enregistre pas tous les choix
                 }
             }
         }
@@ -166,6 +167,9 @@ class Controller_Form
                     }
                 }
             }
+
+            $currentRetryCount = $this->answerModel->getRetryCount($user_id, $form_id);
+            $retryCount = is_null($currentRetryCount) ? 1 : $currentRetryCount + 1;
 
             $this->answerModel->saveAnswers($user_id, $form_id, $answers);
 
