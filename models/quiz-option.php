@@ -26,7 +26,8 @@ class Model_Option
     public function getOptions($question_id)
     {
         $query = $this->wpdb->prepare("SELECT * FROM {$this->table_options} WHERE question_id = %d", $question_id);
-        return $this->wpdb->get_results($query);
+        $results = $this->wpdb->get_results($query);
+        return $results ?: [];
     }
 
     public function getAllOptions()
@@ -56,6 +57,11 @@ class Model_Option
     public function deleteOption($option_id)
     {
         return $this->wpdb->delete($this->table_options, array('id' => $option_id));
+    }
+
+    public function deleteOptionsByQuestionId($question_id)
+    {
+        return $this->wpdb->delete($this->table_options, ['question_id' => $question_id], ['%d']);
     }
 
     public function countCorrectAnswersByFormId($form_id)

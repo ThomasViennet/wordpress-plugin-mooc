@@ -60,6 +60,8 @@ class Controller_Init
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'hideElements'));
         add_action('admin_menu', array(__NAMESPACE__ . '\Controller_Init', 'addElements'));
         add_action('wp_login', array(__NAMESPACE__ . '\Controller_Init', 'wpLogin'), 10, 2);
+
+        // à déplacer dans les controller adéquates
         add_action('admin_post_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate'));
         add_action('admin_post_nopriv_generate_certificate', array(__NAMESPACE__ . '\Controller_Init', 'generate_certificate')); // User not logged in
         add_action('admin_post_submit_quiz_answers', array(self::$formController, 'handleQuizSubmission'));
@@ -69,7 +71,7 @@ class Controller_Init
         //Filters
         add_filter('wp_new_user_notification_email', array(__NAMESPACE__ . '\Controller_Init', 'newUserEmail'), 10, 3);
 
-        //Shortcodes
+        //Shortcodes > à déplacer dans le controller adéquate
         add_shortcode('quiz', array(self::$formController, 'displayQuiz'));
     }
 

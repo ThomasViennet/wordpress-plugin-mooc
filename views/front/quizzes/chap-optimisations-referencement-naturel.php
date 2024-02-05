@@ -41,7 +41,7 @@ $options = array(
     ['Un fichier qui permet d\'influencer la fréquence à laquelle un moteur de recherche peut crawler un site (quotidiennement, mensuellement, etc.)', 'question1', 'optimisations-referencement-naturel', 'free', FALSE],
     ['Un fichier qui permet de donner des instructions de crawl aux moteurs de recherche', 'question1', 'optimisations-referencement-naturel', 'free', TRUE],
 
-    ['Pour désindexer une URL, il faut l\'interdire au crawl l\'URL puis ajouter une balise <meta name="robots" content="noindex" />', 'question2', 'optimisations-referencement-naturel', 'free', FALSE],
+    ['Pour désindexer une URL, il faut interdire au crawl l\'URL puis ajouter une balise <meta name="robots" content="noindex" />', 'question2', 'optimisations-referencement-naturel', 'free', FALSE],
     ['Cette balise <meta name="robots" content="noarchive" /> permet d\'indiquer à Google qu\'il ne doit pas désindexer l\'URL', 'question2', 'optimisations-referencement-naturel', 'free', FALSE],
     ['Cette balise <meta name="robots" content="nofollow" /> permet d\'indiquer à Google qu\'il ne doit pas suivre les liens présents sur cette URL', 'question2', 'optimisations-referencement-naturel', 'free', TRUE],
 
