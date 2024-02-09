@@ -76,6 +76,7 @@ class Model_Init
             form_id mediumint(9) NOT NULL,
             question_text text NOT NULL,
             source_question text DEFAULT NULL,
+            always_include TINYINT(1) NOT NULL DEFAULT '0',
             PRIMARY KEY  (id),
             FOREIGN KEY (form_id) REFERENCES $table_quizzes_forms(id) ON DELETE CASCADE
             ) $charset_collate;";

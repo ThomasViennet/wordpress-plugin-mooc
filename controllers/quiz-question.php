@@ -70,6 +70,7 @@ class Controller_Question
             'form_id' => intval($postData['form_id']),
             'question_text' => sanitize_text_field($postData['question_text']),
             'source_question' => sanitize_text_field($postData['source_question']),
+            'always_include' => isset($postData['always_include']) ? 1 : 0,
         ];
 
         $question_id = $this->model->addQuestion($questionData);
@@ -94,6 +95,7 @@ class Controller_Question
             'form_id' => intval($postData['form_id']),
             'question_text' => sanitize_text_field($postData['question_text']),
             'source_question' => sanitize_text_field($postData['source_question']),
+            'always_include' => isset($postData['always_include']) ? 1 : 0,
         ];
 
         // Mise à jour de la question
@@ -135,7 +137,7 @@ class Controller_Question
             return;
         }
 
-        if (empty($_POST['question_text']) || empty($_POST['form_id']) || !isset($_POST['options'])) {
+        if (empty($_POST['question_text']) || empty($_POST['form_id'])) {
             wp_send_json_error(['message' => 'Des informations requises sont manquantes.']);
             return;
         }
@@ -143,11 +145,13 @@ class Controller_Question
         $form_id = intval($_POST['form_id']);
         $question_text = sanitize_text_field($_POST['question_text']);
         $options = isset($_POST['options']) ? $_POST['options'] : [];
+        $always_include = isset($_POST['always_include']) ? 1 : 0;
 
         $question_data = [
             'form_id' => $form_id,
             'question_text' => $question_text,
             'source_question' => sanitize_text_field($_POST['source_question']),
+            'always_include' => $always_include,
         ];
 
         $question_id = $this->model->addQuestion($question_data);

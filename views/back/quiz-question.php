@@ -14,6 +14,7 @@
                 <tr>
                     <th>Form</th>
                     <th>Question</th>
+                    <th>Toujours Incluse</th>
                     <th>Options</th>
                     <th>Actions</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <tr>
                         <td><?php echo esc_html(stripslashes($question->form_name)); ?></td>
                         <td><?php echo esc_html(stripslashes($question->question_text)); ?></td>
+                        <td><?php echo $question->always_include ? 'Oui' : 'Non'; ?></td>
                         <td>
                             <?php if (!empty($question->options)) : ?>
                                 <ul>
@@ -61,6 +63,9 @@
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <label for="always_include-<?php echo $question->id; ?>">Toujours inclure cette question :</label>
+                                <input type="checkbox" name="always_include" id="always_include-<?php echo $question->id; ?>" value="1" <?php echo $question->always_include ? 'checked' : ''; ?>>
+
                                 <input type="text" name="question_text" value="<?php echo esc_attr(stripslashes($question->question_text)); ?>">
                                 <input type="text" name="source_question" value="<?php echo esc_attr(stripslashes($question->source_question ?? '')); ?>" placeholder="Source de la question">
                                 <div id="options-container-<?php echo $question->id; ?>">
@@ -95,6 +100,10 @@
                 <option value="<?php echo $form->id; ?>"><?php echo esc_html(stripslashes($form->form_name)); ?></option>
             <?php endforeach; ?>
         </select>
+
+        <label for="always_include">Toujours inclure cette question :</label>
+        <input type="checkbox" name="always_include" id="always_include" value="1">
+
         <div id="options-container">
             <!-- Option fields are added here dynamically -->
         </div>
