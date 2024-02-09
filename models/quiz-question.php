@@ -47,14 +47,42 @@ class Model_Question
         return $this->wpdb->get_results($query);
     }
 
+    // public function getRandomQuestionsByFormId($form_id, $limit = 80)
+    // {
+    //     $query = $this->wpdb->prepare(
+    //         "SELECT * FROM {$this->table_questions} WHERE form_id = %d ORDER BY RAND() LIMIT %d",
+    //         $form_id,
+    //         $limit
+    //     );
+    //     return $this->wpdb->get_results($query);
+    // }
+
     public function getRandomQuestionsByFormId($form_id, $limit = 80)
     {
-        $query = $this->wpdb->prepare(
-            "SELECT * FROM {$this->table_questions} WHERE form_id = %d ORDER BY RAND() LIMIT %d",
-            $form_id,
-            $limit
-        );
-        return $this->wpdb->get_results($query);
+        // Select the questions that should always be included
+        $alwaysIncludeQuestions = $this->wpdb->get_results($this->wpdb->prepare(
+            "SELECT * FROM {$this->table_questions} WHERE form_id = %d AND always_include = 1",
+            $form_id
+        ));
+
+        $numberOfAlwaysIncludeQuestions = count($alwaysIncludeQuestions);
+
+        // Adjust the number of random questions to be selected according to the number of questions to be systematically included.
+        $randomLimit = max($limit - $numberOfAlwaysIncludeQuestions, 0);
+
+        // Select the remaining questions at random, if necessary
+        $randomQuestions = [];
+        if ($randomLimit > 0) {
+            $randomQuestions = $this->wpdb->get_results($this->wpdb->prepare(
+                "SELECT * FROM {$this->table_questions} WHERE form_id = %d AND always_include = 0 ORDER BY RAND() LIMIT %d",
+                $form_id,
+                $randomLimit
+            ));
+        }
+
+        $questions = array_merge($alwaysIncludeQuestions, $randomQuestions);
+
+        return $questions;
     }
 
 
