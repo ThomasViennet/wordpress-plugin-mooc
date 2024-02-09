@@ -116,7 +116,7 @@ class Controller_Form
                     echo "</form>";
                 }
             } else {
-                $questions = $this->questionModel->getQuestionsByFormId($form_id);
+                $questions = $this->questionModel->getRandomQuestionsByFormId($form_id);
                 $options = $this->optionModel->getOptionsByFormId($form_id);
                 return $this->prepareQuizHtml($questions, $options, $form_id);
             }

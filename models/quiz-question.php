@@ -47,6 +47,17 @@ class Model_Question
         return $this->wpdb->get_results($query);
     }
 
+    public function getRandomQuestionsByFormId($form_id, $limit = 80)
+    {
+        $query = $this->wpdb->prepare(
+            "SELECT * FROM {$this->table_questions} WHERE form_id = %d ORDER BY RAND() LIMIT %d",
+            $form_id,
+            $limit
+        );
+        return $this->wpdb->get_results($query);
+    }
+
+
     public function updateQuestion($question_id, $data)
     {
         $data = $this->sanitizeData($data);
